@@ -184,6 +184,22 @@
             width: 100%;
         }
 
+        .nav-button a {
+            border: 2px solid var(--accent-color);
+            padding: 0.5rem 1.5rem !important; /* Use important to override btn padding */
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button a:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text-color) !important;
+        }
+
+        .nav-button a:hover::after {
+            display: none; /* No underline on button hover */
+        }
+
         .hamburger {
             display: none;
             cursor: pointer;
@@ -829,6 +845,7 @@
                 <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item nav-button"><a href="auth.html" class="nav-link">Login</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
