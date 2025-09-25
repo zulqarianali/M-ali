@@ -4,267 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Signup</title>
-
-    <!-- Google Fonts (Poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
-        /* --- General Styling & CSS Reset --- */
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --accent-color: #fca311;
+            --text-color: #e5e5e5;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
-            background-size: cover;
-            background-position: center;
+            background: var(--primary-color);
         }
-
-        /* --- Form Container --- */
-        .container {
-            width: 420px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            color: #fff;
+        .form-wrapper {
+            width: 400px;
+            background: var(--secondary-color);
             border-radius: 10px;
-            padding: 30px 40px;
-            transition: height 0.4s ease;
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-
-        .container.active {
-            height: 520px;
-        }
-
-        .container .form-box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .form-header {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 40px;
-            transition: transform 0.6s ease-in-out;
         }
-
-        .container .form-box.login {
-            transform: translateX(0);
-            z-index: 2;
+        .form-header button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-
-        .container.active .form-box.login {
-            transform: translateX(-100%);
-            z-index: 1;
+        .form-header button.active {
+            background-color: var(--accent-color);
+            color: #14213d;
         }
-
-        .container .form-box.signup {
-            transform: translateX(100%);
-            z-index: 1;
+        .form-container {
+            padding: 2rem;
         }
-
-        .container.active .form-box.signup {
-            transform: translateX(0);
+        .form-box {
+            display: none;
         }
-
-        .form-box h1 {
-            font-size: 36px;
-            text-align: center;
-            margin-bottom: 20px;
+        .form-box.active {
+            display: block;
         }
-
-        /* --- Input Fields --- */
-        .form-box .input-box {
+        .input-box {
             position: relative;
-            width: 100%;
-            height: 50px;
-            margin: 30px 0;
+            margin-bottom: 1.5rem;
         }
-
         .input-box input {
             width: 100%;
-            height: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
-            font-size: 16px;
-            color: #fff;
-            padding: 20px 45px 20px 20px;
+            padding: 1rem;
+            padding-right: 45px;
+            background: var(--primary-color);
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: var(--text-color);
+            font-size: 1rem;
         }
-
-        .input-box input::placeholder {
-            color: #eee;
-        }
-
         .input-box i {
             position: absolute;
-            right: 20px;
             top: 50%;
+            right: 15px;
             transform: translateY(-50%);
-            font-size: 20px;
             cursor: pointer;
         }
-
-        /* --- Remember & Forgot --- */
-        .form-box .remember-forgot {
+        .remember-forgot {
             display: flex;
             justify-content: space-between;
-            font-size: 14.5px;
-            margin: -15px 0 15px;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
-
-        .remember-forgot label input {
-            accent-color: #fff;
-            margin-right: 3px;
-        }
-
         .remember-forgot a {
-            color: #fff;
+            color: var(--accent-color);
             text-decoration: none;
         }
-
-        .remember-forgot a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Button --- */
         .btn {
             width: 100%;
-            height: 45px;
-            background: #fff;
+            padding: 1rem;
             border: none;
-            outline: none;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #fca311;
+            border-radius: 5px;
+            background-color: var(--accent-color);
             color: #14213d;
-            transform: scale(1.02);
-        }
-
-        /* --- Signup/Login Link --- */
-        .form-box .login-signup {
-            font-size: 14.5px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .login-signup p a {
-            color: #fca311;
-            text-decoration: none;
+            font-size: 1.1rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
-
-        .login-signup p a:hover {
-            text-decoration: underline;
+        .btn:hover {
+            opacity: 0.9;
         }
-
-        /* --- Alert/Message Styling --- */
         #message {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 1.5rem;
             font-weight: 500;
             color: #ff6b6b;
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 460px) {
-            .container {
-                width: 100%;
-                height: 100vh;
-                border: none;
-                border-radius: 0;
-            }
+            height: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Form -->
-        <div class="form-box login">
-            <h1>Login</h1>
-            <form id="login-form">
-                <div class="input-box">
-                    <input type="email" id="login-email" placeholder="Email" required>
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="login-password" placeholder="Password" required>
-                    <i class="fa-solid fa-eye-slash" id="toggle-login-password"></i>
-                </div>
-                <div class="remember-forgot">
-                    <label><input type="checkbox"> Remember me</label>
-                    <a href="#" id="forgot-password-link">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="login-signup">
-                    <p>Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
-                </div>
-            </form>
-        </div>
+    <div class="form-wrapper">
+        <header class="form-header">
+            <button id="login-tab-btn" class="active">Login</button>
+            <button id="signup-tab-btn">Sign Up</button>
+        </header>
 
-        <!-- Signup Form -->
-        <div class="form-box signup">
-            <h1>Sign Up</h1>
-            <form id="signup-form">
-                <div class="input-box">
-                    <input type="email" id="signup-email" placeholder="Email" required>
-                    <i class="fa-solid fa-envelope"></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="signup-password" placeholder="Password" required>
-                    <i class="fa-solid fa-eye-slash" id="toggle-signup-password"></i>
-                </div>
-                <div class="remember-forgot">
-                    <label><input type="checkbox" required> I agree to the terms & conditions</label>
-                </div>
-                <button type="submit" class="btn">Sign Up</button>
-                <div class="login-signup">
-                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
-                </div>
-            </form>
-        </div>
+        <div class="form-container">
+            <!-- Login Form -->
+            <div id="login-form-box" class="form-box active">
+                <form id="login-form">
+                    <div class="input-box">
+                        <input type="email" id="login-email" placeholder="Email" required>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <i class="fa-solid fa-eye-slash" id="toggle-login-password"></i>
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox"> Remember me</label>
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
 
-        <p id="message"></p>
+            <!-- Signup Form -->
+            <div id="signup-form-box" class="form-box">
+                <form id="signup-form">
+                    <div class="input-box">
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                        <i class="fa-solid fa-eye-slash" id="toggle-signup-password"></i>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
+            </div>
+            <p id="message"></p>
+        </div>
     </div>
 
     <!-- Firebase SDK -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import {
-            getAuth,
-            createUserWithEmailAndPassword,
-            signInWithEmailAndPassword,
-            sendPasswordResetEmail
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
         // ENTER YOUR FIREBASE CONFIG CODE HERE
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
             authDomain: "zulqarnain-ali.firebaseapp.com",
@@ -276,33 +180,32 @@
             measurementId: "G-80199PJVBE"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const adminEmail = 'mrvlogging08@gmail.com';
 
-        // --- DOM Elements ---
-        const container = document.querySelector('.container');
-        const loginLink = document.querySelector('.login-link');
-        const signupLink = document.querySelector('.signup-link');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
+        const loginTab = document.getElementById('login-tab-btn');
+        const signupTab = document.getElementById('signup-tab-btn');
+        const loginFormBox = document.getElementById('login-form-box');
+        const signupFormBox = document.getElementById('signup-form-box');
         const messageEl = document.getElementById('message');
-        const forgotPasswordLink = document.getElementById('forgot-password-link');
 
-        // --- Form Switching ---
-        signupLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            container.classList.add('active');
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginFormBox.classList.add('active');
+            signupFormBox.classList.remove('active');
             messageEl.textContent = '';
         });
 
-        loginLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            container.classList.remove('active');
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupFormBox.classList.add('active');
+            loginFormBox.classList.remove('active');
             messageEl.textContent = '';
         });
 
-        // --- Password Visibility Toggle ---
         function togglePasswordVisibility(passwordInputId, toggleIconId) {
             const passwordInput = document.getElementById(passwordInputId);
             const toggleIcon = document.getElementById(toggleIconId);
@@ -317,78 +220,51 @@
             }
         }
 
-        document.getElementById('toggle-login-password').addEventListener('click', () => {
-            togglePasswordVisibility('login-password', 'toggle-login-password');
-        });
+        document.getElementById('toggle-login-password').addEventListener('click', () => togglePasswordVisibility('login-password', 'toggle-login-password'));
+        document.getElementById('toggle-signup-password').addEventListener('click', () => togglePasswordVisibility('signup-password', 'toggle-signup-password'));
 
-        document.getElementById('toggle-signup-password').addEventListener('click', () => {
-            togglePasswordVisibility('signup-password', 'toggle-signup-password');
-        });
-
-        // --- Firebase Signup ---
-        signupForm.addEventListener('submit', (e) => {
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
-
             messageEl.textContent = 'Signing up...';
-
             createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
+                .then(() => {
                     messageEl.textContent = 'Signup successful! Redirecting...';
-                    window.location.href = 'index.html'; // Or your user dashboard
+                    window.location.href = 'index.html';
                 })
-                .catch((error) => {
-                    messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`;
-                });
+                .catch((error) => { messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`; });
         });
 
-        // --- Firebase Login ---
-        loginForm.addEventListener('submit', (e) => {
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-            const adminEmail = 'mrvlogging08@gmail.com'; // Your admin email
-
             messageEl.textContent = 'Logging in...';
-
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
                     messageEl.textContent = 'Login successful! Redirecting...';
-
-                    if (user.email === adminEmail) {
-                        window.location.href = 'admin.html'; // Admin Dashboard
+                    if (userCredential.user.email === adminEmail) {
+                        window.location.href = 'admin.html';
                     } else {
-                        window.location.href = 'index.html'; // Normal User Home Page
+                        window.location.href = 'index.html';
                     }
                 })
-                .catch((error) => {
-                    messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`;
-                });
+                .catch((error) => { messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`; });
         });
 
-        // --- Firebase Password Reset ---
-        forgotPasswordLink.addEventListener('click', (e) => {
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
-
             if (!email) {
-                messageEl.textContent = 'Please enter your email address to reset password.';
+                messageEl.textContent = 'Please enter your email to reset password.';
                 return;
             }
-
             messageEl.textContent = 'Sending password reset email...';
-
             sendPasswordResetEmail(auth, email)
-                .then(() => {
-                    messageEl.textContent = 'Password reset email sent! Check your inbox.';
-                })
-                .catch((error) => {
-                    messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`;
-                });
+                .then(() => { messageEl.textContent = 'Password reset email sent!'; })
+                .catch((error) => { messageEl.textContent = `Error: ${error.message.replace('Firebase: ', '')}`; });
         });
-
     </script>
 </body>
 </html>

@@ -61,55 +61,6 @@
         #logout-btn:hover {
             background-color: #34495e;
         }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        #create-post-btn {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            border-radius: 5px;
-            border: none;
-            background: var(--accent-color);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        #create-post-btn:hover {
-            opacity: 0.9;
-        }
-        #message {
-            text-align: center;
-            margin-top: 1rem;
-            font-weight: 500;
-            height: 20px;
-        }
-        #message.success {
-            color: #2ecc71;
-        }
-        #message.error {
-            color: #e74c3c;
-        }
     </style>
 </head>
 <body>
@@ -121,32 +72,18 @@
                 <button id="logout-btn">Logout</button>
             </div>
         </header>
-        <h2>Create New Post</h2>
-        <form id="create-post-form">
-            <div class="form-group">
-                <label for="post-title">Title</label>
-                <input type="text" id="post-title" required>
-            </div>
-            <div class="form-group">
-                <label for="post-description">Description</label>
-                <textarea id="post-description" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="post-image-url">Image URL</label>
-                <input type="url" id="post-image-url" placeholder="https://example.com/image.jpg" required>
-            </div>
-            <button type="submit" id="create-post-btn">Create Post</button>
-        </form>
-        <p id="message"></p>
+        <main>
+            <h2>Welcome, Admin!</h2>
+            <p>This is your dashboard. You can add more site management features here.</p>
+        </main>
     </div>
 
-    <!-- Firebase SDK and Firestore Logic -->
+    <!-- Firebase SDK -->
     <script type="module">
-        // ENTER YOUR FIREBASE CONFIG CODE HERE
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+        // ENTER YOUR FIREBASE CONFIG CODE HERE
         const firebaseConfig = {
             apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
             authDomain: "zulqarnain-ali.firebaseapp.com",
@@ -160,7 +97,6 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
         const adminEmail = "mrvlogging08@gmail.com";
 
         // Auth Guard
@@ -173,39 +109,6 @@
         // Logout
         document.getElementById('logout-btn').addEventListener('click', () => {
             signOut(auth).catch((error) => console.error('Logout Error:', error));
-        });
-
-        // Handle Post Creation
-        const postForm = document.getElementById('create-post-form');
-        const messageEl = document.getElementById('message');
-
-        postForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const title = document.getElementById('post-title').value;
-            const description = document.getElementById('post-description').value;
-            const imageURL = document.getElementById('post-image-url').value;
-
-            messageEl.textContent = 'Creating post...';
-            messageEl.className = '';
-
-            try {
-                await addDoc(collection(db, "posts"), {
-                    title: title,
-                    description: description,
-                    imageURL: imageURL,
-                    createdAt: serverTimestamp()
-                });
-
-                messageEl.textContent = 'Post created successfully!';
-                messageEl.classList.add('success');
-                postForm.reset();
-
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                messageEl.textContent = 'Error creating post. See console for details.';
-                messageEl.classList.add('error');
-            }
         });
     </script>
 </body>
