@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Create Post</title>
+    <title>Admin Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
         :root {
             --primary-color: #ffffff;
             --secondary-color: #f0f2f5;
-            --accent-color: #FF4B2B;
+            --accent-color: #2c3e50;
             --text-color: #333;
             --border-color: #ddd;
         }
@@ -59,7 +59,7 @@
             transition: background-color 0.3s ease;
         }
         #logout-btn:hover {
-            background-color: #d43f24;
+            background-color: #34495e;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -88,7 +88,7 @@
             padding: 1rem;
             border-radius: 5px;
             border: none;
-            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            background: var(--accent-color);
             color: white;
             font-size: 1.1rem;
             font-weight: 600;
@@ -102,12 +102,13 @@
             text-align: center;
             margin-top: 1rem;
             font-weight: 500;
+            height: 20px;
         }
         #message.success {
-            color: #28a745;
+            color: #2ecc71;
         }
         #message.error {
-            color: #dc3545;
+            color: #e74c3c;
         }
     </style>
 </head>
@@ -133,10 +134,6 @@
             <div class="form-group">
                 <label for="post-image-url">Image URL</label>
                 <input type="url" id="post-image-url" placeholder="https://example.com/image.jpg" required>
-            </div>
-            <div class="form-group">
-                <label for="post-video-url">YouTube Video URL (Optional)</label>
-                <input type="url" id="post-video-url" placeholder="https://www.youtube.com/watch?v=...">
             </div>
             <button type="submit" id="create-post-btn">Create Post</button>
         </form>
@@ -188,13 +185,6 @@
             const title = document.getElementById('post-title').value;
             const description = document.getElementById('post-description').value;
             const imageURL = document.getElementById('post-image-url').value;
-            let videoURL = document.getElementById('post-video-url').value;
-
-            // Convert YouTube watch URL to embed URL
-            if (videoURL.includes("watch?v=")) {
-                const videoId = videoURL.split('v=')[1].split('&')[0];
-                videoURL = `https://www.youtube.com/embed/${videoId}`;
-            }
 
             messageEl.textContent = 'Creating post...';
             messageEl.className = '';
@@ -204,7 +194,6 @@
                     title: title,
                     description: description,
                     imageURL: imageURL,
-                    videoURL: videoURL || "", // Ensure it's an empty string if not provided
                     createdAt: serverTimestamp()
                 });
 
