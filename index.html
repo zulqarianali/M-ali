@@ -200,6 +200,113 @@
             display: none; /* No underline on button hover */
         }
 
+        /* Styles for the user dropdown */
+        .nav-item.dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 150%; /* Position below the nav item */
+            right: 0;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .user-avatar {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar .fa-user-circle {
+            font-size: 1.5rem;
+            margin-right: 8px;
+        }
+
+        #user-info, #admin-dashboard-link {
+            display: none; /* Hidden by default */
+        }
+
+        /* --- Blog Section --- */
+        #blog {
+            background-color: var(--primary-color);
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .post-card {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+        .post-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 1.5rem;
+        }
+        .post-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        .post-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .post-video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        .post-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         .hamburger {
             display: none;
             cursor: pointer;
@@ -845,7 +952,22 @@
                 <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                <li class="nav-item nav-button"><a href="auth.html" class="nav-link">Login</a></li>
+                <li class="nav-item" id="admin-dashboard-link"><a href="admin.html" class="nav-link">Admin Dashboard</a></li>
+
+                <!-- This will be shown when the user is logged in -->
+                <li class="nav-item dropdown" id="user-info">
+                    <a href="#" class="nav-link user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="user-email"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.html">Profile Settings</a></li>
+                        <li><a href="#" id="logout-btn">Logout</a></li>
+                    </ul>
+                </li>
+
+                <!-- This will be shown when the user is logged out -->
+                <li class="nav-item nav-button" id="login-btn"><a href="auth.html" class="nav-link">Login</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -1145,6 +1267,16 @@
         </section>
 
 
+        <!-- BLOG/POSTS SECTION -->
+        <section id="blog">
+            <div class="container">
+                <h2>Latest Posts</h2>
+                <div class="posts-grid" id="posts-grid-container">
+                    <!-- Posts will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
         <!-- CONTACT SECTION -->
         <section id="contact">
             <div class="container">
@@ -1262,6 +1394,108 @@
 
         showTestimonial(0); // Show first testimonial initially
 
+    </script>
+
+    <!-- Firebase SDK and Auth State Management -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // ENTER YOUR FIREBASE CONFIG CODE HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
+            authDomain: "zulqarnain-ali.firebaseapp.com",
+            databaseURL: "https://zulqarnain-ali-default-rtdb.firebaseio.com",
+            projectId: "zulqarnain-ali",
+            storageBucket: "zulqarnain-ali.firebasestorage.app",
+            messagingSenderId: "626426491607",
+            appId: "1:626426491607:web:83a5dedd5844306b237692",
+            measurementId: "G-80199PJVBE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const adminEmail = "zulqarnain@gmail.com";
+
+        const loginBtn = document.getElementById('login-btn');
+        const userInfo = document.getElementById('user-info');
+        const userEmailEl = document.getElementById('user-email');
+        const logoutBtn = document.getElementById('logout-btn');
+        const adminDashboardLink = document.getElementById('admin-dashboard-link');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is logged in
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'block';
+                userEmailEl.textContent = user.displayName || user.email;
+
+                if (user.email === adminEmail) {
+                    adminDashboardLink.style.display = 'block';
+                } else {
+                    adminDashboardLink.style.display = 'none';
+                }
+
+            } else {
+                // User is logged out
+                loginBtn.style.display = 'block';
+                userInfo.style.display = 'none';
+                adminDashboardLink.style.display = 'none';
+            }
+        });
+
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth).catch((error) => console.error('Logout Error:', error));
+        });
+
+        // --- Fetch and Display Posts from Firestore ---
+        const db = getFirestore(app);
+        const postsGrid = document.getElementById('posts-grid-container');
+
+        async function fetchAndDisplayPosts() {
+            try {
+                const postsQuery = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(postsQuery);
+
+                if (querySnapshot.empty) {
+                    postsGrid.innerHTML = "<p>No posts found.</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const post = doc.data();
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('post-card');
+
+                    let videoHTML = '';
+                    if (post.videoURL) {
+                        videoHTML = `
+                            <div class="post-video-wrapper">
+                                <iframe src="${post.videoURL}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        `;
+                    }
+
+                    postElement.innerHTML = `
+                        <img src="${post.imageURL}" alt="${post.title}">
+                        <div class="post-content">
+                            <h3>${post.title}</h3>
+                            <p>${post.description}</p>
+                            ${videoHTML}
+                        </div>
+                    `;
+                    postsGrid.appendChild(postElement);
+                });
+            } catch (error) {
+                console.error("Error fetching posts: ", error);
+                postsGrid.innerHTML = "<p>Error loading posts. Please try again later.</p>";
+            }
+        }
+
+        // Load posts when the page loads
+        fetchAndDisplayPosts();
     </script>
 </body>
 </html>

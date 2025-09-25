@@ -3,43 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Google Fonts (Poppins) -->
+    <title>Admin Panel - Create Post</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f0f2f5;
+            --accent-color: #FF4B2B;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
             margin: 0;
-            text-align: center;
+            padding: 2rem;
         }
-        .dashboard-container {
-            padding: 40px;
-            background: #fff;
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--primary-color);
+            padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        h1 {
-            margin-bottom: 20px;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
-        p {
-            margin-bottom: 30px;
-            font-size: 1.2rem;
+        h1 {
+            color: var(--text-color);
         }
         #logout-btn {
-            padding: 10px 30px;
+            padding: 0.6rem 1.2rem;
             border: none;
             border-radius: 20px;
-            background-color: #FF4B2B;
+            background-color: var(--accent-color);
             color: white;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -47,21 +55,91 @@
         #logout-btn:hover {
             background-color: #d43f24;
         }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        #create-post-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        #create-post-btn:hover {
+            opacity: 0.9;
+        }
+        #message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        #message.success {
+            color: #28a745;
+        }
+        #message.error {
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Welcome, Admin!</h1>
-        <p>This is your admin dashboard. You can manage your site from here.</p>
-        <button id="logout-btn">Logout</button>
+    <div class="admin-container">
+        <header>
+            <h1>Create New Post</h1>
+            <button id="logout-btn">Logout</button>
+        </header>
+        <form id="create-post-form">
+            <div class="form-group">
+                <label for="post-title">Title</label>
+                <input type="text" id="post-title" required>
+            </div>
+            <div class="form-group">
+                <label for="post-description">Description</label>
+                <textarea id="post-description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="post-image-url">Image URL</label>
+                <input type="url" id="post-image-url" placeholder="https://example.com/image.jpg" required>
+            </div>
+            <div class="form-group">
+                <label for="post-video-url">YouTube Video URL (Optional)</label>
+                <input type="url" id="post-video-url" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+            <button type="submit" id="create-post-btn">Create Post</button>
+        </form>
+        <p id="message"></p>
     </div>
 
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK and Firestore Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
+        // ENTER YOUR FIREBASE CONFIG CODE HERE
         const firebaseConfig = {
             apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
             authDomain: "zulqarnain-ali.firebaseapp.com",
@@ -73,38 +151,62 @@
             measurementId: "G-80199PJVBE"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const adminEmail = 'zulqarnain@gmail.com';
+        const db = getFirestore(app);
+        const adminEmail = "zulqarnain@gmail.com";
 
-        // Auth state listener to protect the page
+        // Auth Guard
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in. Check if they are the admin.
-                if (user.email !== adminEmail) {
-                    // If not admin, redirect to home page
-                    console.log("User is not admin. Redirecting...");
-                    window.location.href = 'index.html';
-                }
-            } else {
-                // No user is signed in. Redirect to login page.
-                console.log("No user signed in. Redirecting...");
-                window.location.href = 'auth.html';
+            if (!user || user.email !== adminEmail) {
+                window.location.href = 'index.html';
             }
         });
 
-        // Logout functionality
-        const logoutButton = document.getElementById('logout-btn');
-        logoutButton.addEventListener('click', () => {
-            signOut(auth).then(() => {
-                // Sign-out successful.
-                console.log('User signed out successfully.');
-                window.location.href = 'auth.html';
-            }).catch((error) => {
-                // An error happened.
-                console.error('Sign out error:', error);
-            });
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).catch((error) => console.error('Logout Error:', error));
+        });
+
+        // Handle Post Creation
+        const postForm = document.getElementById('create-post-form');
+        const messageEl = document.getElementById('message');
+
+        postForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('post-title').value;
+            const description = document.getElementById('post-description').value;
+            const imageURL = document.getElementById('post-image-url').value;
+            let videoURL = document.getElementById('post-video-url').value;
+
+            // Convert YouTube watch URL to embed URL
+            if (videoURL.includes("watch?v=")) {
+                const videoId = videoURL.split('v=')[1].split('&')[0];
+                videoURL = `https://www.youtube.com/embed/${videoId}`;
+            }
+
+            messageEl.textContent = 'Creating post...';
+            messageEl.className = '';
+
+            try {
+                await addDoc(collection(db, "posts"), {
+                    title: title,
+                    description: description,
+                    imageURL: imageURL,
+                    videoURL: videoURL,
+                    createdAt: serverTimestamp()
+                });
+
+                messageEl.textContent = 'Post created successfully!';
+                messageEl.classList.add('success');
+                postForm.reset();
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                messageEl.textContent = 'Error creating post. See console for details.';
+                messageEl.classList.add('error');
+            }
         });
     </script>
 </body>
