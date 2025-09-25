@@ -53,6 +53,29 @@
             color: #ffffff;
         }
 
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
@@ -142,10 +165,6 @@
             transition: color 0.3s ease;
         }
 
-        .nav-link.active {
-            color: var(--accent-color);
-        }
-
         .nav-link::after {
             content: '';
             position: absolute;
@@ -157,11 +176,11 @@
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover {
             color: var(--accent-color);
         }
 
-        .nav-link.active::after {
+        .nav-link:hover::after {
             width: 100%;
         }
 
@@ -216,10 +235,10 @@
             width: 350px;
             height: 350px;
             object-fit: cover;
+            object-position: 50% 25%;
             border-radius: 50%;
             border: 5px solid var(--accent-color);
             box-shadow: 0 0 30px rgba(252, 163, 17, 0.5);
-            object-position: 50% 25%;
         }
 
         .hero-text {
@@ -252,14 +271,447 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- ABOUT ME SECTION --- */
+        #about {
+            background-color: var(--secondary-color);
+        }
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+          margin-bottom: 1rem;
+        }
+
+        .skills-chart {
+            flex: 1;
+            padding-left: 2rem;
+        }
+
+        .skill {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-bar {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 10px;
+            background-color: var(--accent-color);
+            border-radius: 10px;
+            animation: fillSkill 2s ease-out forwards;
+        }
+
+        @keyframes fillSkill {
+            from { width: 0; }
+        }
+
+        .skill-level.photoshop { width: 95%; }
+        .skill-level.premiere { width: 90%; }
+        .skill-level.after-effects { width: 85%; }
+        .skill-level.filmora { width: 98%; }
+        .skill-level.edius { width: 80%; }
+        .skill-level.illustrator { width: 75%; }
+        .skill-level.canva { width: 95%; }
+
+        /* --- SERVICES SECTION --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--secondary-color);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PORTFOLIO SECTION --- */
+        #portfolio {
+            background-color: var(--secondary-color);
+        }
+
+        .portfolio-tabs {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-tab-button {
+            background: none;
+            border: 2px solid var(--text-color);
+            color: var(--text-color);
+            padding: 0.8rem 2rem;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            font-family: var(--font-english);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-tab-button.active, .portfolio-tab-button:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-text-color);
+            border-color: var(--accent-color);
+        }
+
+        .portfolio-content {
+            display: none;
+        }
+
+        .portfolio-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Video Portfolio */
+        .video-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-portfolio-player {
+            position: relative;
+            padding-bottom: 177.77%; /* 9:16 aspect ratio for YouTube Shorts */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .video-portfolio-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Graphic Design Portfolio */
+        .graphics-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .graphic-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .graphic-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .graphic-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .graphic-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .graphic-item:hover .graphic-item-overlay {
+            opacity: 1;
+        }
+
+        .graphic-item-overlay h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .graphic-item-overlay p {
+            font-size: 0.9rem;
+        }
+
+        /* --- PRICING SECTION --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .pricing-card {
+            background-color: var(--secondary-color);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--secondary-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.7rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .pricing-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* --- EXTRAS (Testimonials, FAQ) --- */
+        #testimonials, #faq {
+            background-color: var(--secondary-color);
+        }
+
+        /* Testimonials */
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial {
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* FAQ */
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px; /* Adjust as needed */
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-content {
+            display: flex;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info i {
+            color: var(--accent-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .contact-form {
+            flex: 1.5;
+            background-color: var(--secondary-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-family: var(--font-english);
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: 2px solid var(--accent-color);
+        }
+
+        /* --- WHATSAPP FLOATING BUTTON --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
         /* --- FOOTER --- */
         .footer {
             background-color: #000;
             padding: 3rem 0;
             text-align: center;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
         }
 
         .footer .container {
@@ -273,13 +725,16 @@
             padding: 0.5rem;
             font-weight: 500;
             text-align: center;
-            position: absolute;
-            bottom: 110px; /* Adjust based on footer height */
-            width: 100%;
         }
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -293,6 +748,16 @@
             }
             .hero-text h1 {
                 font-size: 2.8rem;
+            }
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+            .about-content, .contact-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            .skills-chart {
+                padding-left: 0;
             }
         }
 
@@ -336,21 +801,34 @@
             .hamburger.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
             }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- DISCOUNT BANNER -->
+    <div class="discount-banner">
+        50% Discount Offer on Video Editing Bundles!
+    </div>
+
     <!-- HEADER & NAVIGATION -->
     <header class="header">
         <nav class="navbar container">
-            <a href="index.html" class="nav-logo">Zulqarnain<span>.</span></a>
+            <a href="#" class="nav-logo">Zulqarnain<span>.</span></a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -371,13 +849,315 @@
                     <h1>Hi, I'm <span>Zulqarnain Ali</span></h1>
                     <p>Graphic Designer & Video Editor</p>
                     <div class="hero-buttons">
-                        <a href="portfolio.html" class="btn btn-primary">View My Work</a>
-                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+                        <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Creative Visionary & Digital Storyteller</h3>
+                        <p>With a passion for visual arts and a keen eye for detail, I specialize in bringing ideas to life through compelling graphic design and dynamic video editing. Over the past 5 years, I have helped numerous clients elevate their brand presence with high-quality visuals that engage and convert.</p>
+                        <p>My expertise spans across the Adobe Creative Suite and other industry-standard tools, allowing me to deliver a wide range of creative solutions tailored to each client's unique needs. From corporate branding to social media content, I am dedicated to producing work that is not only aesthetically pleasing but also strategically effective.</p>
+                    </div>
+                    <div class="skills-chart">
+                        <h3>My Skills</h3>
+                        <div class="skill">
+                            <h4>Photoshop</h4>
+                            <div class="skill-bar"><div class="skill-level photoshop"></div></div>
+                        </div>
+                        <div class="skill">
+                            <h4>Premiere Pro</h4>
+                            <div class="skill-bar"><div class="skill-level premiere"></div></div>
+                        </div>
+                        <div class="skill">
+                            <h4>After Effects</h4>
+                            <div class="skill-bar"><div class="skill-level after-effects"></div></div>
+                        </div>
+                        <div class="skill">
+                            <h4>Filmora</h4>
+                            <div class="skill-bar"><div class="skill-level filmora"></div></div>
+                        </div>
+                        <div class="skill">
+                            <h4>EDIUS</h4>
+                            <div class="skill-bar"><div class="skill-level edius"></div></div>
+                        </div>
+                         <div class="skill">
+                            <h4>Illustrator</h4>
+                            <div class="skill-bar"><div class="skill-level illustrator"></div></div>
+                        </div>
+                         <div class="skill">
+                            <h4>Canva</h4>
+                            <div class="skill-bar"><div class="skill-level canva"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services">
+            <div class="container">
+                <h2>My Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-video"></i>
+                        <h3>Video Editing</h3>
+                        <p>Professional editing for YouTube, social media, corporate videos, and more. Includes color grading, sound design, and smooth transitions.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Graphic Design</h3>
+                        <p>Creative logos, branding packages, social media posts, banners, and marketing materials that capture your brand's essence.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-film"></i>
+                        <h3>Motion Graphics</h3>
+                        <p>Engaging animated logos, lower thirds, and explainer videos to make your content stand out from the crowd.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-image"></i>
+                        <h3>Thumbnail Designing</h3>
+                        <p>Click-worthy and high-CTR YouTube thumbnails designed to grab attention and boost your video views.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio">
+            <div class="container">
+                <h2>My Portfolio</h2>
+                <div class="portfolio-tabs">
+                    <button class="portfolio-tab-button active" data-target="#video-portfolio">Video Portfolio</button>
+                    <button class="portfolio-tab-button" data-target="#graphics-portfolio">Graphic Design</button>
+                </div>
+
+                <div id="video-portfolio" class="portfolio-content active">
+                    <div class="video-portfolio-grid">
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-portfolio-player">
+                            <iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="graphics-portfolio" class="portfolio-content">
+                    <div class="graphics-portfolio-grid">
+                        <div class="graphic-item">
+                            <img src="https://via.placeholder.com/400x300/1" alt="Project 1">
+                            <div class="graphic-item-overlay">
+                                <h4>Client Name</h4>
+                                <p>Software: Photoshop</p>
+                                <p>A short description of the project.</p>
+                            </div>
+                        </div>
+                        <div class="graphic-item">
+                            <img src="https://via.placeholder.com/400x300/2" alt="Project 2">
+                            <div class="graphic-item-overlay">
+                                <h4>Client Name</h4>
+                                <p>Software: Illustrator</p>
+                                <p>A short description of the project.</p>
+                            </div>
+                        </div>
+                        <div class="graphic-item">
+                            <img src="https://via.placeholder.com/400x300/3" alt="Project 3">
+                            <div class="graphic-item-overlay">
+                                <h4>Client Name</h4>
+                                <p>Software: Canva</p>
+                                <p>A short description of the project.</p>
+                            </div>
+                        </div>
+                        <div class="graphic-item">
+                            <img src="https://via.placeholder.com/400x300/4" alt="Project 4">
+                            <div class="graphic-item-overlay">
+                                <h4>Client Name</h4>
+                                <p>Software: Photoshop</p>
+                                <p>A short description of the project.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section id="pricing">
+            <div class="container">
+                <h2>Pricing Plans</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Short Clip</h3>
+                        <div class="price">PKR 1500</div>
+                        <ul>
+                            <li>30-35 Second Video</li>
+                            <li>Script Writing</li>
+                            <li>Voice-over</li>
+                            <li>Professional Editing</li>
+                            <li>Background Music</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Standard Video</h3>
+                        <div class="price">PKR 1800</div>
+                        <ul>
+                            <li>Up to 1 Minute Video</li>
+                            <li>Script Writing</li>
+                            <li>Voice-over</li>
+                            <li>Professional Editing</li>
+                            <li>Background Music</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>3 Video Bundle</h3>
+                        <div class="price">PKR 4500-5400</div>
+                         <ul>
+                            <li>Three Pro Videos</li>
+                            <li>Script Writing</li>
+                            <li>Voice-over</li>
+                            <li>Professional Editing</li>
+                            <li>Background Music</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Get Started</a>
+                    </div>
+                     <div class="pricing-card">
+                        <h3>5 Video Bundle</h3>
+                        <div class="price">PKR 6000-9000</div>
+                         <ul>
+                            <li>Five Pro Videos</li>
+                            <li>Script Writing</li>
+                            <li>Voice-over</li>
+                            <li>Professional Editing</li>
+                            <li>Background Music</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section id="testimonials">
+            <div class="container">
+                <h2>What Clients Say</h2>
+                <div class="testimonial-slider">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial active">
+                        <img src="https://via.placeholder.com/100/1" alt="Client 1">
+                        <p class="testimonial-text">"Zulqarnain's creativity and professionalism are unmatched. He transformed our vision into a stunning reality. Highly recommended!"</p>
+                        <p class="testimonial-author">John Doe, CEO of TechCorp</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial">
+                        <img src="https://via.placeholder.com/100/2" alt="Client 2">
+                        <p class="testimonial-text">"The video editing was top-notch and delivered ahead of schedule. Our social media engagement has skyrocketed since we started working with him."</p>
+                        <p class="testimonial-author">Jane Smith, Marketing Manager</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section id="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What is your revision policy?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>I offer up to two rounds of minor revisions free of charge for every project to ensure you are 100% satisfied with the final result. Major changes may incur additional costs.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What is the typical turnaround time?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Turnaround time varies by project complexity. A standard video edit usually takes 2-3 business days, while graphic design projects can be completed within 1-2 days. I will provide a specific timeline upon project confirmation.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What file formats will I receive?
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>For videos, I typically deliver in MP4 format, optimized for web and social media. For graphics, you will receive high-resolution JPG, PNG, and source files (PSD, AI) as needed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Let's Create Something Amazing!</h3>
+                        <p>Have a project in mind? I'd love to hear about it. Reach out to me via phone, WhatsApp, or the contact form, and I'll get back to you as soon as possible.</p>
+                        <p><i class="fas fa-phone"></i> +92 324 7107543</p>
+                        <p><i class="fas fa-envelope"></i> your-email@example.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</p>
+                    </div>
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -403,6 +1183,61 @@
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
         }));
+
+        // --- PORTFOLIO TABS ---
+        const portfolioTabs = document.querySelectorAll('.portfolio-tab-button');
+        const portfolioContents = document.querySelectorAll('.portfolio-content');
+
+        portfolioTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Deactivate all tabs and content
+                portfolioTabs.forEach(t => t.classList.remove('active'));
+                portfolioContents.forEach(c => c.classList.remove('active'));
+
+                // Activate clicked tab and corresponding content
+                tab.classList.add('active');
+                document.querySelector(tab.dataset.target).classList.add('active');
+            });
+        });
+
+        // --- FAQ ACCORDION ---
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other items
+                faqItems.forEach(i => i.classList.remove('active'));
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // --- TESTIMONIAL SLIDER (SIMPLE) ---
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.remove('active');
+                if (i === index) {
+                    testimonial.classList.add('active');
+                }
+            });
+        }
+
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000); // Change every 5 seconds
+
+        showTestimonial(0); // Show first testimonial initially
+
     </script>
 </body>
 </html>
