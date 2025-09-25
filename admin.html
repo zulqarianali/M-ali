@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .dashboard-container {
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        #logout-btn {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: #FF4B2B;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #logout-btn:hover {
+            background-color: #d43f24;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, Admin!</h1>
+        <p>This is your admin dashboard. You can manage your site from here.</p>
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
+            authDomain: "zulqarnain-ali.firebaseapp.com",
+            databaseURL: "https://zulqarnain-ali-default-rtdb.firebaseio.com",
+            projectId: "zulqarnain-ali",
+            storageBucket: "zulqarnain-ali.firebasestorage.app",
+            messagingSenderId: "626426491607",
+            appId: "1:626426491607:web:83a5dedd5844306b237692",
+            measurementId: "G-80199PJVBE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const adminEmail = 'zulqarnain@gmail.com';
+
+        // Auth state listener to protect the page
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in. Check if they are the admin.
+                if (user.email !== adminEmail) {
+                    // If not admin, redirect to home page
+                    console.log("User is not admin. Redirecting...");
+                    window.location.href = 'index.html';
+                }
+            } else {
+                // No user is signed in. Redirect to login page.
+                console.log("No user signed in. Redirecting...");
+                window.location.href = 'auth.html';
+            }
+        });
+
+        // Logout functionality
+        const logoutButton = document.getElementById('logout-btn');
+        logoutButton.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                console.log('User signed out successfully.');
+                window.location.href = 'auth.html';
+            }).catch((error) => {
+                // An error happened.
+                console.error('Sign out error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

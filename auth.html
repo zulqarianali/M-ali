@@ -33,7 +33,9 @@
 
         /* --- Form Container --- */
         .container {
+            position: relative; /* This is crucial for absolute positioning of children */
             width: 420px;
+            min-height: 440px; /* Use min-height to allow it to grow */
             background: rgba(0, 0, 0, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
@@ -42,6 +44,7 @@
             border-radius: 10px;
             padding: 30px 40px;
             transition: height 0.4s ease;
+            overflow: hidden; /* Hide the form that slides out */
         }
 
         .container.active {
@@ -65,8 +68,12 @@
 
         .container .form-box.signup {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
             transition: none;
-            transform: translateX(500px);
+            transform: translateX(420px); /* Move it exactly one container width to the right */
         }
 
         .container.active .form-box.signup {
