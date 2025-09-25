@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f0f2f5;
+            --accent-color: #FF4B2B;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--primary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--text-color);
+        }
+        .home-link {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            background-color: transparent;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .home-link:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+        .form-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-group input[disabled] {
+            background-color: #eee;
+            cursor: not-allowed;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        #message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+            height: 20px;
+        }
+        #message.success { color: #28a745; }
+        #message.error { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <header>
+            <h1>Profile Settings</h1>
+            <a href="index.html" class="home-link">Back to Home</a>
+        </header>
+
+        <div class="form-section">
+            <h2>Update Profile</h2>
+            <form id="profile-update-form">
+                <div class="form-group">
+                    <label for="display-name">Display Name</label>
+                    <input type="text" id="display-name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" disabled>
+                </div>
+                <button type="submit" class="btn">Update Profile</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Change Password</h2>
+            <form id="password-change-form">
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <button type="submit" class="btn">Change Password</button>
+            </form>
+        </div>
+        <p id="message"></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // ENTER YOUR FIREBASE CONFIG CODE HERE
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
+            authDomain: "zulqarnain-ali.firebaseapp.com",
+            databaseURL: "https://zulqarnain-ali-default-rtdb.firebaseio.com",
+            projectId: "zulqarnain-ali",
+            storageBucket: "zulqarnain-ali.firebasestorage.app",
+            messagingSenderId: "626426491607",
+            appId: "1:626426491607:web:83a5dedd5844306b237692",
+            measurementId: "G-80199PJVBE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const messageEl = document.getElementById('message');
+
+        let currentUser = null;
+
+        // Auth Guard
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                // Pre-fill form
+                document.getElementById('display-name').value = user.displayName || '';
+                document.getElementById('email').value = user.email;
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Handle Profile Update
+        document.getElementById('profile-update-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const displayName = document.getElementById('display-name').value;
+
+            messageEl.textContent = 'Updating profile...';
+            messageEl.className = '';
+
+            updateProfile(currentUser, { displayName: displayName })
+                .then(() => {
+                    messageEl.textContent = 'Profile updated successfully!';
+                    messageEl.classList.add('success');
+                })
+                .catch((error) => {
+                    messageEl.textContent = `Error: ${error.message}`;
+                    messageEl.classList.add('error');
+                });
+        });
+
+        // Handle Password Change
+        document.getElementById('password-change-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newPassword = document.getElementById('new-password').value;
+
+            if (newPassword.length < 6) {
+                messageEl.textContent = 'Password should be at least 6 characters.';
+                messageEl.className = 'error';
+                return;
+            }
+
+            messageEl.textContent = 'Changing password...';
+            messageEl.className = '';
+
+            updatePassword(currentUser, newPassword)
+                .then(() => {
+                    messageEl.textContent = 'Password changed successfully!';
+                    messageEl.classList.add('success');
+                    document.getElementById('password-change-form').reset();
+                })
+                .catch((error) => {
+                    messageEl.textContent = `Error: ${error.message}. You may need to log in again to perform this action.`;
+                    messageEl.classList.add('error');
+                });
+        });
+    </script>
+</body>
+</html>

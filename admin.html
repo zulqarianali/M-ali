@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Create Post</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f0f2f5;
+            --accent-color: #FF4B2B;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--primary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            color: var(--text-color);
+        }
+        .nav-links a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        #logout-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #logout-btn:hover {
+            background-color: #d43f24;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        #create-post-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        #create-post-btn:hover {
+            opacity: 0.9;
+        }
+        #message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        #message.success {
+            color: #28a745;
+        }
+        #message.error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <div class="nav-links">
+                <a href="index.html">View Site</a>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+        <h2>Create New Post</h2>
+        <form id="create-post-form">
+            <div class="form-group">
+                <label for="post-title">Title</label>
+                <input type="text" id="post-title" required>
+            </div>
+            <div class="form-group">
+                <label for="post-description">Description</label>
+                <textarea id="post-description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="post-image-url">Image URL</label>
+                <input type="url" id="post-image-url" placeholder="https://example.com/image.jpg" required>
+            </div>
+            <div class="form-group">
+                <label for="post-video-url">YouTube Video URL (Optional)</label>
+                <input type="url" id="post-video-url" placeholder="https://www.youtube.com/watch?v=...">
+            </div>
+            <button type="submit" id="create-post-btn">Create Post</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <!-- Firebase SDK and Firestore Logic -->
+    <script type="module">
+        // ENTER YOUR FIREBASE CONFIG CODE HERE
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
+            authDomain: "zulqarnain-ali.firebaseapp.com",
+            databaseURL: "https://zulqarnain-ali-default-rtdb.firebaseio.com",
+            projectId: "zulqarnain-ali",
+            storageBucket: "zulqarnain-ali.firebasestorage.app",
+            messagingSenderId: "626426491607",
+            appId: "1:626426491607:web:83a5dedd5844306b237692",
+            measurementId: "G-80199PJVBE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const adminEmail = "mrvlogging08@gmail.com";
+
+        // Auth Guard
+        onAuthStateChanged(auth, (user) => {
+            if (!user || user.email !== adminEmail) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).catch((error) => console.error('Logout Error:', error));
+        });
+
+        // Handle Post Creation
+        const postForm = document.getElementById('create-post-form');
+        const messageEl = document.getElementById('message');
+
+        postForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('post-title').value;
+            const description = document.getElementById('post-description').value;
+            const imageURL = document.getElementById('post-image-url').value;
+            let videoURL = document.getElementById('post-video-url').value;
+
+            // Convert YouTube watch URL to embed URL
+            if (videoURL.includes("watch?v=")) {
+                const videoId = videoURL.split('v=')[1].split('&')[0];
+                videoURL = `https://www.youtube.com/embed/${videoId}`;
+            }
+
+            messageEl.textContent = 'Creating post...';
+            messageEl.className = '';
+
+            try {
+                await addDoc(collection(db, "posts"), {
+                    title: title,
+                    description: description,
+                    imageURL: imageURL,
+                    videoURL: videoURL || "", // Ensure it's an empty string if not provided
+                    createdAt: serverTimestamp()
+                });
+
+                messageEl.textContent = 'Post created successfully!';
+                messageEl.classList.add('success');
+                postForm.reset();
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                messageEl.textContent = 'Error creating post. See console for details.';
+                messageEl.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>
