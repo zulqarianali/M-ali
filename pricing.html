@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zulqarnain Ali - Graphic Designer & Video Editor</title>
+    <title>Pricing - Zulqarnain Ali</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,13 @@
             --dark-text-color: #14213d;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
         body { background-color: var(--primary-color); color: var(--text-color); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        h1 { font-weight: 600; color: #ffffff; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
+        h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px; }
+        section { padding: 6rem 0; }
+        main section:first-child { padding-top: 8rem; }
 
         .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
         .btn-primary { background-color: var(--accent-color); color: var(--dark-text-color); }
@@ -43,24 +47,21 @@
         .hamburger { display: none; cursor: pointer; }
         .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color); }
 
-        #home { min-height: 100vh; display: flex; align-items: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover; position: relative; }
-        #home::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); }
-        .hero-content { display: flex; align-items: center; justify-content: space-between; gap: 2rem; position: relative; z-index: 1; }
-        .hero-image { flex: 1; text-align: center; }
-        .hero-image img { width: 350px; height: 350px; object-fit: cover; border-radius: 50%; border: 5px solid var(--accent-color); box-shadow: 0 0 30px rgba(252, 163, 17, 0.5); object-position: 50% 25%; }
-        .hero-text { flex: 1.5; animation: fadeIn 1s ease-in-out; }
-        .hero-text h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1rem; }
-        .hero-text h1 span { color: var(--accent-color); }
-        .hero-text p { font-size: 1.5rem; font-weight: 300; margin-bottom: 2rem; }
-        .hero-buttons .btn { margin-right: 1rem; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center; }
+        .pricing-card { background-color: var(--secondary-color); padding: 2.5rem 2rem; border-radius: 10px; text-align: center; border: 2px solid var(--secondary-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .pricing-card:hover { transform: scale(1.05); border-color: var(--accent-color); }
+        .pricing-card h3 { font-size: 1.7rem; color: var(--accent-color); margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .pricing-card .price span { font-size: 1rem; font-weight: 400; }
+        .pricing-card ul { list-style: none; margin-bottom: 2rem; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #444; }
+        .pricing-card ul li:last-child { border-bottom: none; }
 
         .footer { background-color: #000; padding: 3rem 0; text-align: center; }
         .footer .container { border-top: 1px solid #333; padding-top: 3rem; }
         .footer p a { color: #777; text-decoration: none; }
         .footer p a:hover { text-decoration: underline; }
 
-        @media (max-width: 992px) { .hero-content { flex-direction: column; text-align: center; } .hero-image { margin-bottom: 2rem; } .hero-image img { width: 250px; height: 250px; } .hero-text h1 { font-size: 2.8rem; } }
         @media (max-width: 768px) {
             .nav-menu { position: fixed; left: -100%; top: 70px; flex-direction: column; background-color: var(--secondary-color); width: 100%; height: calc(100vh - 70px); text-align: center; transition: 0.3s; }
             .nav-menu.active { left: 0; }
@@ -78,11 +79,11 @@
         <nav class="navbar container">
             <a href="index.html" class="nav-logo">Zulqarnain<span>.</span></a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="work.html" class="nav-link">Portfolio</a></li>
-                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li class="nav-item"><a href="pricing.html" class="nav-link active">Pricing</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -92,17 +93,29 @@
     </header>
 
     <main>
-        <section id="home">
-            <div class="container hero-content">
-                <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
-                </div>
-                <div class="hero-text">
-                    <h1>Hi, I'm <span>Zulqarnain Ali</span></h1>
-                    <p>Graphic Designer & Video Editor</p>
-                    <div class="hero-buttons">
-                        <a href="work.html" class="btn btn-primary">View My Work</a>
-                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+        <section id="pricing">
+            <div class="container">
+                <h2>Pricing Plans</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>30–35 sec video</h3><div class="price">PKR 1500</div>
+                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
+                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Up to 1 min video</h3><div class="price">PKR 1800</div>
+                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
+                        <a href="contact.html" class="btn btn-primary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>3 video bundle</h3><div class="price">PKR 4500–5400</div>
+                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
+                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>5 video bundle</h3><div class="price">PKR 6000–9000</div>
+                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
+                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
                     </div>
                 </div>
             </div>

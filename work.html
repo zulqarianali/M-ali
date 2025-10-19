@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work - Zulqarnain Ali</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --accent-color: #fca311;
+            --text-color: #e5e5e5;
+            --dark-text-color: #14213d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--primary-color); color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        h1, h2, h3, h4 { font-weight: 600; color: #ffffff; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; position: relative; }
+        h3 { font-size: 2rem; text-align: center; margin-bottom: 3rem; position: relative; }
+        h3::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            transform: translateX(-50%); width: 60px; height: 3px;
+            background-color: var(--accent-color); border-radius: 2px;
+        }
+        section { padding: 6rem 0; }
+        main section:first-child { padding-top: 8rem; }
+
+        .header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .nav-logo { font-size: 1.8rem; font-weight: 700; color: #fff; text-decoration: none; }
+        .nav-logo span { color: var(--accent-color); }
+        .nav-menu { display: flex; list-style: none; align-items: center; }
+        .nav-item { margin-left: 2.5rem; }
+        .nav-link { text-decoration: none; color: var(--text-color); font-weight: 500; position: relative; transition: color 0.3s ease; }
+        .nav-link.active { color: var(--accent-color); }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--accent-color); transition: width 0.3s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--accent-color); }
+        .nav-link.active::after { width: 100%; }
+        .hamburger { display: none; cursor: pointer; }
+        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color); }
+
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .graphic-item { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; background-color: var(--secondary-color); }
+        .graphic-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .graphic-item:hover img { transform: scale(1.1); }
+        .graphic-item-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1rem; opacity: 0; transition: opacity 0.4s ease; }
+        .graphic-item:hover .graphic-item-overlay { opacity: 1; }
+        .graphic-item-overlay h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .graphic-item-overlay p { font-size: 0.9rem; }
+
+        .video-item { border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .video-short { max-width: 320px; margin: 0 auto; }
+        .video-player { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
+        .video-player.short { padding-bottom: 177.77%; }
+        .video-player iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        .footer { background-color: #000; padding: 3rem 0; text-align: center; }
+        .footer .container { border-top: 1px solid #333; padding-top: 3rem; }
+        .footer p a { color: #777; text-decoration: none; }
+        .footer p a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .nav-menu { position: fixed; left: -100%; top: 70px; flex-direction: column; background-color: var(--secondary-color); width: 100%; height: calc(100vh - 70px); text-align: center; transition: 0.3s; }
+            .nav-menu.active { left: 0; }
+            .nav-item { margin: 2rem 0; }
+            .nav-link { font-size: 1.2rem; }
+            .hamburger { display: block; }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="nav-logo">Zulqarnain<span>.</span></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="work.html" class="nav-link active">Portfolio</a></li>
+                <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item nav-button" id="login-btn-wrapper"><a href="login.html" class="nav-link">Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="portfolio-page">
+            <div class="container">
+                <h2>My Work</h2>
+
+                <!-- Video Portfolio Section -->
+                <div class="video-portfolio">
+                    <h3>Video Portfolio</h3>
+                    <div class="portfolio-grid">
+                        <!-- Add 12 videos here: mix of short and long -->
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                        <div class="video-item video-short"><div class="video-player short"><iframe src="https://www.youtube.com/embed/mRbeS-Q5Z7s" allowfullscreen></iframe></div></div>
+                        <div class="video-item"><div class="video-player"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe></div></div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Portfolio Section -->
+                <div class="graphic-portfolio" style="margin-top: 6rem;">
+                    <h3>Graphic Design</h3>
+                    <div class="portfolio-grid">
+                        <!-- Add 8-10 graphic designs here -->
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?graphic,design" alt="Project 1"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Photoshop</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?graphic,art" alt="Project 2"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Illustrator</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?design,abstract" alt="Project 3"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Canva</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?tech,design" alt="Project 4"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Photoshop</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?minimal,design" alt="Project 5"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Illustrator</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?poster,design" alt="Project 6"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Photoshop</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?logo,design" alt="Project 7"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Illustrator</p></div></div>
+                        <div class="graphic-item"><img src="https://source.unsplash.com/random/400x300?branding,design" alt="Project 8"><div class="graphic-item-overlay"><h4>Client Name</h4><p>Software: Canva</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved. | <a href="admin-login.html">Admin Login</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    </script>
+</body>
+</html>

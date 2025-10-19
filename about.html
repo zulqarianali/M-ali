@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zulqarnain Ali - Graphic Designer & Video Editor</title>
+    <title>About Me - Zulqarnain Ali</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,18 +16,16 @@
             --secondary-color: #2c2c2c;
             --accent-color: #fca311;
             --text-color: #e5e5e5;
-            --dark-text-color: #14213d;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
         body { background-color: var(--primary-color); color: var(--text-color); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        h1 { font-weight: 600; color: #ffffff; }
-
-        .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
-        .btn-primary { background-color: var(--accent-color); color: var(--dark-text-color); }
-        .btn-primary:hover { background-color: transparent; border-color: var(--accent-color); color: var(--accent-color); }
-        .btn-secondary { background-color: transparent; color: var(--accent-color); border-color: var(--accent-color); }
-        .btn-secondary:hover { background-color: var(--accent-color); color: var(--dark-text-color); }
+        h1, h2, h3, h4 { font-weight: 600; color: #ffffff; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
+        h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px; }
+        section { padding: 6rem 0; }
+        main section:first-child { padding-top: 8rem; }
 
         .header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); }
         .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
@@ -43,24 +41,29 @@
         .hamburger { display: none; cursor: pointer; }
         .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color); }
 
-        #home { min-height: 100vh; display: flex; align-items: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover; position: relative; }
-        #home::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); }
-        .hero-content { display: flex; align-items: center; justify-content: space-between; gap: 2rem; position: relative; z-index: 1; }
-        .hero-image { flex: 1; text-align: center; }
-        .hero-image img { width: 350px; height: 350px; object-fit: cover; border-radius: 50%; border: 5px solid var(--accent-color); box-shadow: 0 0 30px rgba(252, 163, 17, 0.5); object-position: 50% 25%; }
-        .hero-text { flex: 1.5; animation: fadeIn 1s ease-in-out; }
-        .hero-text h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1rem; }
-        .hero-text h1 span { color: var(--accent-color); }
-        .hero-text p { font-size: 1.5rem; font-weight: 300; margin-bottom: 2rem; }
-        .hero-buttons .btn { margin-right: 1rem; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        #about { background-color: var(--secondary-color); }
+        .about-content { display: flex; gap: 4rem; align-items: flex-start; }
+        .about-text { flex: 2; }
+        .about-text p { margin-bottom: 1rem; }
+        .skills-chart { flex: 1; padding-left: 2rem; }
+        .skill { margin-bottom: 1.5rem; }
+        .skill h4 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .skill-bar { background-color: var(--primary-color); border-radius: 10px; overflow: hidden; }
+        .skill-level { height: 10px; background-color: var(--accent-color); border-radius: 10px; }
+        .skill-level.photoshop { width: 95%; }
+        .skill-level.premiere { width: 90%; }
+        .skill-level.after-effects { width: 85%; }
+        .skill-level.filmora { width: 98%; }
+        .skill-level.edius { width: 80%; }
+        .skill-level.illustrator { width: 75%; }
+        .skill-level.canva { width: 95%; }
 
         .footer { background-color: #000; padding: 3rem 0; text-align: center; }
         .footer .container { border-top: 1px solid #333; padding-top: 3rem; }
         .footer p a { color: #777; text-decoration: none; }
         .footer p a:hover { text-decoration: underline; }
 
-        @media (max-width: 992px) { .hero-content { flex-direction: column; text-align: center; } .hero-image { margin-bottom: 2rem; } .hero-image img { width: 250px; height: 250px; } .hero-text h1 { font-size: 2.8rem; } }
+        @media (max-width: 992px) { .about-content { flex-direction: column; } .skills-chart { padding-left: 0; width: 100%; margin-top: 2rem; } }
         @media (max-width: 768px) {
             .nav-menu { position: fixed; left: -100%; top: 70px; flex-direction: column; background-color: var(--secondary-color); width: 100%; height: calc(100vh - 70px); text-align: center; transition: 0.3s; }
             .nav-menu.active { left: 0; }
@@ -78,8 +81,8 @@
         <nav class="navbar container">
             <a href="index.html" class="nav-logo">Zulqarnain<span>.</span></a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
                 <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="work.html" class="nav-link">Portfolio</a></li>
                 <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
@@ -92,17 +95,24 @@
     </header>
 
     <main>
-        <section id="home">
-            <div class="container hero-content">
-                <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
-                </div>
-                <div class="hero-text">
-                    <h1>Hi, I'm <span>Zulqarnain Ali</span></h1>
-                    <p>Graphic Designer & Video Editor</p>
-                    <div class="hero-buttons">
-                        <a href="work.html" class="btn btn-primary">View My Work</a>
-                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Creative Visionary & Digital Storyteller</h3>
+                        <p>With a passion for visual arts and a keen eye for detail, I specialize in bringing ideas to life through compelling graphic design and dynamic video editing. Over the past 5 years, I have helped numerous clients elevate their brand presence with high-quality visuals that engage and convert.</p>
+                        <p>My expertise spans across the Adobe Creative Suite and other industry-standard tools, allowing me to deliver a wide range of creative solutions tailored to each client's unique needs. From corporate branding to social media content, I am dedicated to producing work that is not only aesthetically pleasing but also strategically effective.</p>
+                    </div>
+                    <div class="skills-chart">
+                        <h3>My Skills</h3>
+                        <div class="skill"><h4>Photoshop</h4><div class="skill-bar"><div class="skill-level photoshop"></div></div></div>
+                        <div class="skill"><h4>Premiere Pro</h4><div class="skill-bar"><div class="skill-level premiere"></div></div></div>
+                        <div class="skill"><h4>After Effects</h4><div class="skill-bar"><div class="skill-level after-effects"></div></div></div>
+                        <div class="skill"><h4>Filmora</h4><div class="skill-bar"><div class="skill-level filmora"></div></div></div>
+                        <div class="skill"><h4>EDIUS</h4><div class="skill-bar"><div class="skill-level edius"></div></div></div>
+                        <div class="skill"><h4>Illustrator</h4><div class="skill-bar"><div class="skill-level illustrator"></div></div></div>
+                        <div class="skill"><h4>Canva</h4><div class="skill-bar"><div class="skill-level canva"></div></div></div>
                     </div>
                 </div>
             </div>
