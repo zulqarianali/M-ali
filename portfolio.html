@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Zulqarnain Ali</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- Google Fonts --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -154,6 +156,10 @@
         .portfolio-tabs {
             text-align: center;
             margin-bottom: 40px;
+            display: flex; /* Added flex to manage button layout */
+            justify-content: center;
+            flex-wrap: wrap; /* Allows wrapping on small screens */
+            gap: 10px; /* Spacing between buttons */
         }
 
         .tab-button {
@@ -161,11 +167,19 @@
             border: 1px solid var(--border-color);
             color: var(--text-color);
             padding: 10px 20px;
-            margin: 0 5px;
+            /* margin: 0 5px; Removed for better flex control */
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s ease;
         }
+        
+        /* Mobile-specific adjustments for buttons */
+        @media (max-width: 480px) {
+            .tab-button {
+                flex-basis: 100%; /* Make buttons full width on very small screens */
+            }
+        }
+
 
         .tab-button.active {
             background-color: var(--accent-color);
@@ -181,13 +195,16 @@
             display: block;
         }
 
+        /* Video Portfolio Grid */
         .video-portfolio-grid {
+            /* Desktop/Large Tablet Default */
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns for better aspect ratio management */
             gap: 20px;
         }
-
-        .video-wrapper {
+        
+        /* Video Player Wrapper */
+        .video-wrapper, .video-portfolio-player {
             position: relative;
             padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
             height: 0;
@@ -197,7 +214,7 @@
             background-color: #000;
         }
 
-        .video-wrapper iframe {
+        .video-wrapper iframe, .video-portfolio-player iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -206,6 +223,7 @@
             border: 0;
         }
 
+        /* Graphics Portfolio Grid and Items */
         .graphics-portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -242,11 +260,13 @@
             transform: translateY(100%);
             transition: all 0.4s ease;
         }
-
+        
+        /* Mobile: Show overlay instantly on hover/tap-emulator (though actual tap behavior may differ) */
         .graphic-item:hover .graphic-overlay {
             opacity: 1;
             transform: translateY(0);
         }
+
 
         .graphic-overlay h4 {
             color: #fff;
@@ -299,13 +319,19 @@
             transform: scale(1.1);
         }
 
-        /* --- Responsive Design --- */
+        /* --- Responsive Design (Enhanced) --- */
+        
+        /* Tablet View (769px to 992px) */
         @media (max-width: 992px) {
             .video-portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+            .nav-links li {
+                margin-left: 15px;
             }
         }
 
+        /* Mobile View (Below 768px) */
         @media (max-width: 768px) {
             .nav-links {
                 position: absolute;
@@ -337,17 +363,27 @@
             h2 {
                 font-size: 2rem;
             }
+            
+            /* Single column for videos on mobile for better viewing */
             .video-portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Single column for graphics on mobile */
+            .graphics-portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Ensure video player stays visible on mobile */
+            .video-portfolio-player {
+                 padding-bottom: 150%; /* Slightly less vertical space for better aspect ratio on small screens if needed */
+            }
         }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header (Using multi-page structure) -->
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
@@ -376,38 +412,69 @@
                 <button class="tab-button" data-tab="graphics">Graphic Design</button>
             </div>
 
-            <!-- Video Portfolio -->
-              <div id="video-portfolio" class="portfolio-content active">
-                    <div class="video-portfolio-grid">
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/5DMJMVhzbpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/iWwR540lmn0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/5TFMmNSGP-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/I0_1g7aXVe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/eE9Wn5lPOII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/-Bpwog89K7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/dg5U0M8kMRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/sjjxAIbSzq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/KLTQcmYMzok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
+            <!-- Video Portfolio (Preserved YouTube Shorts Content) -->
+            <div id="video-portfolio" class="portfolio-content active">
+                <div class="video-portfolio-grid">
+                    <!-- Your Existing YouTube Shorts Links (Preserved) -->
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/5DMJMVhzbpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/iWwR540lmn0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/5TFMmNSGP-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/I0_1g7aXVe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/eE9Wn5lPOII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/-Bpwog89K7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/dg5U0M8kMRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/sjjxAIbSzq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/KLTQcmYMzok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Additional shorts from your initial single-page code (combined and kept) -->
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/m0T0D-pA7gY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/LqdnTrXmI-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/tH0-_5LGHTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/u_wB9p-4p-c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/DflqZKea_yA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/j54Hh4p5h2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/8Z1e_gYk1A4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/Q344a-n_yqE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-portfolio-player">
+                        <iframe src="https://www.youtube.com/embed/shorts/Vf7D_ur2C-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    
                 </div>
+            </div>
 
             <!-- Graphics Portfolio -->
             <div id="graphics-portfolio" class="portfolio-content">
@@ -422,7 +489,7 @@
                     </div>
                     <div class="graphic-item">
                         <img src="https://via.placeholder.com/400x300.png?text=Project+2" alt="Graphic Design Project 2">
-                         <div class="graphic-overlay">
+                          <div class="graphic-overlay">
                             <h4>Client: Foodie Haven</h4>
                             <p>Software: Canva</p>
                             <p>Engaging social media posts for a restaurant.</p>
@@ -430,7 +497,7 @@
                     </div>
                     <div class="graphic-item">
                         <img src="https://via.placeholder.com/400x300.png?text=Project+3" alt="Graphic Design Project 3">
-                         <div class="graphic-overlay">
+                          <div class="graphic-overlay">
                             <h4>Client: Fitness World</h4>
                             <p>Software: Illustrator</p>
                             <p>Promotional flyers and banners for a gym.</p>
