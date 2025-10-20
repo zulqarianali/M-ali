@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Zulqarnain Ali</title>
+    <title>Blog - Zulqarnain Ali</title>
     <style>
         /* --- Google Fonts --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -33,15 +33,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: auto;
             padding: 0 20px;
-        }
-
-        h2, h3 {
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
         }
 
         h2 {
@@ -51,6 +45,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
+            color: var(--accent-color);
         }
 
         h2::after {
@@ -65,16 +60,6 @@
 
         section {
             padding: 80px 0;
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
         }
 
         /* --- Header & Navigation --- */
@@ -150,39 +135,27 @@
             color: var(--accent-color);
         }
 
-        /* --- Services Section --- */
-        #services {
+        /* --- Blog Posts --- */
+        .blog-post {
             background-color: var(--secondary-color);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
         }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            text-align: center;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .service-card .icon {
-            font-size: 3rem;
+        .blog-post h3 {
             color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        .post-meta {
+            font-size: 0.9rem;
+            color: #aaa;
             margin-bottom: 20px;
         }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .post-content {
+            white-space: pre-wrap; /* Respects newlines in the content */
         }
 
         /* --- Footer --- */
@@ -191,41 +164,9 @@
             color: #aaa;
             padding: 40px 0 20px;
             text-align: center;
+            border-top: 1px solid var(--border-color);
         }
 
-        .warning-bar {
-            background-color: #ffc107;
-            color: #333;
-            padding: 8px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        /* --- Floating WhatsApp Button --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: #FFF;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- Responsive Design --- */
         @media (max-width: 768px) {
             .nav-links {
                 position: absolute;
@@ -253,14 +194,8 @@
             .menu-toggle {
                 display: block;
             }
-
-            h2 {
-                font-size: 2rem;
-            }
         }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -274,69 +209,98 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="pricing.html">Pricing</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container fade-in">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-video"></i></div>
-                    <h3>Video Editing</h3>
-                    <p>Professional video editing for YouTube, social media, corporate events, and more. Engaging cuts, color grading, and sound design.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-palette"></i></div>
-                    <h3>Graphic Design</h3>
-                    <p>Creative designs for logos, branding, social media posts, banners, and marketing materials that make your brand stand out.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-film"></i></div>
-                    <h3>Motion Graphics</h3>
-                    <p>Dynamic motion graphics and animations to bring your ideas to life. Perfect for intros, outros, and promotional videos.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon"><i class="fas fa-image"></i></div>
-                    <h3>Thumbnail Designing</h3>
-                    <p>Eye-catching and clickable YouTube thumbnails that increase your video's CTR and grab viewers' attention.</p>
-                </div>
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <h2>Latest Posts</h2>
+            <div id="posts-container">
+                <!-- Posts will be loaded here by JavaScript -->
+                <p>Loading posts...</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="warning-bar">
-            Downloading and reusing videos is a legal offense.
-        </div>
         <div class="container">
             <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- Mobile Menu Toggle ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        // --- Initialize Firebase (ADD YOUR CONFIG HERE) ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const postsCollection = db.collection('posts');
+
+        // --- DOM Elements ---
+        const postsContainer = document.getElementById('posts-container');
+
+        // --- Load and Display Posts ---
+        function loadPosts() {
+            postsCollection.orderBy('createdAt', 'desc').get().then(snapshot => {
+                postsContainer.innerHTML = '';
+                if (snapshot.empty) {
+                    postsContainer.innerHTML = '<p>No posts have been published yet. Check back soon!</p>';
+                    return;
+                }
+                snapshot.forEach(doc => {
+                    const post = doc.data();
+                    const postElement = document.createElement('article');
+                    postElement.className = 'blog-post';
+
+                    const postDate = post.createdAt.toDate().toLocaleDateString('en-US', {
+                        year: 'numeric', month: 'long', day: 'numeric'
+                    });
+
+                    postElement.innerHTML = `
+                        <h3>${post.title}</h3>
+                        <div class="post-meta">Published on ${postDate}</div>
+                        <div class="post-content">${post.content}</div>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+            }).catch(error => {
+                console.error("Error loading posts: ", error);
+                postsContainer.innerHTML = '<p>Could not load posts due to an error.</p>';
+            });
+        }
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPosts();
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
         });
-    });
     </script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>

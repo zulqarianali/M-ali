@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Zulqarnain Ali</title>
+    <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #00aaff;
+            --text-color: #f0f0f0;
+            --card-bg: #252525;
+            --border-color: #444;
+            --font-english: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-english);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        h2, h3, h4 {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+
+        /* --- Portfolio Section --- */
+        .portfolio-tabs {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-button {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .portfolio-content {
+            display: none;
+        }
+
+        .portfolio-content.active {
+            display: block;
+        }
+
+        .video-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background-color: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .graphics-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .graphic-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .graphic-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .graphic-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .graphic-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #fff;
+            padding: 40px 20px 20px;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.4s ease;
+        }
+
+        .graphic-item:hover .graphic-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .graphic-overlay h4 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .graphic-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .warning-bar {
+            background-color: #ffc107;
+            color: #333;
+            padding: 8px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* --- Floating WhatsApp Button --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .video-portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                padding: 20px 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+                padding: 20px 0;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+            .video-portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container fade-in">
+            <h2>Portfolio</h2>
+            <div class="portfolio-tabs">
+                <button class="tab-button active" data-tab="video">Video Portfolio</button>
+                <button class="tab-button" data-tab="graphics">Graphic Design</button>
+            </div>
+
+            <!-- Video Portfolio -->
+            <div id="video-portfolio" class="portfolio-content active">
+                <div class="video-portfolio-grid">
+                    <!-- Row 1 -->
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/m0T0D-pA7gY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/LqdnTrXmI-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                         <iframe src="https://www.youtube.com/embed/shorts/tH0-_5LGHTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/u_wB9p-4p-c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/DflqZKea_yA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/j54Hh4p5h2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/8Z1e_gYk1A4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/Q344a-n_yqE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/shorts/Vf7D_ur2C-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphics Portfolio -->
+            <div id="graphics-portfolio" class="portfolio-content">
+                <div class="graphics-portfolio-grid">
+                    <div class="graphic-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Project+1" alt="Graphic Design Project 1">
+                        <div class="graphic-overlay">
+                            <h4>Client: Tech Solutions</h4>
+                            <p>Software: Photoshop, Illustrator</p>
+                            <p>A modern logo and branding package.</p>
+                        </div>
+                    </div>
+                    <div class="graphic-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Project+2" alt="Graphic Design Project 2">
+                         <div class="graphic-overlay">
+                            <h4>Client: Foodie Haven</h4>
+                            <p>Software: Canva</p>
+                            <p>Engaging social media posts for a restaurant.</p>
+                        </div>
+                    </div>
+                    <div class="graphic-item">
+                        <img src="https://via.placeholder.com/400x300.png?text=Project+3" alt="Graphic Design Project 3">
+                         <div class="graphic-overlay">
+                            <h4>Client: Fitness World</h4>
+                            <p>Software: Illustrator</p>
+                            <p>Promotional flyers and banners for a gym.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="warning-bar">
+            Downloading and reusing videos is a legal offense.
+        </div>
+        <div class="container">
+            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // --- Portfolio Tabs ---
+        const tabs = document.querySelectorAll('.tab-button');
+        const portfolioContents = document.querySelectorAll('.portfolio-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Deactivate all
+                tabs.forEach(t => t.classList.remove('active'));
+                portfolioContents.forEach(c => c.classList.remove('active'));
+
+                // Activate clicked
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + '-portfolio').classList.add('active');
+            });
+        });
+    });
+    </script>
+</body>
+</html>

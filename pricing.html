@@ -4,141 +4,419 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing - Zulqarnain Ali</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* --- Global Styles & Variables --- */
         :root {
             --primary-color: #1a1a1a;
-            --secondary-color: #2c2c2c;
-            --accent-color: #fca311;
-            --text-color: #e5e5e5;
-            --dark-text-color: #14213d;
+            --secondary-color: #2d2d2d;
+            --accent-color: #00aaff;
+            --text-color: #f0f0f0;
+            --card-bg: #252525;
+            --border-color: #444;
+            --success-color: #28a745;
+            --font-english: 'Poppins', sans-serif;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background-color: var(--primary-color); color: var(--text-color); line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
-        h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--accent-color); border-radius: 2px; }
-        section { padding: 6rem 0; }
-        main section:first-child { padding-top: 8rem; }
 
-        .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; cursor: pointer; border: 2px solid transparent; }
-        .btn-primary { background-color: var(--accent-color); color: var(--dark-text-color); }
-        .btn-primary:hover { background-color: transparent; border-color: var(--accent-color); color: var(--accent-color); }
-        .btn-secondary { background-color: transparent; color: var(--accent-color); border-color: var(--accent-color); }
-        .btn-secondary:hover { background-color: var(--accent-color); color: var(--dark-text-color); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .nav-logo { font-size: 1.8rem; font-weight: 700; color: #fff; text-decoration: none; }
-        .nav-logo span { color: var(--accent-color); }
-        .nav-menu { display: flex; list-style: none; align-items: center; }
-        .nav-item { margin-left: 2.5rem; }
-        .nav-link { text-decoration: none; color: var(--text-color); font-weight: 500; position: relative; transition: color 0.3s ease; }
-        .nav-link.active { color: var(--accent-color); }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background-color: var(--accent-color); transition: width 0.3s ease; }
-        .nav-link:hover, .nav-link.active { color: var(--accent-color); }
-        .nav-link.active::after { width: 100%; }
-        .hamburger { display: none; cursor: pointer; }
-        .bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: all 0.3s ease-in-out; background-color: var(--text-color); }
+        body {
+            font-family: var(--font-english);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: center; }
-        .pricing-card { background-color: var(--secondary-color); padding: 2.5rem 2rem; border-radius: 10px; text-align: center; border: 2px solid var(--secondary-color); transition: transform 0.3s ease, border-color 0.3s ease; }
-        .pricing-card:hover { transform: scale(1.05); border-color: var(--accent-color); }
-        .pricing-card h3 { font-size: 1.7rem; color: var(--accent-color); margin-bottom: 1rem; }
-        .pricing-card .price { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; }
-        .pricing-card .price span { font-size: 1rem; font-weight: 400; }
-        .pricing-card ul { list-style: none; margin-bottom: 2rem; }
-        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #444; }
-        .pricing-card ul li:last-child { border-bottom: none; }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
 
-        .footer { background-color: #000; padding: 3rem 0; text-align: center; }
-        .footer .container { border-top: 1px solid #333; padding-top: 3rem; }
-        .footer p a { color: #777; text-decoration: none; }
-        .footer p a:hover { text-decoration: underline; }
+        h2, h3 {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
 
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: transparent;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+
+        /* --- Pricing Section --- */
+        #pricing {
+            background-color: var(--secondary-color);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            text-align: left;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .pricing-card .btn {
+            margin-top: auto;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .warning-bar {
+            background-color: #ffc107;
+            color: #333;
+            padding: 8px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        /* --- Floating WhatsApp Button --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Responsive Design --- */
         @media (max-width: 768px) {
-            .nav-menu { position: fixed; left: -100%; top: 70px; flex-direction: column; background-color: var(--secondary-color); width: 100%; height: calc(100vh - 70px); text-align: center; transition: 0.3s; }
-            .nav-menu.active { left: 0; }
-            .nav-item { margin: 2rem 0; }
-            .nav-link { font-size: 1.2rem; }
-            .hamburger { display: block; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                padding: 20px 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+                padding: 20px 0;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
         }
     </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <!-- Header -->
     <header class="header">
-        <nav class="navbar container">
-            <a href="index.html" class="nav-logo">Zulqarnain<span>.</span></a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="work.html" class="nav-link">Portfolio</a></li>
-                <li class="nav-item"><a href="pricing.html" class="nav-link active">Pricing</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <div class="container">
+            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
             </div>
-        </nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="pricing.html" class="active">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
     </header>
 
-    <main>
-        <section id="pricing">
-            <div class="container">
-                <h2>Pricing Plans</h2>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3>30–35 sec video</h3><div class="price">PKR 1500</div>
-                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
-                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Up to 1 min video</h3><div class="price">PKR 1800</div>
-                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
-                        <a href="contact.html" class="btn btn-primary">Get Started</a>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>3 video bundle</h3><div class="price">PKR 4500–5400</div>
-                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
-                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>5 video bundle</h3><div class="price">PKR 6000–9000</div>
-                        <ul><li>Script Writing</li><li>Voice-over</li><li>Professional Editing</li><li>Background Music</li></ul>
-                        <a href="contact.html" class="btn btn-secondary">Get Started</a>
-                    </div>
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container fade-in">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic Video</h3>
+                    <div class="price">PKR 1500 <span>/ 30-35 sec</span></div>
+                    <ul>
+                        <li>Script Writing</li>
+                        <li>Voice-Over</li>
+                        <li>Professional Editing</li>
+                        <li>Background Music</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Standard Video</h3>
+                    <div class="price">PKR 1800 <span>/ up to 1 min</span></div>
+                    <ul>
+                        <li>Script Writing</li>
+                        <li>Voice-Over</li>
+                        <li>Professional Editing</li>
+                        <li>Background Music</li>
+                    </ul>
+                     <a href="contact.html" class="btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>3 Video Bundle</h3>
+                    <div class="price">PKR 4500-5400</div>
+                     <ul>
+                        <li>Script Writing</li>
+                        <li>Voice-Over</li>
+                        <li>Professional Editing</li>
+                        <li>Background Music</li>
+                    </ul>
+                     <a href="contact.html" class="btn">Get Started</a>
+                </div>
+                 <div class="pricing-card">
+                    <h3>5 Video Bundle</h3>
+                    <div class="price">PKR 6000-9000</div>
+                     <ul>
+                        <li>Script Writing</li>
+                        <li>Voice-Over</li>
+                        <li>Professional Editing</li>
+                        <li>Background Music</li>
+                    </ul>
+                     <a href="contact.html" class="btn">Get Started</a>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer class="footer">
+        <div class="warning-bar">
+            Downloading and reusing videos is a legal offense.
+        </div>
         <div class="container">
-            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved. | <a href="admin-login.html">Admin Login</a></p>
+            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script>
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
-        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
+    });
     </script>
 </body>
 </html>

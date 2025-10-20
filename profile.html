@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #00aaff;
+            --text-color: #f0f0f0;
+            --card-bg: #252525;
+            --border-color: #444;
+            --error-color: #dc3545;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: var(--accent-color);
+            margin: 0;
+        }
+        .btn-danger {
+            padding: 10px 20px;
+            background: var(--error-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .profile-container {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .profile-container h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+        .profile-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .profile-info strong {
+            color: #ccc;
+        }
+        #user-email {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>User Profile</h1>
+            <button id="logout-btn" class="btn-danger">Logout</button>
+        </div>
+
+        <div id="profile-content" style="display: none;">
+            <div class="profile-container">
+                <h2>Welcome!</h2>
+                <div class="profile-info">
+                    <p><strong>Email:</strong> <span id="user-email"></span></p>
+                    <p><strong>Role:</strong> <span id="user-role"></span></p>
+                    <p>This is your profile page. More content and features can be added here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+    <script>
+        // --- Initialize Firebase (ADD YOUR CONFIG HERE) ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // --- DOM Elements ---
+        const profileContent = document.getElementById('profile-content');
+        const userEmailSpan = document.getElementById('user-email');
+        const userRoleSpan = document.getElementById('user-role');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // --- Auth State Management ---
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                profileContent.style.display = 'block';
+                userEmailSpan.textContent = user.email;
+
+                // Get user role from Firestore
+                db.collection('users').doc(user.uid).get().then(doc => {
+                    if (doc.exists) {
+                        userRoleSpan.textContent = doc.data().role || 'user';
+                    } else {
+                        userRoleSpan.textContent = 'user';
+                    }
+                }).catch(error => {
+                    console.error("Error getting user role:", error);
+                    userRoleSpan.textContent = 'user';
+                });
+
+            } else {
+                // No user is signed in.
+                window.location.href = 'login.html';
+            }
+        });
+
+        // --- Logout ---
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -4,35 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zulqarnain Ali - Graphic Designer & Video Editor</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <style>
-        /* --- CSS RESET & BASIC SETUP --- */
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Jameel+Noori+Nastaleeq&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+        /* --- Global Styles & Variables --- */
         :root {
             --primary-color: #1a1a1a;
-            --secondary-color: #2c2c2c;
-            --accent-color: #fca311;
-            --text-color: #e5e5e5;
-            --dark-text-color: #14213d;
+            --secondary-color: #2d2d2d;
+            --accent-color: #00aaff;
+            --text-color: #f0f0f0;
+            --dark-text-color: #333;
+            --card-bg: #252525;
+            --border-color: #444;
             --font-english: 'Poppins', sans-serif;
-            --font-urdu: 'Noto Nastaliq Urdu', serif;
+            --font-urdu: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -44,132 +36,127 @@
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            margin: auto;
+            padding: 0 20px;
         }
 
-        h1, h2, h3, h4 {
+        h1 {
             font-weight: 600;
-            color: #ffffff;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        section {
-            padding: 6rem 0;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            padding: 12px 28px;
+            background: var(--accent-color);
+            color: #fff;
             text-decoration: none;
+            border-radius: 50px;
             font-weight: 500;
             transition: all 0.3s ease;
-            cursor: pointer;
             border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
         }
 
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: var(--dark-text-color);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
+        .btn:hover {
+            background: transparent;
             border-color: var(--accent-color);
             color: var(--accent-color);
+            transform: translateY(-3px);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--accent-color);
+            background: transparent;
             border-color: var(--accent-color);
+            color: var(--accent-color);
         }
 
         .btn-secondary:hover {
-            background-color: var(--accent-color);
-            color: var(--dark-text-color);
+            background: var(--accent-color);
+            color: #fff;
         }
 
-        /* --- DISCOUNT BANNER --- */
+        /* --- Utility Classes --- */
+        .urdu-text {
+            font-family: var(--font-urdu);
+            direction: rtl;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* --- Discount Banner --- */
         .discount-banner {
             background-color: var(--accent-color);
-            color: var(--dark-text-color);
+            color: #fff;
             text-align: center;
-            padding: 0.5rem;
+            padding: 10px 0;
             font-weight: 600;
             font-size: 1.1rem;
+            width: 100%;
+            z-index: 1001;
+            position: relative;
         }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- Header & Navigation --- */
         .header {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px 0;
             position: sticky;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(26, 26, 26, 0.8);
             backdrop-filter: blur(10px);
-            transition: background-color 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .navbar {
+        .header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
         }
 
-        .nav-logo {
+        .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-color);
             text-decoration: none;
         }
 
-        .nav-logo span {
+        .logo span {
             color: var(--accent-color);
         }
 
-        .nav-menu {
-            display: flex;
-            align-items: center;
+        .nav-links {
             list-style: none;
+            display: flex;
         }
 
-        .nav-item {
-            margin-left: 2.5rem;
+        .nav-links li {
+            margin-left: 30px;
         }
 
-        .nav-link {
-            text-decoration: none;
+        .nav-links a {
             color: var(--text-color);
+            text-decoration: none;
             font-weight: 500;
-            position: relative;
             transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        .nav-link::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -177,116 +164,36 @@
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover {
+        .nav-links a:hover, .nav-links a.active {
             color: var(--accent-color);
         }
 
-        .nav-link:hover::after {
+        .nav-links a:hover::after, .nav-links a.active::after {
             width: 100%;
         }
 
-        .nav-button a {
-            border: 2px solid var(--accent-color);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-button a:hover {
-            background-color: var(--accent-color);
-            color: var(--dark-text-color);
-        }
-
-        .nav-button a:hover::after {
+        .menu-toggle {
             display: none;
-        }
-
-        /* Styles for the user dropdown */
-        .nav-item.dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 150%;
-            right: 0;
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            list-style: none;
-            padding: 0.5rem 0;
-            margin: 0;
-            width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu li a {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: var(--primary-color);
-        }
-
-        .user-avatar {
+            font-size: 2rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
+            color: var(--accent-color);
         }
 
-        .user-avatar .fa-user-circle {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
-
-        #user-info, #admin-dashboard-link, #login-btn {
-            display: none; /* Hidden by default, JS will manage visibility */
-        }
-
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            transition: all 0.3s ease-in-out;
-            background-color: var(--text-color);
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- Hero Section --- */
         #home {
-            min-height: calc(100vh - 70px);
+            min-height: 90vh;
             display: flex;
             align-items: center;
-            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
             position: relative;
+            border-bottom: 1px solid var(--border-color);
         }
 
         #home::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 26, 26, 0.7);
         }
 
         .hero-content {
@@ -299,531 +206,79 @@
         }
 
         .hero-image {
-            flex: 1;
+            flex-basis: 40%;
             text-align: center;
         }
 
         .hero-image img {
-            width: 350px;
-            height: 350px;
-            object-fit: cover;
-            object-position: 50% 25%;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
+            object-fit: cover;
             border: 5px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(252, 163, 17, 0.5);
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
+            object-position: top;
         }
 
         .hero-text {
-            flex: 1.5;
-            animation: fadeIn 1s ease-in-out;
+            flex-basis: 55%;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
             line-height: 1.2;
-            margin-bottom: 1rem;
         }
 
         .hero-text h1 span {
             color: var(--accent-color);
         }
 
-        .hero-text p {
-            font-size: 1.5rem;
-            font-weight: 300;
+        .hero-text .subtitle {
+            font-size: 1.8rem;
+            color: var(--text-color);
             margin-bottom: 2rem;
+            font-weight: 300;
         }
 
         .hero-buttons .btn {
-            margin-right: 1rem;
+            margin-right: 15px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- ABOUT ME SECTION --- */
-        #about {
-            background-color: var(--secondary-color);
-        }
-        .about-content {
-            display: flex;
-            gap: 4rem;
-            align-items: flex-start;
-        }
-
-        .about-text {
-            flex: 2;
-        }
-
-        .about-text p {
-          margin-bottom: 1rem;
-        }
-
-        .skills-chart {
-            flex: 1;
-            padding-left: 2rem;
-        }
-
-        .skill {
-            margin-bottom: 1.5rem;
-        }
-
-        .skill h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .skill-bar {
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .skill-level {
-            height: 10px;
-            background-color: var(--accent-color);
-            border-radius: 10px;
-            animation: fillSkill 2s ease-out forwards;
-        }
-
-        @keyframes fillSkill {
-            from { width: 0; }
-        }
-
-        .skill-level.photoshop { width: 95%; }
-        .skill-level.premiere { width: 90%; }
-        .skill-level.after-effects { width: 85%; }
-        .skill-level.filmora { width: 98%; }
-        .skill-level.edius { width: 80%; }
-        .skill-level.illustrator { width: 75%; }
-        .skill-level.canva { width: 95%; }
-
-        /* --- SERVICES SECTION --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background-color: var(--secondary-color);
-            padding: 2.5rem 2rem;
+        /* --- Footer --- */
+        .footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0 20px;
             text-align: center;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .service-card i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* --- PORTFOLIO SECTION --- */
-        #portfolio {
-            background-color: var(--secondary-color);
-        }
-
-        .portfolio-tabs {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .portfolio-tab-button {
-            background: none;
-            border: 2px solid var(--text-color);
-            color: var(--text-color);
-            padding: 0.8rem 2rem;
-            margin: 0 0.5rem;
-            font-size: 1rem;
-            font-family: var(--font-english);
+        .warning-bar {
+            background-color: #ffc107;
+            color: #333;
+            padding: 8px;
             font-weight: 500;
-            cursor: pointer;
-            border-radius: 50px;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
 
-        .portfolio-tab-button.active, .portfolio-tab-button:hover {
-            background-color: var(--accent-color);
-            color: var(--dark-text-color);
-            border-color: var(--accent-color);
-        }
-
-        .portfolio-content {
-            display: none;
-        }
-
-        .portfolio-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        /* Video Portfolio */
-        .video-portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .video-portfolio-player {
-            position: relative;
-            padding-bottom: 177.77%; /* 9:16 aspect ratio for YouTube Shorts */
-            height: 0;
-            overflow: hidden;
-            border-radius: 15px;
-            background: #000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .video-portfolio-player iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Graphic Design Portfolio */
-        .graphics-portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .graphic-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .graphic-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .graphic-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .graphic-item-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 1rem;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .graphic-item:hover .graphic-item-overlay {
-            opacity: 1;
-        }
-
-        .graphic-item-overlay h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .graphic-item-overlay p {
-            font-size: 0.9rem;
-        }
-
-        /* --- PRICING SECTION --- */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .pricing-card {
-            background-color: var(--secondary-color);
-            padding: 2.5rem 2rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid var(--secondary-color);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-color);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.7rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .pricing-card .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .pricing-card .price span {
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-card ul li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #444;
-        }
-
-        .pricing-card ul li:last-child {
-            border-bottom: none;
-        }
-
-        /* --- EXTRAS (Testimonials, FAQ) --- */
-        #testimonials, #faq {
-            background-color: var(--secondary-color);
-        }
-
-        /* Testimonials */
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .testimonial {
-            display: none;
-        }
-
-        .testimonial.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        .testimonial img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-
-        /* FAQ */
-        .faq-accordion {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background-color: var(--primary-color);
-            margin-bottom: 1rem;
-            border-radius: 5px;
-        }
-
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            text-align: left;
-            padding: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--text-color);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question i {
-            transition: transform 0.3s ease;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 1.5rem;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 300px; /* Adjust as needed */
-            padding: 0 1.5rem 1.5rem;
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* --- BLOG SECTION --- */
-        #blog {
-            background-color: var(--primary-color);
-        }
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .post-card {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-        .post-card:hover {
-            transform: translateY(-5px);
-        }
-        .post-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .post-content {
-            padding: 1.5rem;
-        }
-        .post-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-color);
-        }
-        .post-content p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .post-video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        .post-video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* --- CONTACT SECTION --- */
-        .contact-content {
-            display: flex;
-            gap: 4rem;
-            align-items: flex-start;
-        }
-
-        .contact-info {
-            flex: 1;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-info i {
-            color: var(--accent-color);
-            margin-right: 10px;
-            width: 20px;
-        }
-
-        .contact-form {
-            flex: 1.5;
-            background-color: var(--secondary-color);
-            padding: 2.5rem;
-            border-radius: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 5px;
-            border: none;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            font-family: var(--font-english);
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: 2px solid var(--accent-color);
-        }
-
-        /* --- WHATSAPP FLOATING BUTTON --- */
+        /* --- Floating WhatsApp Button --- */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 60px;
-            height: 60px;
             background-color: #25D366;
             color: #FFF;
             border-radius: 50%;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            z-index: 100;
+            width: 60px;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 2.5rem;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
             transition: transform 0.3s ease;
         }
 
@@ -831,34 +286,8 @@
             transform: scale(1.1);
         }
 
-        /* --- FOOTER --- */
-        .footer {
-            background-color: #000;
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        .footer .container {
-            border-top: 1px solid #333;
-            padding-top: 3rem;
-        }
-
-        .footer-warning {
-            background-color: #ffc107;
-            color: #000;
-            padding: 0.5rem;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        /* --- RESPONSIVE DESIGN --- */
+        /* --- Responsive Design --- */
         @media (max-width: 992px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            h2 {
-                font-size: 2rem;
-            }
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -866,631 +295,113 @@
             .hero-image {
                 margin-bottom: 2rem;
             }
-            .hero-image img {
-                width: 250px;
-                height: 250px;
-            }
             .hero-text h1 {
-                font-size: 2.8rem;
-            }
-            .hero-text p {
-                font-size: 1.2rem;
-            }
-            .about-content, .contact-content {
-                flex-direction: column;
-                gap: 3rem;
-            }
-            .skills-chart {
-                padding-left: 0;
+                font-size: 3rem;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px; /* Nav height */
-                flex-direction: column;
-                background-color: var(--secondary-color);
-                width: 100%;
-                height: calc(100vh - 70px);
-                text-align: center;
-                transition: 0.3s;
-            }
-
-            .nav-menu.active {
+            .nav-links {
+                position: absolute;
+                top: 100%;
                 left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                padding: 20px 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
             }
 
-            .nav-item {
-                margin: 2rem 0;
+            .nav-links.active {
+                max-height: 500px;
+                padding: 20px 0;
             }
 
-            .nav-link {
-                font-size: 1.2rem;
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
             }
 
-            .hamburger {
+            .menu-toggle {
                 display: block;
-            }
-
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            .pricing-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- DISCOUNT BANNER -->
-    <div class="discount-banner">
-        50% Discount Offer on Video Editing Bundles!
+    <!-- Discount Banner -->
+    <div class="discount-banner urdu-text">
+        %50 ڈسکاؤنٹ آفر
     </div>
 
-    <!-- HEADER & NAVIGATION -->
+    <!-- Header -->
     <header class="header">
-        <nav class="navbar container">
-            <a href="#" class="nav-logo">Zulqarnain<span>.</span></a>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li class="nav-item"><a href="#blog" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                <li class="nav-item" id="admin-dashboard-link"><a href="admin.html" class="nav-link">Admin Dashboard</a></li>
-
-                <!-- This will be shown when the user is logged in -->
-                <li class="nav-item dropdown" id="user-info">
-                    <a href="#" class="nav-link user-avatar">
-                        <i class="fas fa-user-circle"></i>
-                        <span id="user-email"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="profile.html">Profile Settings</a></li>
-                        <li><a href="#" id="logout-btn">Logout</a></li>
-                    </ul>
-                </li>
-
-                <!-- This will be shown when the user is logged out -->
-                <li class="nav-item nav-button" id="login-btn"><a href="login.html" class="nav-link">Login</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+        <div class="container">
+            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
             </div>
-        </nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
     </header>
 
-    <main>
-        <!-- HERO SECTION -->
-        <section id="home">
-            <div class="container hero-content">
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
                 <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_k2G3__oI-N21_n0-iUe52sY5eT9h_y_rL_w-f93GAh-g=s176-c-k-c0x00ffffff-no-rj" alt="Zulqarnain Ali">
                 </div>
                 <div class="hero-text">
-                    <h1>Hi, I'm <span>Zulqarnain Ali</span></h1>
-                    <p>Graphic Designer & Video Editor</p>
+                    <h1>Zulqarnain <span>Ali</span></h1>
+                    <p class="subtitle">Graphic Designer & Video Editor</p>
                     <div class="hero-buttons">
-                        <a href="#portfolio" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                        <a href="portfolio.html" class="btn">View My Work</a>
+                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ABOUT ME SECTION -->
-        <section id="about">
-            <div class="container">
-                <h2>About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <h3>Creative Visionary & Digital Storyteller</h3>
-                        <p>With a passion for visual arts and a keen eye for detail, I specialize in bringing ideas to life through compelling graphic design and dynamic video editing. Over the past 5 years, I have helped numerous clients elevate their brand presence with high-quality visuals that engage and convert.</p>
-                        <p>My expertise spans across the Adobe Creative Suite and other industry-standard tools, allowing me to deliver a wide range of creative solutions tailored to each client's unique needs. From corporate branding to social media content, I am dedicated to producing work that is not only aesthetically pleasing but also strategically effective.</p>
-                    </div>
-                    <div class="skills-chart">
-                        <h3>My Skills</h3>
-                        <div class="skill">
-                            <h4>Photoshop</h4>
-                            <div class="skill-bar"><div class="skill-level photoshop"></div></div>
-                        </div>
-                        <div class="skill">
-                            <h4>Premiere Pro</h4>
-                            <div class="skill-bar"><div class="skill-level premiere"></div></div>
-                        </div>
-                        <div class="skill">
-                            <h4>After Effects</h4>
-                            <div class="skill-bar"><div class="skill-level after-effects"></div></div>
-                        </div>
-                        <div class="skill">
-                            <h4>Filmora</h4>
-                            <div class="skill-bar"><div class="skill-level filmora"></div></div>
-                        </div>
-                        <div class="skill">
-                            <h4>EDIUS</h4>
-                            <div class="skill-bar"><div class="skill-level edius"></div></div>
-                        </div>
-                         <div class="skill">
-                            <h4>Illustrator</h4>
-                            <div class="skill-bar"><div class="skill-level illustrator"></div></div>
-                        </div>
-                         <div class="skill">
-                            <h4>Canva</h4>
-                            <div class="skill-bar"><div class="skill-level canva"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES SECTION -->
-        <section id="services">
-            <div class="container">
-                <h2>My Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <i class="fas fa-video"></i>
-                        <h3>Video Editing</h3>
-                        <p>Professional editing for YouTube, social media, corporate videos, and more. Includes color grading, sound design, and smooth transitions.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-palette"></i>
-                        <h3>Graphic Design</h3>
-                        <p>Creative logos, branding packages, social media posts, banners, and marketing materials that capture your brand's essence.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-film"></i>
-                        <h3>Motion Graphics</h3>
-                        <p>Engaging animated logos, lower thirds, and explainer videos to make your content stand out from the crowd.</p>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-image"></i>
-                        <h3>Thumbnail Designing</h3>
-                        <p>Click-worthy and high-CTR YouTube thumbnails designed to grab attention and boost your video views.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO SECTION -->
-        <section id="portfolio">
-            <div class="container">
-                <h2>My Portfolio</h2>
-                <div class="portfolio-tabs">
-                    <button class="portfolio-tab-button active" data-target="#video-portfolio">Video Portfolio</button>
-                    <button class="portfolio-tab-button" data-target="#graphics-portfolio">Graphic Design</button>
-                </div>
-
-                <div id="video-portfolio" class="portfolio-content active">
-                    <div class="video-portfolio-grid">
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/5DMJMVhzbpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/iWwR540lmn0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/5TFMmNSGP-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/I0_1g7aXVe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/eE9Wn5lPOII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/-Bpwog89K7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/dg5U0M8kMRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/sjjxAIbSzq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-portfolio-player">
-                            <iframe src="https://www.youtube.com/embed/KLTQcmYMzok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="graphics-portfolio" class="portfolio-content">
-                    <div class="graphics-portfolio-grid">
-                        <div class="graphic-item">
-                            <img src="https://via.placeholder.com/400x300/1" alt="Project 1">
-                            <div class="graphic-item-overlay">
-                                <h4>Client Name</h4>
-                                <p>Software: Photoshop</p>
-                                <p>A short description of the project.</p>
-                            </div>
-                        </div>
-                        <div class="graphic-item">
-                            <img src="https://via.placeholder.com/400x300/2" alt="Project 2">
-                            <div class="graphic-item-overlay">
-                                <h4>Client Name</h4>
-                                <p>Software: Illustrator</p>
-                                <p>A short description of the project.</p>
-                            </div>
-                        </div>
-                        <div class="graphic-item">
-                            <img src="https://via.placeholder.com/400x300/3" alt="Project 3">
-                            <div class="graphic-item-overlay">
-                                <h4>Client Name</h4>
-                                <p>Software: Canva</p>
-                                <p>A short description of the project.</p>
-                            </div>
-                        </div>
-                        <div class="graphic-item">
-                            <img src="https://via.placeholder.com/400x300/4" alt="Project 4">
-                            <div class="graphic-item-overlay">
-                                <h4>Client Name</h4>
-                                <p>Software: Photoshop</p>
-                                <p>A short description of the project.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- BLOG/POSTS SECTION -->
-        <section id="blog">
-            <div class="container">
-                <h2>Latest Posts</h2>
-                <div class="posts-grid" id="posts-grid-container">
-                    <!-- Posts will be dynamically inserted here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- PRICING SECTION -->
-        <section id="pricing">
-            <div class="container">
-                <h2>Pricing Plans</h2>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3>Short Clip</h3>
-                        <div class="price">PKR 1500</div>
-                        <ul>
-                            <li>30-35 Second Video</li>
-                            <li>Script Writing</li>
-                            <li>Voice-over</li>
-                            <li>Professional Editing</li>
-                            <li>Background Music</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-secondary">Get Started</a>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Standard Video</h3>
-                        <div class="price">PKR 1800</div>
-                        <ul>
-                            <li>Up to 1 Minute Video</li>
-                            <li>Script Writing</li>
-                            <li>Voice-over</li>
-                            <li>Professional Editing</li>
-                            <li>Background Music</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-primary">Get Started</a>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>3 Video Bundle</h3>
-                        <div class="price">PKR 4500-5400</div>
-                         <ul>
-                            <li>Three Pro Videos</li>
-                            <li>Script Writing</li>
-                            <li>Voice-over</li>
-                            <li>Professional Editing</li>
-                            <li>Background Music</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-secondary">Get Started</a>
-                    </div>
-                     <div class="pricing-card">
-                        <h3>5 Video Bundle</h3>
-                        <div class="price">PKR 6000-9000</div>
-                         <ul>
-                            <li>Five Pro Videos</li>
-                            <li>Script Writing</li>
-                            <li>Voice-over</li>
-                            <li>Professional Editing</li>
-                            <li>Background Music</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-secondary">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIALS SECTION -->
-        <section id="testimonials">
-            <div class="container">
-                <h2>What Clients Say</h2>
-                <div class="testimonial-slider">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial active">
-                        <img src="https://via.placeholder.com/100/1" alt="Client 1">
-                        <p class="testimonial-text">"Zulqarnain's creativity and professionalism are unmatched. He transformed our vision into a stunning reality. Highly recommended!"</p>
-                        <p class="testimonial-author">John Doe, CEO of TechCorp</p>
-                    </div>
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial">
-                        <img src="https://via.placeholder.com/100/2" alt="Client 2">
-                        <p class="testimonial-text">"The video editing was top-notch and delivered ahead of schedule. Our social media engagement has skyrocketed since we started working with him."</p>
-                        <p class="testimonial-author">Jane Smith, Marketing Manager</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ SECTION -->
-        <section id="faq">
-            <div class="container">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            What is your revision policy?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>I offer up to two rounds of minor revisions free of charge for every project to ensure you are 100% satisfied with the final result. Major changes may incur additional costs.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            What is the typical turnaround time?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Turnaround time varies by project complexity. A standard video edit usually takes 2-3 business days, while graphic design projects can be completed within 1-2 days. I will provide a specific timeline upon project confirmation.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            What file formats will I receive?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>For videos, I typically deliver in MP4 format, optimized for web and social media. For graphics, you will receive high-resolution JPG, PNG, and source files (PSD, AI) as needed.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- CONTACT SECTION -->
-        <section id="contact">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Let's Create Something Amazing!</h3>
-                        <p>Have a project in mind? I'd love to hear about it. Reach out to me via phone, WhatsApp, or the contact form, and I'll get back to you as soon as possible.</p>
-                        <p><i class="fas fa-phone"></i> +92 324 7107543</p>
-                        <p><i class="fas fa-envelope"></i> your-email@example.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Lahore, Pakistan</p>
-                    </div>
-                    <form class="contact-form" action="#" method="POST">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="footer">
+        <div class="warning-bar">
+            Downloading and reusing videos is a legal offense.
+        </div>
         <div class="container">
             <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
         </div>
     </footer>
-    <div class="footer-warning">
-        Downloading and reusing videos or graphics from this site is a legal offense.
-    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
-        // --- MOBILE NAVIGATION ---
-        const hamburger = document.querySelector(".hamburger");
-        const navMenu = document.querySelector(".nav-menu");
-
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Mobile Menu Toggle ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
-
-        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }));
-
-        // --- PORTFOLIO TABS ---
-        const portfolioTabs = document.querySelectorAll('.portfolio-tab-button');
-        const portfolioContents = document.querySelectorAll('.portfolio-content');
-
-        portfolioTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Deactivate all tabs and content
-                portfolioTabs.forEach(t => t.classList.remove('active'));
-                portfolioContents.forEach(c => c.classList.remove('active'));
-
-                // Activate clicked tab and corresponding content
-                tab.classList.add('active');
-                document.querySelector(tab.dataset.target).classList.add('active');
-            });
-        });
-
-        // --- FAQ ACCORDION ---
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-
-                // Close all other items
-                faqItems.forEach(i => i.classList.remove('active'));
-
-                // Toggle current item
-                if (!isActive) {
-                    item.classList.add('active');
-                }
-            });
-        });
-
-        // --- TESTIMONIAL SLIDER (SIMPLE) ---
-        const testimonials = document.querySelectorAll('.testimonial');
-        let currentTestimonial = 0;
-
-        function showTestimonial(index) {
-            testimonials.forEach((testimonial, i) => {
-                testimonial.classList.remove('active');
-                if (i === index) {
-                    testimonial.classList.add('active');
-                }
-            });
-        }
-
-        setInterval(() => {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(currentTestimonial);
-        }, 5000); // Change every 5 seconds
-
-        showTestimonial(0); // Show first testimonial initially
-
-    </script>
-
-    <!-- Firebase SDK and Auth State Management -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        // ENTER YOUR FIREBASE CONFIG CODE HERE
-        const firebaseConfig = {
-            apiKey: "AIzaSyCUp8NQyfh3WRQd3qrCYtnGc7sTHJqfLrE",
-            authDomain: "zulqarnain-ali.firebaseapp.com",
-            databaseURL: "https://zulqarnain-ali-default-rtdb.firebaseio.com",
-            projectId: "zulqarnain-ali",
-            storageBucket: "zulqarnain-ali.firebasestorage.app",
-            messagingSenderId: "626426491607",
-            appId: "1:626426491607:web:83a5dedd5844306b237692",
-            measurementId: "G-80199PJVBE"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const adminEmail = "mrvlogging08@gmail.com";
-
-        const loginBtn = document.getElementById('login-btn');
-        const userInfo = document.getElementById('user-info');
-        const userEmailEl = document.getElementById('user-email');
-        const logoutBtn = document.getElementById('logout-btn');
-        const adminDashboardLink = document.getElementById('admin-dashboard-link');
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is logged in
-                loginBtn.style.display = 'none';
-                userInfo.style.display = 'block';
-                userEmailEl.textContent = user.displayName || user.email;
-
-                if (user.email === adminEmail) {
-                    adminDashboardLink.style.display = 'block';
-                } else {
-                    adminDashboardLink.style.display = 'none';
-                }
-
-            } else {
-                // User is logged out
-                loginBtn.style.display = 'block';
-                userInfo.style.display = 'none';
-                adminDashboardLink.style.display = 'none';
-            }
-        });
-
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            signOut(auth).catch((error) => console.error('Logout Error:', error));
-        });
-
-        // --- Fetch and Display Posts from Firestore ---
-        const db = getFirestore(app);
-        const postsGrid = document.getElementById('posts-grid-container');
-
-        async function fetchAndDisplayPosts() {
-            try {
-                const postsQuery = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(postsQuery);
-
-                if (querySnapshot.empty) {
-                    postsGrid.innerHTML = "<p>No posts found.</p>";
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const post = doc.data();
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('post-card');
-
-                    let videoHTML = '';
-                    if (post.videoURL) {
-                        videoHTML = `
-                            <div class="post-video-wrapper">
-                                <iframe src="${post.videoURL}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        `;
-                    }
-
-                    postElement.innerHTML = `
-                        <img src="${post.imageURL}" alt="${post.title}">
-                        <div class="post-content">
-                            <h3>${post.title}</h3>
-                            <p>${post.description}</p>
-                            ${videoHTML}
-                        </div>
-                    `;
-                    postsGrid.appendChild(postElement);
-                });
-            } catch (error) {
-                console.error("Error fetching posts: ", error);
-                postsGrid.innerHTML = "<p>Error loading posts. Please try again later.</p>";
-            }
-        }
-
-        // Load posts when the page loads
-        fetchAndDisplayPosts();
+    });
     </script>
 </body>
 </html>

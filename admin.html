@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #00aaff;
+            --text-color: #f0f0f0;
+            --card-bg: #252525;
+            --border-color: #444;
+            --error-color: #dc3545;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: var(--accent-color);
+            margin: 0;
+        }
+        .btn, button {
+            padding: 10px 20px;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-danger {
+            background-color: var(--error-color);
+        }
+        .btn:hover, button:hover {
+            background-color: #0088cc;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .form-container {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .form-container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .posts-list-container h2 {
+             color: var(--accent-color);
+        }
+        .post-item {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .post-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #eee;
+        }
+        .post-item .actions button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <button id="logout-btn" class="btn btn-danger">Logout</button>
+        </div>
+
+        <div id="admin-content" style="display: none;">
+            <div class="form-container">
+                <h2 id="form-title">Create New Post</h2>
+                <form id="post-form">
+                    <input type="hidden" id="post-id">
+                    <input type="text" id="post-title" placeholder="Post Title" required>
+                    <textarea id="post-content" rows="8" placeholder="Post Content" required></textarea>
+                    <button type="submit" class="btn">Save Post</button>
+                </form>
+            </div>
+
+            <div class="posts-list-container">
+                <h2>Manage Posts</h2>
+                <div id="posts-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+    <script>
+        // --- Initialize Firebase (ADD YOUR CONFIG HERE) ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const postsCollection = db.collection('posts');
+
+        // --- DOM Elements ---
+        const adminContent = document.getElementById('admin-content');
+        const logoutBtn = document.getElementById('logout-btn');
+        const postForm = document.getElementById('post-form');
+        const postFormTitle = document.getElementById('form-title');
+        const postIdInput = document.getElementById('post-id');
+        const postTitleInput = document.getElementById('post-title');
+        const postContentInput = document.getElementById('post-content');
+        const postsList = document.getElementById('posts-list');
+
+        // --- Auth State Management ---
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // Check if user is admin
+                db.collection('users').doc(user.uid).get().then(doc => {
+                    if (doc.exists && doc.data().role === 'admin') {
+                        adminContent.style.display = 'block';
+                        loadPosts();
+                    } else {
+                        // Not an admin, redirect
+                        alert('Access denied. You are not an admin.');
+                        window.location.href = 'profile.html';
+                    }
+                });
+            } else {
+                // Not logged in, redirect
+                window.location.href = 'login.html';
+            }
+        });
+
+        // --- Logout ---
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+
+        // --- Form Submission (Create/Update) ---
+        postForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const postId = postIdInput.value;
+            const title = postTitleInput.value;
+            const content = postContentInput.value;
+
+            if (postId) {
+                // Update existing post
+                postsCollection.doc(postId).update({
+                    title: title,
+                    content: content,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    resetForm();
+                    loadPosts();
+                });
+            } else {
+                // Create new post
+                postsCollection.add({
+                    title: title,
+                    content: content,
+                    authorId: auth.currentUser.uid,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    resetForm();
+                    loadPosts();
+                });
+            }
+        });
+
+        function resetForm() {
+            postForm.reset();
+            postIdInput.value = '';
+            postFormTitle.textContent = 'Create New Post';
+        }
+
+        // --- Load and Display Posts ---
+        function loadPosts() {
+            postsCollection.orderBy('createdAt', 'desc').get().then(snapshot => {
+                postsList.innerHTML = '';
+                if (snapshot.empty) {
+                    postsList.innerHTML = '<p>No posts found.</p>';
+                    return;
+                }
+                snapshot.forEach(doc => {
+                    const post = doc.data();
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post-item';
+                    postElement.innerHTML = `
+                        <div>
+                            <h3>${post.title}</h3>
+                        </div>
+                        <div class="actions">
+                            <button onclick="editPost('${doc.id}', '${escape(post.title)}', '${escape(post.content)}')">Edit</button>
+                            <button class="btn-danger" onclick="deletePost('${doc.id}')">Delete</button>
+                        </div>
+                    `;
+                    postsList.appendChild(postElement);
+                });
+            });
+        }
+
+        // --- Edit Post ---
+        window.editPost = function(id, title, content) {
+            postIdInput.value = id;
+            postTitleInput.value = unescape(title);
+            postContentInput.value = unescape(content);
+            postFormTitle.textContent = 'Edit Post';
+            window.scrollTo(0, 0); // Scroll to top to see the form
+        }
+
+        // --- Delete Post ---
+        window.deletePost = function(id) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                postsCollection.doc(id).delete().then(() => {
+                    loadPosts();
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
