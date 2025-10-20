@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zulqarnain Ali - Graphic Designer & Video Editor</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- Google Fonts --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Jameel+Noori+Nastaleeq&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
@@ -43,7 +45,7 @@
         h1 {
             font-weight: 600;
             color: var(--accent-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem; /* Reduced margin */
         }
 
         .btn {
@@ -83,15 +85,26 @@
             direction: rtl;
         }
 
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- Custom Animations --- */
+
+        /* 1. Image Animation Keyframes: Zoom and Shadow Effect */
+        @keyframes zoomInFloat {
+            0% { transform: scale(0.8); opacity: 0; box-shadow: 0 0 0 rgba(0, 170, 255, 0); }
+            100% { transform: scale(1.0); opacity: 1; box-shadow: 0 0 30px rgba(0, 170, 255, 0.4); }
         }
 
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        /* 2. Text/Cursor Animation Keyframes: Blinking Effect for Typewriter */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color); }
         }
+        
+        /* Make subtitle opaque initially to hide text before animation */
+        .hero-text .subtitle {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
 
         /* --- Discount Banner --- */
         .discount-banner {
@@ -184,25 +197,42 @@
             min-height: 90vh;
             display: flex;
             align-items: center;
-            background: url('https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
+            /* Background image is removed and replaced by the video element */
             position: relative;
             border-bottom: 1px solid var(--border-color);
+            overflow: hidden; /* Important for full-screen video background */
+        }
+        
+        /* Video Styling */
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
         }
 
         #home::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(26, 26, 26, 0.7); /* Dark overlay over the video */
+            z-index: 1; /* In front of video, behind content */
         }
 
         .hero-content {
+            /* Content should be above the overlay */
+            position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 2rem;
-            position: relative;
-            z-index: 1;
         }
 
         .hero-image {
@@ -216,7 +246,9 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
+            /* Apply Image Animation here */
+            animation: zoomInFloat 1.2s ease-out forwards;
+            opacity: 0; /* Start hidden for animation */
             object-position: top;
         }
 
@@ -229,6 +261,7 @@
             margin-bottom: 0.5rem;
             color: #fff;
             line-height: 1.2;
+            white-space: pre-wrap; /* Ensure text wraps if needed */
         }
 
         .hero-text h1 span {
@@ -240,6 +273,21 @@
             color: var(--text-color);
             margin-bottom: 2rem;
             font-weight: 300;
+        }
+
+        /* Typewriter Cursor Style */
+        .typing-cursor {
+            display: inline-block;
+            width: 0.15em;
+            height: 1.1em;
+            background-color: var(--accent-color);
+            margin-left: 5px;
+            vertical-align: middle;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        .typing-cursor.finished {
+            animation: none;
+            opacity: 0;
         }
 
         .hero-buttons .btn {
@@ -329,8 +377,6 @@
             }
         }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -339,7 +385,7 @@
         %50 ڈسکاؤنٹ آفر
     </div>
 
-    <!-- Header -->
+    <!-- Header (No change in structure, only links updated for multi-page concept) -->
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
@@ -361,14 +407,25 @@
 
     <!-- Hero Section -->
     <section id="home">
+        
+        <!-- Background Video Element for minimum load (Updated URL) -->
+        <video autoplay loop muted playsinline class="background-video">
+            <!-- نئی ویڈیو: یہ ایک بہتر Free-to-use، high-quality ویڈیو ہے جو کام، ٹیکنالوجی اور فری لانسنگ سے متعلقہ محسوس ہوتی ہے۔ -->
+            <source src="https://videos.pexels.com/video-files/5966461/5966461-sd_640_360_30fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
         <div class="container">
-            <div class="hero-content fade-in">
+            <div class="hero-content">
                 <div class="hero-image">
-                    <img src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
+                    <!-- Image has a zoom-in animation applied via CSS -->
+                    <img id="hero-image" src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
                 </div>
                 <div class="hero-text">
-                    <h1>Zulqarnain <span>Ali</span></h1>
-                    <p class="subtitle">Graphic Designer & Video Editor</p>
+                    <!-- Title for Typewriter Effect -->
+                    <h1 id="hero-title"></h1>
+                    <!-- Subtitle now has an ID and content for typewriter effect -->
+                    <p id="hero-subtitle" class="subtitle">Graphic Designer & Video Editor</p>
                     <div class="hero-buttons">
                         <a href="portfolio.html" class="btn">View My Work</a>
                         <a href="contact.html" class="btn btn-secondary">Contact Me</a>
@@ -377,6 +434,11 @@
             </div>
         </div>
     </section>
+    
+    <!-- NOTE: The YouTube Short Video/Portfolio Section would follow here in the original file,
+         but since you only provided the header/hero, I am maintaining the structure and
+         ensuring no other sections are altered or broken, per your request.
+    -->
 
     <!-- Footer -->
     <footer class="footer">
@@ -401,6 +463,74 @@
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+
+        // Animation speed adjusted: 150ms per character (slower than 100ms)
+        const typingSpeed = 150; 
+
+        /**
+         * Applies the typewriter effect to an element.
+         * @param {HTMLElement} element - The target HTML element.
+         * @param {string} textToType - The full text to type.
+         * @param {number} colorSplitIndex - Index to start applying accent color. Use -1 for no colored text.
+         * @param {Function} [onComplete] - Callback function when typing is finished.
+         */
+        function applyTypewriter(element, textToType, colorSplitIndex, onComplete) {
+            let i = 0;
+            const originalText = textToType;
+            element.textContent = ''; // Clear content to start typing
+            
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            element.appendChild(cursor);
+
+            let coloredSpan = null;
+
+            const timer = setInterval(() => {
+                if (i < originalText.length) {
+                    const char = originalText.charAt(i);
+                    
+                    if (i === colorSplitIndex) {
+                        // Start of the colored word ('Ali' in the title case)
+                        coloredSpan = document.createElement('span');
+                        coloredSpan.style.color = 'var(--accent-color)';
+                        element.insertBefore(coloredSpan, cursor);
+                        coloredSpan.textContent += char;
+                    } else if (i > colorSplitIndex && coloredSpan) {
+                        // Continuation of the colored word - Fixed the logic here
+                        coloredSpan.textContent += char;
+                    } else {
+                        // Normal text (e.g., 'Zulqarnain ' or subtitle)
+                        element.insertBefore(document.createTextNode(char), cursor);
+                    }
+                    i++;
+                } else {
+                    clearInterval(timer);
+                    // Stop the cursor blink after typing is finished
+                    setTimeout(() => {
+                        cursor.classList.add('finished');
+                        if (onComplete) {
+                            onComplete();
+                        }
+                    }, 500); 
+                }
+            }, typingSpeed);
+        }
+
+        // --- Title Animation ---
+        const titleElement = document.getElementById('hero-title');
+        const titleText = 'Zulqarnain Ali';
+        // 'Zulqarnain ' has 11 characters (10 letters + 1 space)
+        const titleDuration = applyTypewriter(titleElement, titleText, 11, () => {
+             // --- Subtitle Animation starts after title is complete ---
+             const subtitleElement = document.getElementById('hero-subtitle');
+             const subtitleText = subtitleElement.textContent; // Get the original text
+             subtitleElement.style.opacity = '1'; // Make subtitle visible before typing
+             
+             // Apply typewriter to subtitle (no colored text, so index is -1)
+             applyTypewriter(subtitleElement, subtitleText, -1); 
+        });
+
+        // The image animation already starts on load via CSS, no need for extra JS timing.
     });
     </script>
 </body>
