@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Zulqarnain Ali</title>
+    <title>Professional Profile - Zulqarnain Ali</title>
     <style>
-        /* --- Google Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Jameel+Noori+Nastaleeq&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+        /* --- Google Fonts (Modern & Clean) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
 
-        /* --- Global Styles & Variables --- */
+        /* --- Global Styles & Variables (Professional Overhaul based on Screenshot) --- */
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #2d2d2d;
-            --accent-color: #00aaff;
-            --text-color: #f0f0f0;
-            --dark-text-color: #333;
-            --card-bg: #252525;
-            --border-color: #444;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --font-english: 'Poppins', sans-serif;
-            --font-urdu: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+            --bg-light: #f7f9fc; /* Very light, soft background (similar to screenshot) */
+            --bg-card: #ffffff; /* Pure white card background */
+            --text-primary: #1F2E51; /* Deep Navy Blue for main text (from screenshot) */
+            --text-secondary: #000000; /* Muted grey for paragraphs */
+            --accent-main: #6F42C1; /* Primary Purple/Violet accent (from screenshot) */
+            --accent-secondary: #28a745; /* Green accent for tags (from screenshot) */
+            --accent-dark: #1F2E51; /* Dark Navy for headers/footer (consistent with text-primary) */
+            --whatsapp-green: #25D366; /* Standard WhatsApp Green (kept for brand recognition) */
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08); /* Modern, soft shadow */
+            --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.15); /* Deeper shadow for elevation */
+            --font-main: 'Inter', sans-serif; /* Clean, modern body font */
+            --font-heading: 'Playfair Display', serif; /* Elegant, strong heading font */
         }
 
         * {
@@ -34,195 +35,371 @@
         }
 
         body {
-            font-family: var(--font-english);
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: var(--font-main);
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.65; /* Better line height for long text */
+            overflow-x: hidden;
+            padding-top: 80px; /* Space for fixed header */
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px; /* Wider container */
             margin: auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
 
         h1, h2, h3, h4 {
-            font-weight: 600;
-            color: var(--accent-color);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--accent-dark);
             margin-bottom: 1rem;
         }
-
         h2 {
+            font-size: 3.5rem; /* Large, impactful heading */
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 70px;
+            color: var(--text-primary); /* Dark Navy */
             position: relative;
         }
-
+        h2 span {
+            color: var(--accent-main); /* Purple accent */
+        }
         h2::after {
             content: '';
-            display: block;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background-color: var(--accent-color);
-            margin: 10px auto 0;
+            background-color: var(--accent-main); /* Purple accent */
             border-radius: 2px;
         }
-
         section {
             padding: 80px 0;
         }
-
+        
         /* --- Animations --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        @keyframes skillFill {
+            from { width: 0%; }
+            to { width: var(--skill-percent); } 
+        }
+        @keyframes fadeInUpFloat {
+            0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* --- Header & Navigation --- */
         .header {
-            background-color: rgba(26, 26, 26, 0.9);
+            background-color: var(--bg-card);
             padding: 15px 0;
-            position: sticky;
+            box-shadow: var(--shadow-soft);
+            position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
         }
-
         .header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary); /* Dark Navy */
             text-decoration: none;
         }
-
         .logo span {
-            color: var(--accent-color);
+            color: var(--accent-main); /* Purple accent */
         }
-
         .nav-links {
             list-style: none;
             display: flex;
+            align-items: center;
         }
-
         .nav-links li {
             margin-left: 30px;
         }
-
         .nav-links a {
-            color: var(--text-color);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
+            padding: 5px 0;
             transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
         .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
+            color: var(--accent-main); /* Purple accent */
         }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
+        .nav-button {
+            background-color: var(--accent-main); /* Purple accent */
+            color: var(--bg-card);
+            padding: 10px 22px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 30px;
+            box-shadow: 0 5px 15px rgba(111, 66, 193, 0.4); /* Purple Shadow */
         }
-
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--accent-color);
+        .nav-button:hover {
+            background-color: #5d38a3; /* Darker purple on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.6); /* Purple Shadow */
         }
+        .menu-toggle { display: none; }
 
         /* --- About Me Section --- */
         #about {
-             border-bottom: 1px solid var(--border-color);
+            padding: 100px 0;
+            background-color: var(--bg-light);
         }
-        .about-content {
-            display: flex;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text {
-            flex: 2;
-        }
-
-        .about-skills {
-            flex: 1;
-        }
-
-        .skill {
-            margin-bottom: 15px;
+        .about-card {
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-deep);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.2s forwards;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .skill p {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .skill-bar {
-            width: 100%;
-            height: 10px;
-            background-color: var(--secondary-color);
-            border-radius: 5px;
-        }
-
-        .skill-level {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 5px;
-            width: 90%; /* Default width for non-animated page */
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 40px 0 20px;
+        /* --- Left Column: Photo & Name --- */
+        .profile-summary {
             text-align: center;
-            border-top: 1px solid var(--border-color);
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            position: sticky;
+            top: 100px; 
+            transition: none;
+        }
+        
+        .profile-img-container {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto 25px auto;
+            padding: 10px;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow-deep);
+            border: 2px solid var(--accent-main); /* Purple accent */
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            animation: fadeInUpFloat 1.2s ease-out 0.4s forwards;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .profile-img-container:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
 
-        .warning-bar {
-            background-color: #ffc107;
-            color: #333;
-            padding: 8px;
-            font-weight: 500;
+        .profile-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            aspect-ratio: 4 / 5;
+            display: block;
+        }
+
+        .profile-summary h4 {
+            font-size: 2.2rem;
+            color: var(--text-primary); /* Dark Navy */
+            margin-bottom: 5px;
+            font-family: var(--font-main); 
+        }
+        .profile-summary p {
+            color: var(--accent-main); /* Purple accent */
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* --- Right Column: Details & Skills --- */
+        .about-details {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .about-text h3 {
+            font-size: 2.8rem;
+            color: var(--accent-main); /* Purple accent */
+            line-height: 1.2;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--text-secondary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .about-text p {
+            font-size: 1.15rem; 
+            color: var(--text-secondary);
             margin-bottom: 20px;
         }
 
-        /* --- Floating WhatsApp Button --- */
+        /* --- Skills Section --- */
+        .about-skills h3 {
+            font-size: 2.2rem;
+            color: var(--text-primary); /* Dark Navy */
+            margin-bottom: 30px;
+            border-bottom: none;
+        }
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .skill {
+            margin-bottom: 0; 
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--bg-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .skill p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--text-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background-color: var(--accent-main); /* Purple accent */
+            border-radius: 4px;
+            transition: width 1.5s ease-out; 
+            width: 0%;
+        }
+
+        /* --- Contact Me Section (Themed as per screenshot) --- */
+        #contact-me-section {
+            background-color: var(--accent-dark); /* Dark Navy background */
+            padding: 100px 0;
+            text-align: center;
+            color: var(--bg-card); /* White text */
+        }
+        #contact-me-section h2 {
+            color: var(--bg-card); /* White heading */
+            margin-bottom: 40px;
+        }
+        #contact-me-section h2 span {
+            color: var(--accent-main); /* Purple accent in heading */
+        }
+        #contact-me-section h2::after {
+            background-color: var(--accent-main); /* Purple accent underline */
+        }
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+        .contact-content p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+            justify-content: center;
+            gap: 25px; /* Spacing between buttons */
+            margin-top: 30px;
+        }
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px; /* Larger padding for bigger buttons */
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .contact-button i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+
+        .whatsapp-button {
+            background-color: var(--whatsapp-green); /* WhatsApp Green (kept for brand identity) */
+            color: white;
+        }
+        .whatsapp-button:hover {
+            background-color: #1DA851; /* Darker Green on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .chat-button {
+            background-color: var(--accent-main); /* Purple accent */
+            color: white;
+        }
+        .chat-button:hover {
+            background-color: #5d38a3; /* Darker purple on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.6); /* Purple Shadow */
+        }
+
+        /* --- Footer (Dark and Solid) --- */
+        .footer {
+            background-color: var(--accent-dark);
+            color: var(--bg-light);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 5px solid var(--accent-main); /* Purple accent */
+        }
+        .warning-bar {
+            background-color: var(--accent-main); /* Purple accent */
+            color: var(--bg-card);
+            padding: 12px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* --- Floating WhatsApp Button (Now uses purple accent) --- */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #25D366;
+            background-color: var(--accent-main); /* Purple accent */
             color: #FFF;
             border-radius: 50%;
             width: 60px;
@@ -232,148 +409,261 @@
             align-items: center;
             font-size: 2.5rem;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.4); /* Purple Shadow */
             z-index: 999;
             transition: transform 0.3s ease;
         }
-
         .whatsapp-float:hover {
             transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(111, 66, 193, 0.6); /* Purple Shadow */
         }
 
         /* --- Responsive Design --- */
         @media (max-width: 992px) {
-            .about-content {
-                flex-direction: column;
+            .about-card {
+                grid-template-columns: 1fr;
+                padding: 30px;
+                gap: 30px;
+            }
+            .profile-summary {
+                position: static;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+            .profile-img-container {
+                max-width: 250px;
+                margin: 0 auto 20px auto;
+            }
+            .about-details {
+                text-align: center;
+            }
+            .about-text h3 {
+                border-bottom: none;
+                padding-bottom: 0;
+                display: block;
+            }
+            .skill-list {
+                grid-template-columns: 1fr;
+            }
+            .skill p {
+                padding: 0 5px;
+            }
+            .container {
+                padding: 0 25px;
+            }
+            h2 {
+                font-size: 2.5rem;
+            }
+            .contact-button {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+            .contact-buttons {
+                flex-direction: column; /* Stack buttons vertically on small screens */
+                gap: 15px;
+            }
+            .contact-button i {
+                font-size: 1.3rem;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--secondary-color);
-                flex-direction: column;
-                padding: 20px 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            }
-
-            .nav-links.active {
-                max-height: 500px; /* Adjust as needed */
-                padding: 20px 0;
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            h2 {
+            body { padding-top: 65px; }
+            .header { padding: 12px 0; }
+            .logo { font-size: 1.8rem; }
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .about-card { padding: 20px; }
+            .profile-img { max-width: 200px; }
+            .profile-summary h4 { font-size: 1.8rem; }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
                 font-size: 2rem;
+                bottom: 20px;
+                right: 20px;
             }
         }
+        /* Mobile menu specific styles */
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 75px; /* Adjust based on header height */
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow-soft);
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .nav-links.active li {
+            margin: 10px 0;
+            text-align: center;
+        }
+        .nav-links.active a {
+            padding: 10px 20px;
+            display: block;
+        }
+        .nav-links.active .nav-button {
+            margin: 10px auto; /* Center the button */
+        }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome for Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header">
+    <!-- Header --><header class="header">
         <div class="container">
-            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
+            <a href="index.html" class="logo">Zulqarnain<span>.</span></a>
             <div class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
-                <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="services.html">Services</a></li>
+                <!-- Nav Contact Button now directly links to the new section --><li><a href="#contact-me-section" class="nav-button">Contact Me</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- About Me Section -->
-    <section id="about">
-        <div class="container fade-in">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Hello! I'm Zulqarnain Ali.</h3>
-                    <p>I am a passionate and creative Graphic Designer and Video Editor with a keen eye for detail and a love for storytelling. With years of experience in the field, I specialize in creating visually stunning content that captivates audiences and delivers messages effectively. My goal is to bring your vision to life, whether it's through a dynamic video, a compelling motion graphic, or a clean and professional design.</p>
-                    <p>From concept to final delivery, I am dedicated to producing high-quality work that exceeds expectations. Let's collaborate and create something amazing together!</p>
+    <!-- About Me Section --><section id="about">
+        <div class="container">
+            <h2>The Story <span>Behind</span> the Work</h2>
+            <div class="about-card">
+                
+                <!-- Left Column: Professional Profile Card (Sticky) --><div class="profile-summary">
+                    <div class="profile-img-container">
+                        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjObjsU5SbHq6nkOVfAqE9aT0AD4EcENjAME61rci5CsmzmBcl5OXdpj3YCeDs4ydyzdmwT1g5cx1xXXQnVM-9zy41h1OdiWc5Z9YVkbxRBtehYOp1qIRAJM_-QVN2F-C0HmH1ChJF_yYZ1tyJYPGnEg3McfpgLiOafxQDBO9G0kzS_n78Xjxsey1Vd=w265-h397" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/250x397/1F2E51/ffffff?text=Zulqarnain+Ali'" 
+                             class="profile-img" 
+                             alt="Zulqarnain Ali - Creative Professional">
+                    </div>
+                    <h4>Zulqarnain Ali</h4> 
+                    <p>Video Editor & Graphic Designer</p>
                 </div>
-                <div class="about-skills">
-                    <div class="skill">
-                        <p><span>Photoshop</span><span>95%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 95%;"></div></div>
+
+                <!-- Right Column: Text and Skills --><div class="about-details">
+                    
+                    <div class="about-text">
+                        <h3>Elevating Brands Through Visual Storytelling</h3>
+                        <p>I am a highly driven creative professional specializing in high-impact graphic design and dynamic video editing. My expertise lies in transforming raw ideas and footage into polished, compelling visual assets that not only meet client objectives but also set new standards for engagement.</p>
+                        <p>I have mastered a broad spectrum of industry-leading tools—from precise photo manipulation in Photoshop to complex motion graphics in After Effects. My methodology is centered on meticulous attention to detail, efficiency in delivery, and a continuous pursuit of visual excellence. I don't just create content; I craft digital experiences.</p>
+                        <p>When you collaborate with me, you are investing in a partner dedicated to technical proficiency and artistic vision, ensuring your message resonates powerfully in the competitive digital landscape.</p>
                     </div>
-                    <div class="skill">
-                        <p><span>Premiere Pro</span><span>90%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
-                    </div>
-                     <div class="skill">
-                        <p><span>After Effects</span><span>80%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
-                    </div>
-                    <div class="skill">
-                        <p><span>Illustrator</span><span>85%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 85%;"></div></div>
-                    </div>
-                    <div class="skill">
-                        <p><span>Filmora</span><span>98%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 98%;"></div></div>
-                    </div>
-                    <div class="skill">
-                        <p><span>EDIUS</span><span>75%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 75%;"></div></div>
-                    </div>
-                    <div class="skill">
-                        <p><span>Canva</span><span>99%</span></p>
-                        <div class="skill-bar"><div class="skill-level" style="width: 99%;"></div></div>
+                    
+                    <div class="about-skills">
+                        <h3>Core Competencies & Proficiency</h3>
+                        <div class="skill-list">
+                            <div class="skill">
+                                <p><span>Adobe Photoshop</span><span>95%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 95%;"></div></div>
+                            </div>
+                            <div class="skill">
+                                <p><span>Adobe Premiere Pro</span><span>90%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 90%;"></div></div>
+                            </div>
+                            <div class="skill">
+                                <p><span>Adobe After Effects</span><span>80%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 80%;"></div></div>
+                            </div>
+                            <div class="skill">
+                                <p><span>Adobe Illustrator</span><span>85%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 85%;"></div></div>
+                            </div>
+                            <div class="skill">
+                                <p><span>Filmora & EDIUS</span><span>98%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 98%;"></div></div>
+                            </div>
+                            <div class="skill">
+                                <p><span>Branding & Layout Design</span><span>99%</span></p>
+                                <div class="skill-bar"><div class="skill-level" style="--skill-percent: 99%;"></div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Contact Me Section --><section id="contact-me-section">
+        <div class="container">
+            <h2>Get In <span>Touch</span></h2>
+            <div class="contact-content">
+                <p>Are you ready to transform your ideas into stunning visual realities? Let's connect and discuss how my expertise in video editing and graphic design can elevate your brand.</p>
+                <div class="contact-buttons">
+                    <!-- WhatsApp Button --><a href="https://wa.me/923247107543" target="_blank" class="contact-button whatsapp-button">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    <!-- Placeholder for another chat/contact option (e.g., Email, Live Chat) --><a href="mailto:your.email@example.com" class="contact-button chat-button">
+                        <i class="fas fa-envelope"></i> Send Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer --><footer class="footer">
         <div class="warning-bar">
             Downloading and reusing videos is a legal offense.
         </div>
         <div class="container">
-            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
+            <p>Crafted with Precision. &copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+    <!-- Floating WhatsApp Button --><a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-
         // --- Mobile Menu Toggle ---
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.getElementById('nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                const icon = menuToggle.querySelector('i');
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times'); // Use X icon when open
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            // Close menu if a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.querySelector('i').classList.remove('fa-times');
+                        menuToggle.querySelector('i').classList.add('fa-bars');
+                    }
+                });
+            });
+        }
+        
+        // --- Animate Skill Bars when they become visible (Improved Observer) ---
+        const skillObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const skillLevels = entry.target.querySelectorAll('.skill-level');
+              skillLevels.forEach(level => {
+                  const targetWidth = level.style.getPropertyValue('--skill-percent'); 
+                  level.style.width = targetWidth;
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+
+        const aboutSkillsSection = document.querySelector('.about-skills');
+        if (aboutSkillsSection) {
+            skillObserver.observe(aboutSkillsSection);
+        }
     });
     </script>
 </body>
