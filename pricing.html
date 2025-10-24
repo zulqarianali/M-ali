@@ -3,420 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing - Zulqarnain Ali</title>
+    <title>Pricing Plan Page</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for custom colors/theme -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
     <style>
-        /* --- Google Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        /* Setting up Inter font for the whole page */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-        /* --- Global Styles & Variables --- */
-        :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #2d2d2d;
-            --accent-color: #00aaff;
-            --text-color: #f0f0f0;
-            --card-bg: #252525;
-            --border-color: #444;
-            --success-color: #28a745;
-            --font-english: 'Poppins', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-english);
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        h2, h3 {
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* Custom styles to mimic the organic background shapes (blobs) */
+        .plan-bg {
             position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll just in case */
+            background-color: #f7f9fd; /* Light background similar to image */
+            /* FIX 1: Removed min-height: 100vh; to allow content to naturally fit the screen height */
+            /* FIX 2: Vertical padding reduced to minimum for screen fit */
+            padding: 1rem 0; 
         }
 
-        h2::after {
+        /* Blob 1: Top-Left Curve (Light Blue/White) */
+        .plan-bg::before {
             content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            margin: 10px auto 0;
-            border-radius: 2px;
+            position: absolute;
+            top: -100px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(165, 243, 252, 0.5), rgba(125, 211, 252, 0.7));
+            border-radius: 40% 60% 70% 30% / 50% 50% 50% 50%;
+            opacity: 0.6;
+            z-index: 0;
+            transform: rotate(-10deg);
         }
 
-        section {
-            padding: 80px 0;
+        /* Blob 2: Bottom-Right Circle (Light Pink/Purple) */
+        .plan-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(251, 182, 219, 0.4), rgba(244, 114, 182, 0.5));
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 0;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+        /* Ensure content is above the blobs */
+        .plan-content {
+            position: relative;
+            z-index: 10;
         }
 
-        .btn:hover {
-            background: transparent;
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        /* --- Header & Navigation --- */
-        .header {
-            background-color: rgba(26, 26, 26, 0.9);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header .container {
+        /* Custom Feature Item Styling */
+        .feature-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 0.95rem;
+            color: #4a4a4a;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-decoration: none;
+        .feature-item:last-child {
+            border-bottom: none;
         }
 
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .nav-links a::after {
-            content: '';
+        /* Custom Gradient Background for the large, organic shape behind the header */
+        .header-curve-bg {
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
             position: absolute;
-            bottom: 0;
+            top: 50px;
             left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--accent-color);
-        }
-
-        /* --- Pricing Section --- */
-        #pricing {
-            background-color: var(--secondary-color);
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            align-items: stretch;
-        }
-
-        .pricing-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-        }
-
-        .pricing-card .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .pricing-card .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-color);
-        }
-
-        .pricing-card ul {
-            list-style: none;
-            margin: 20px 0;
-            flex-grow: 1;
-        }
-
-        .pricing-card ul li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-            text-align: left;
-        }
-
-        .pricing-card ul li::before {
-            content: '✓';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: var(--success-color);
-            position: absolute;
-            left: 0;
-        }
-
-        .pricing-card .btn {
-            margin-top: auto;
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 40px 0 20px;
-            text-align: center;
-        }
-
-        .warning-bar {
-            background-color: #ffc107;
-            color: #333;
-            padding: 8px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        /* --- Floating WhatsApp Button --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: #FFF;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--secondary-color);
-                flex-direction: column;
-                padding: 20px 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            }
-
-            .nav-links.active {
-                max-height: 500px;
-                padding: 20px 0;
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
+            right: 0;
+            height: 300px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 90%, 0 70%);
+            z-index: 1;
+            opacity: 0.6;
         }
     </style>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="font-sans plan-bg">
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
-            <div class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="pricing.html" class="active">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </div>
-    </header>
+    <!-- Background Curve (Behind Header) -->
+    <div class="header-curve-bg"></div>
 
-    <!-- Pricing Section -->
-    <section id="pricing">
-        <div class="container fade-in">
-            <h2>Pricing Plans</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Basic Video</h3>
-                    <div class="price">PKR 1500 <span>/ 30-35 sec</span></div>
-                    <ul>
-                        <li>Script Writing</li>
-                        <li>Voice-Over</li>
-                        <li>Professional Editing</li>
-                        <li>Background Music</li>
-                    </ul>
-                    <a href="contact.html" class="btn">Get Started</a>
+    <!-- Added max-width for large screens (lg:max-w-7xl) to prevent content from stretching too wide -->
+    <div class="container mx-auto px-4 plan-content lg:max-w-7xl">
+        <!-- Header Section -->
+        <!-- FIX 3: Reduced vertical space (pt-4 to pt-2 and mb-6 to mb-4) -->
+        <header class="text-center mb-4 pt-2">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Video Editing Service Plans</h1>
+            <div class="w-16 h-1 mx-auto bg-purple-500 rounded-full mb-3"></div>
+            <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">
+                Discover the perfect video editing package for your needs, from simple cuts to high-end cinematic productions.
+            </p>
+        </header>
+
+        <!-- Pricing Cards Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+
+            <!-- Card 1: Basic Video Editing (Purple) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
+                <!-- Header with Gradient -->
+                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-indigo-500 to-violet-600 relative text-white">
+                    <!-- Decorative Wave Shape -->
+                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
+                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Basic Video Editing</p>
+                    <!-- Currency is PKR -->
+                    <p class="text-4xl font-extrabold">PKR 1,500<span class="text-base font-light ml-1">/project</span></p>
                 </div>
-                <div class="pricing-card">
-                    <h3>Standard Video</h3>
-                    <div class="price">PKR 1800 <span>/ up to 1 min</span></div>
-                    <ul>
-                        <li>Script Writing</li>
-                        <li>Voice-Over</li>
-                        <li>Professional Editing</li>
-                        <li>Background Music</li>
-                    </ul>
-                     <a href="contact.html" class="btn">Get Started</a>
+                <!-- Features List -->
+                <div class="p-6 space-y-1">
+                    <div class="feature-item"><span>Project Resolution</span> <span>1080p Max</span></div>
+                    <div class="feature-item"><span>Delivery Time</span> <span>5 Days</span></div>
+                    <div class="feature-item"><span>Revision Rounds</span> <span>1</span></div>
+                    <div class="feature-item"><span>Source Files</span> <span class="text-red-500 font-bold">NO</span></div>
+                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-red-500 font-bold">NO</span></div>
+                    <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
                 </div>
-                <div class="pricing-card">
-                    <h3>3 Video Bundle</h3>
-                    <div class="price">PKR 4500-5400</div>
-                     <ul>
-                        <li>Script Writing</li>
-                        <li>Voice-Over</li>
-                        <li>Professional Editing</li>
-                        <li>Background Music</li>
-                    </ul>
-                     <a href="contact.html" class="btn">Get Started</a>
-                </div>
-                 <div class="pricing-card">
-                    <h3>5 Video Bundle</h3>
-                    <div class="price">PKR 6000-9000</div>
-                     <ul>
-                        <li>Script Writing</li>
-                        <li>Voice-Over</li>
-                        <li>Professional Editing</li>
-                        <li>Background Music</li>
-                    </ul>
-                     <a href="contact.html" class="btn">Get Started</a>
+                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 1) -->
+                <div class="p-6 pt-2">
+                    <a 
+                        href="https://wa.me/923247107543?text=I%20want%20Plan%201%3A%20Basic%20Video%20Editing." 
+                        target="_blank" 
+                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-violet-600 hover:bg-violet-700 transition duration-300 shadow-md shadow-violet-300/50">
+                        SELECT PLAN
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="warning-bar">
-            Downloading and reusing videos is a legal offense.
-        </div>
-        <div class="container">
-            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
-        </div>
-    </footer>
+            <!-- Card 2: Normal Video Editing (Pink/Magenta) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out border-4 border-transparent">
+                 <!-- Header with Gradient -->
+                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-pink-500 to-fuchsia-600 relative text-white">
+                    <!-- Decorative Wave Shape -->
+                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
+                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Normal Video Editing</p>
+                    <!-- Currency is PKR -->
+                    <p class="text-4xl font-extrabold">PKR 2,000<span class="text-base font-light ml-1">/project</span></p>
+                </div>
+                <!-- Features List -->
+                <div class="p-6 space-y-1">
+                    <div class="feature-item"><span>Project Resolution</span> <span>4K Available</span></div>
+                    <div class="feature-item"><span>Delivery Time</span> <span>3 Days</span></div>
+                    <div class="feature-item"><span>Revision Rounds</span> <span>3</span></div>
+                    <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
+                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
+                    <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
+                </div>
+                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 2) -->
+                <div class="p-6 pt-2">
+                    <a 
+                        href="https://wa.me/923247107543?text=I%20want%20Plan%202%3A%20Normal%20Video%20Editing." 
+                        target="_blank" 
+                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-fuchsia-600 hover:bg-fuchsia-700 transition duration-300 shadow-md shadow-fuchsia-300/50">
+                        SELECT PLAN
+                    </a>
+                </div>
+            </div>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+            <!-- Card 3: Ultra Video Editing (Blue) -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
+                 <!-- Header with Gradient -->
+                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-blue-400 to-cyan-500 relative text-white">
+                    <!-- Decorative Wave Shape -->
+                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
+                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    </svg>
+                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Ultra Video Editing</p>
+                    <!-- Currency is PKR -->
+                    <p class="text-4xl font-extrabold">PKR 2,500<span class="text-base font-light ml-1">/project</span></p>
+                </div>
+                <!-- Features List -->
+                <div class="p-6 space-y-1">
+                    <div class="feature-item"><span>Project Resolution</span> <span>8K Ready</span></div>
+                    <div class="feature-item"><span>Delivery Time</span> <span>1 Day Priority</span></div>
+                    <div class="feature-item"><span>Revision Rounds</span> <span>Unlimited</span></div>
+                    <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
+                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
+                    <div class="feature-item"><span>Commercial License</span> <span class="text-green-500 font-bold">YES</span></div>
+                </div>
+                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 3) -->
+                <div class="p-6 pt-2">
+                    <a 
+                        href="https://wa.me/923247107543?text=I%20want%20Plan%203%3A%20Ultra%20Video%20Editing." 
+                        target="_blank" 
+                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-cyan-500 hover:bg-cyan-600 transition duration-300 shadow-md shadow-cyan-300/50">
+                        SELECT PLAN
+                    </a>
+                </div>
+            </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- Mobile Menu Toggle ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    });
-    </script>
+        </div>
+    </div>
 </body>
 </html>
