@@ -3,535 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zulqarnain Ali - Graphic Designer & Video Editor</title>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Zulqarnain Ali - Creative Portfolio</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Lucide Icons with DEFER attribute to ensure it loads fully before DOMContentLoaded --><script src="https://unpkg.com/lucide@latest" defer></script> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* --- Google Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Jameel+Noori+Nastaleeq&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
-
-        /* --- Global Styles & Variables --- */
+        /* Custom Tailwind Configuration */
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #2d2d2d;
-            --accent-color: #00aaff;
-            --text-color: #f0f0f0;
-            --dark-text-color: #333;
-            --card-bg: #252525;
-            --border-color: #444;
-            --font-english: 'Poppins', sans-serif;
-            --font-urdu: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+            font-family: 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ---------------------------------------------------- */
+        /* Custom Styles for Hero Section */
+        /* ---------------------------------------------------- */
+
+        /* Hero Background - Using a subtle light background */
+        .custom-hero-bg {
+            background-color: #f7f9fb; 
         }
 
-        body {
-            font-family: var(--font-english);
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        /* 1. Floating Animation for Labels */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        h1 {
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem; /* Reduced margin */
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
+        .floating-label {
+            animation: float 4s ease-in-out infinite;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+            z-index: 10; /* Ensure labels are on top */
         }
 
-        .btn:hover {
-            background: transparent;
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-color);
-            color: #fff;
-        }
-
-        /* --- Utility Classes --- */
-        .urdu-text {
-            font-family: var(--font-urdu);
-            direction: rtl;
-        }
-
-        /* --- Custom Animations --- */
-
-        /* 1. Image Animation Keyframes: Zoom and Shadow Effect */
-        @keyframes zoomInFloat {
-            0% { transform: scale(0.8); opacity: 0; box-shadow: 0 0 0 rgba(0, 170, 255, 0); }
-            100% { transform: scale(1.0); opacity: 1; box-shadow: 0 0 30px rgba(0, 170, 255, 0.4); }
-        }
-
-        /* 2. Text/Cursor Animation Keyframes: Blinking Effect for Typewriter */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent-color); }
-        }
+        /* Adjust individual label timing/position relative to the image container */
+        /* Positions adjusted to prevent overlap on small screens */
+        .label-1 { top: -10px; right: 10%; animation-delay: 0s; }
+        .label-2 { top: 30%; right: -20px; animation-delay: 1.5s; }
+        .label-3 { bottom: 10px; left: 10%; animation-delay: 0.7s; }
         
-        /* Make subtitle opaque initially to hide text before animation */
-        .hero-text .subtitle {
+        /* 2. Image Slide-in Animation (Initial state) */
+        .image-container {
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
             opacity: 0;
-            transition: opacity 0.5s;
+            transform: translateX(50px) scale(0.95); 
+            width: 100%; /* Ensure container fills space */
+        }
+        .image-container.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
         }
 
-
-        /* --- Discount Banner --- */
-        .discount-banner {
-            background-color: var(--accent-color);
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            font-weight: 600;
-            font-size: 1.1rem;
-            width: 100%;
-            z-index: 1001;
-            position: relative;
-        }
-
-        /* --- Header & Navigation --- */
-        .header {
-            background-color: rgba(26, 26, 26, 0.9);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--accent-color);
-        }
-
-        /* --- Hero Section --- */
-        #home {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            /* Background image is removed and replaced by the video element */
-            position: relative;
-            border-bottom: 1px solid var(--border-color);
-            overflow: hidden; /* Important for full-screen video background */
-        }
-        
-        /* Video Styling */
-        .background-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        #home::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(26, 26, 26, 0.7); /* Dark overlay over the video */
-            z-index: 1; /* In front of video, behind content */
-        }
-
-        .hero-content {
-            /* Content should be above the overlay */
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .hero-image {
-            flex-basis: 40%;
-            text-align: center;
-        }
-
-        .hero-image img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent-color);
-            /* Apply Image Animation here */
-            animation: zoomInFloat 1.2s ease-out forwards;
-            opacity: 0; /* Start hidden for animation */
-            object-position: top;
-        }
-
-        .hero-text {
-            flex-basis: 55%;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
-            color: #fff;
-            line-height: 1.2;
-            white-space: pre-wrap; /* Ensure text wraps if needed */
-        }
-
-        .hero-text h1 span {
-            color: var(--accent-color);
-        }
-
-        .hero-text .subtitle {
-            font-size: 1.8rem;
-            color: var(--text-color);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        /* Typewriter Cursor Style */
-        .typing-cursor {
+        /* 3. Typing Animation CSS - Applied to both headings */
+        .typing-effect {
+            border-right: 3px solid transparent; 
+            white-space: nowrap;
+            overflow: hidden;
             display: inline-block;
-            width: 0.15em;
-            height: 1.1em;
-            background-color: var(--accent-color);
-            margin-left: 5px;
-            vertical-align: middle;
-            animation: blink-caret 0.75s step-end infinite;
-        }
-        .typing-cursor.finished {
-            animation: none;
-            opacity: 0;
         }
 
-        .hero-buttons .btn {
-            margin-right: 15px;
-        }
+        /* Custom Styling for the Image using the Provided Portrait Link */
+        .portrait-frame {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            max-width: 320px; /* Max width like a phone screen */
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: rotate(3deg);
+            
+            /* --- IMAGE IMPLEMENTATION START --- */
+            background-color: #3730a3; 
+            /* Set the background image using the user's provided URL */
+            background-image: url('https://i.pinimg.com/1200x/11/2d/c0/112dc016b1b5d93d619735d74738dd6f.jpg'); 
+            background-size: cover; /* Cover the entire frame */
+            background-position: center top; /* Center horizontally, align top vertically */
+            background-repeat: no-repeat;
+            /* --- IMAGE IMPLEMENTATION END --- */
 
-        /* --- Footer --- */
-        .footer {
-            background-color: #111;
-            color: #aaa;
-            padding: 40px 0 20px;
-            text-align: center;
+            overflow: hidden;
+            border: 5px solid white; /* To make it look like a framed photo */
         }
-
-        .warning-bar {
-            background-color: #ffc107;
-            color: #333;
-            padding: 8px;
-            font-weight: 500;
-            margin-bottom: 20px;
+        
+        /* The img tag is now primarily used for accessibility/fallback, but the visual is the background */
+        .portrait-frame img {
+            display: none; /* Hide the placeholder image tag */
         }
-
-        /* --- Floating WhatsApp Button --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: #FFF;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-image {
-                margin-bottom: 2rem;
-            }
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-        }
-
+        
+        /* Ensure the main image container on mobile is centered */
         @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--secondary-color);
-                flex-direction: column;
-                padding: 20px 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            }
-
-            .nav-links.active {
-                max-height: 500px;
-                padding: 20px 0;
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
+            .image-container {
+                margin: 2rem auto 0;
             }
         }
+
+        /* ---------------------------------------------------- */
+        /* Custom Styles for Animated Navigation Links (Pages) */
+        /* ---------------------------------------------------- */
+        .nav-link-anim {
+            padding: 8px 14px; /* Slightly increased padding for bigger look */
+            border-radius: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.05rem; /* Slightly larger font size */
+        }
+        .nav-link-anim:hover {
+            color: #4f46e5; /* indigo-600 */
+            background-color: #eef2ff; /* indigo-50 */
+            transform: translateY(-2px); /* Slight lift */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+        }
+
     </style>
 </head>
-<body>
 
-    <!-- Discount Banner -->
-    <div class="discount-banner urdu-text">
-        %50 ڈسکاؤنٹ آفر
-    </div>
+<body class="min-h-screen bg-gray-50 antialiased overflow-x-hidden">
 
-    <!-- Header (No change in structure, only links updated for multi-page concept) -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
-            <div class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home">
-        
-        <!-- Background Video Element for minimum load (Updated URL) -->
-        <video autoplay loop muted playsinline class="background-video">
-            <!-- نئی ویڈیو: یہ ایک بہتر Free-to-use، high-quality ویڈیو ہے جو کام، ٹیکنالوجی اور فری لانسنگ سے متعلقہ محسوس ہوتی ہے۔ -->
-            <source src="https://videos.pexels.com/video-files/5966461/5966461-sd_640_360_30fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-image">
-                    <!-- Image has a zoom-in animation applied via CSS -->
-                    <img id="hero-image" src="https://i.pinimg.com/736x/33/8a/8c/338a8cdc8400d6ae9f0eafa56dfde38f.jpg" alt="Zulqarnain Ali">
+    <!-- NAVIGATION BAR --><nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo --><div class="flex-shrink-0 font-bold text-2xl text-indigo-600">
+                    Zulqarnain.
                 </div>
-                <div class="hero-text">
-                    <!-- Title for Typewriter Effect -->
-                    <h1 id="hero-title"></h1>
-                    <!-- Subtitle now has an ID and content for typewriter effect -->
-                    <p id="hero-subtitle" class="subtitle">Graphic Designer & Video Editor</p>
-                    <div class="hero-buttons">
-                        <a href="portfolio.html" class="btn">View My Work</a>
-                        <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+                
+                <!-- Desktop Menu Links (Login link removed) --><div class="hidden md:flex md:space-x-4 items-center">
+                    <!-- Updated Navigation: Home, About, Portfolio, Price, Services (Added custom class for animation) --><a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">About</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Portfolio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Price</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Services</a>
+                    
+                    <!-- Content Me Action Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="
+                        ml-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out flex items-center
+                    ">
+                        <i data-lucide="phone" class="w-4 h-4 mr-1"></i> Content Me
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button --><button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-indigo-600 p-2 rounded-md transition duration-150">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu - Hidden by default (Login link removed) --><div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Portfolio</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Price</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Services</a>
+                
+                <!-- Content Me Mobile Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="block w-full text-center mt-2 px-3 py-2 rounded-md text-base font-medium bg-indigo-500 text-white hover:bg-indigo-600 flex items-center justify-center">
+                    <i data-lucide="phone" class="w-5 h-5 mr-2"></i> Content Me
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- HERO SECTION START (Responsive & Overlap Fixed) --><!-- Increased padding (pt-16 pb-28) for a "bigger" feel --><section id="hero" class="relative pt-16 pb-28 md:pt-28 md:pb-36 custom-hero-bg overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                
+                <!-- Left Side: Text Content and Buttons --><div class="text-center md:text-left md:w-1/2 order-2 md:order-1">
+                    
+                    <!-- CORRECTED HEADING STRUCTURE (Zulqarnain Ali on top, job titles below) -->
+                    <!-- Updated with typing-effect class and data-text attribute -->
+                    <h1 id="h1-typing-text" class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-none mb-2 typing-effect" data-text="Zulqarnain Ali">
+                        <span class="text-indigo-600"></span>
+                    </h1>
+                    
+                    <!-- Sub-Heading with Typing Animation (Job Title) - Increased font size -->
+                    <h2 id="h2-typing-text" class="text-3xl lg:text-4xl font-semibold text-gray-700 mb-6 typing-effect" data-text="Video Editor & Graphic Designer">
+                    </h2>
+
+                    <!-- Descriptive Paragraph - Increased font size (text-lg sm:text-xl) for bigger look --><p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-xl mx-auto md:mx-0">
+                        A visionary creator crafting captivating visuals and stories through the art of video and design.
+                    </p>
+
+                    <!-- Buttons --><div class="flex justify-center md:justify-start space-x-4">
+                        <!-- 1. Content Me Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="
+                            px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold shadow-xl transition duration-300 ease-in-out text-base flex items-center justify-center
+                            bg-gradient-to-r from-indigo-600 to-purple-600 hover:scale-[1.03] hover:shadow-2xl
+                        ">
+                            <i data-lucide="phone" class="w-5 h-5 mr-2"></i> Content Me
+                        </a>
+                        
+                        <!-- 2. View Portfolio Button (Text changed from 'Start Project') --><a href="#" class="
+                            px-6 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold text-indigo-600 border-2 border-indigo-200 transition duration-300 ease-in-out text-base
+                            hover:bg-indigo-50 hover:border-indigo-600 hover:scale-[1.03]
+                        ">
+                            View Portfolio
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Side: Image and Floating Labels (Takes 1/2 columns on desktop) --><div class="md:w-1/2 order-1 md:order-2 flex justify-center w-full h-full min-h-[400px]">
+                    <div class="relative w-full max-w-sm flex justify-center items-center image-container" id="image-anim-target">
+                        
+                        <!-- Portrait Image Card Container (Now using custom styles for better look) --><div class="portrait-frame">
+                            <!-- Image URL is now set via CSS background-image --><img 
+                                src="https://placehold.co/1x1" 
+                                alt="Zulqarnain Ali Portrait" 
+                                class="w-full h-full object-cover"
+                                onerror="this.onerror=null; this.src='https://placehold.co/1x1';"
+                            >
+                        </div>
+
+                        <!-- Floating Labels (Properly positioned relative to the image container and animating) --><!-- 1. Video Editing --><div class="floating-label label-1 absolute -top-4 right-1/4 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-5deg] hover:rotate-[0deg] transition-transform">
+                            <i data-lucide="video" class="w-4 h-4 inline-block mr-1"></i> Video Editing
+                        </div>
+
+                        <!-- 2. Graphic Design --><div class="floating-label label-2 absolute top-30 right-20 sm:right-0 px-4 py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[10deg] hover:rotate-[0deg] transition-transform">
+                            <i data-lucide="layout-grid" class="w-4 h-4 inline-block mr-1"></i> Graphic Design
+                        </div>
+
+                        <!-- 3. Social Media Services --><div class="floating-label label-3 absolute bottom-0 left-1/4 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-10deg] hover:rotate-[0deg] transition-transform">
+                            <i data-lucide="share-2" class="w-4 h-4 inline-block mr-1"></i> Social Media Services
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- NOTE: The YouTube Short Video/Portfolio Section would follow here in the original file,
-         but since you only provided the header/hero, I am maintaining the structure and
-         ensuring no other sections are altered or broken, per your request.
-    -->
+    <!-- STATS BAR SECTION (Animated) --><section class="bg-white py-10 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                
+                <!-- Stat Item 1: Years Experience --><div class="p-4 rounded-xl">
+                    <p class="text-4xl md:text-5xl font-extrabold text-indigo-700 mb-1">
+                        <span id="counter-1" data-target="5">0</span>+
+                    </p>
+                    <p class="text-gray-500 font-medium tracking-wide text-sm md:text-base">Years Experience</p>
+                </div>
+                
+                <!-- Stat Item 2: Projects Success --><div class="p-4 rounded-xl">
+                    <p class="text-4xl md:text-5xl font-extrabold text-indigo-700 mb-1">
+                        <span id="counter-2" data-target="85">0</span>+
+                    </p>
+                    <p class="text-gray-500 font-medium tracking-wide text-sm md:text-base">Projects Success</p>
+                </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="warning-bar">
-            Downloading and reusing videos is a legal offense.
+                <!-- Stat Item 3: Satisfied Clients --><div class="p-4 rounded-xl">
+                    <p class="text-4xl md:text-5xl font-extrabold text-indigo-700 mb-1">
+                        <span id="counter-3" data-target="45">0</span>+
+                    </p>
+                    <p class="text-gray-500 font-medium tracking-wide text-sm md:text-base">Satisfied Clients</p>
+                </div>
+                
+                <!-- Stat Item 4: Average Rating --><div class="p-4 rounded-xl">
+                    <p class="text-4xl md:text-5xl font-extrabold text-indigo-700 mb-1 flex items-center justify-center">
+                        4.9<span class="text-2xl ml-1">/5</span>
+                        <i data-lucide="star" class="w-5 h-5 ml-1 text-amber-400 fill-amber-400"></i>
+                    </p>
+                    <p class="text-gray-500 font-medium tracking-wide text-sm md:text-base">Average Rating</p>
+                </div>
+
+            </div>
         </div>
-        <div class="container">
-            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // --- Mobile Menu Toggle ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Animation speed adjusted: 150ms per character (slower than 100ms)
-        const typingSpeed = 150; 
-
-        /**
-         * Applies the typewriter effect to an element.
-         * @param {HTMLElement} element - The target HTML element.
-         * @param {string} textToType - The full text to type.
-         * @param {number} colorSplitIndex - Index to start applying accent color. Use -1 for no colored text.
-         * @param {Function} [onComplete] - Callback function when typing is finished.
-         */
-        function applyTypewriter(element, textToType, colorSplitIndex, onComplete) {
-            let i = 0;
-            const originalText = textToType;
-            element.textContent = ''; // Clear content to start typing
+    </section>
+    <!-- HERO SECTION END --><script>
+        // Function to handle the counter animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const duration = 1500; // Animation duration in ms
+            const start = performance.now();
             
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-            element.appendChild(cursor);
+            const updateCounter = (timestamp) => {
+                const elapsed = timestamp - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                current = progress * target;
+                element.textContent = Math.ceil(current);
 
-            let coloredSpan = null;
-
-            const timer = setInterval(() => {
-                if (i < originalText.length) {
-                    const char = originalText.charAt(i);
-                    
-                    if (i === colorSplitIndex) {
-                        // Start of the colored word ('Ali' in the title case)
-                        coloredSpan = document.createElement('span');
-                        coloredSpan.style.color = 'var(--accent-color)';
-                        element.insertBefore(coloredSpan, cursor);
-                        coloredSpan.textContent += char;
-                    } else if (i > colorSplitIndex && coloredSpan) {
-                        // Continuation of the colored word - Fixed the logic here
-                        coloredSpan.textContent += char;
-                    } else {
-                        // Normal text (e.g., 'Zulqarnain ' or subtitle)
-                        element.insertBefore(document.createTextNode(char), cursor);
-                    }
-                    i++;
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
                 } else {
-                    clearInterval(timer);
-                    // Stop the cursor blink after typing is finished
-                    setTimeout(() => {
-                        cursor.classList.add('finished');
-                        if (onComplete) {
-                            onComplete();
-                        }
-                    }, 500); 
+                    element.textContent = target; // Final value
                 }
-            }, typingSpeed);
+            };
+            requestAnimationFrame(updateCounter);
         }
 
-        // --- Title Animation ---
-        const titleElement = document.getElementById('hero-title');
-        const titleText = 'Zulqarnain Ali';
-        // 'Zulqarnain ' has 11 characters (10 letters + 1 space)
-        const titleDuration = applyTypewriter(titleElement, titleText, 11, () => {
-             // --- Subtitle Animation starts after title is complete ---
-             const subtitleElement = document.getElementById('hero-subtitle');
-             const subtitleText = subtitleElement.textContent; // Get the original text
-             subtitleElement.style.opacity = '1'; // Make subtitle visible before typing
-             
-             // Apply typewriter to subtitle (no colored text, so index is -1)
-             applyTypewriter(subtitleElement, subtitleText, -1); 
-        });
+        // Function to handle the typing animation
+        function startTypingAnimation(elementId, delay = 0) {
+            const typingElement = document.getElementById(elementId);
+            if (!typingElement) return;
 
-        // The image animation already starts on load via CSS, no need for extra JS timing.
-    });
+            // Get the full text from the data attribute, defaulting to an empty string if not found
+            const fullText = typingElement.getAttribute('data-text') || "";
+            // Find the child span for coloring (if present, only used for h1)
+            const textSpan = typingElement.querySelector('span') || typingElement;
+            
+            textSpan.textContent = ''; // Clear content
+            let charIndex = 0;
+            const typingSpeed = 40; // milliseconds per character
+
+            function type() {
+                if (charIndex < fullText.length) {
+                    // Check if we are typing the colorful part (only for h1, i.e., "Zulqarnain Ali")
+                    if (elementId === 'h1-typing-text') {
+                        // Apply the text color class to the span, and ensure only "Zulqarnain Ali" is typed inside
+                        textSpan.textContent = fullText.substring(0, charIndex + 1);
+                    } else {
+                         // Apply the text color class to the span, and ensure only "Video Editor & Graphic Designer" is typed inside
+                        textSpan.textContent += fullText.charAt(charIndex);
+                    }
+                    
+                    charIndex++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    // Stop the "cursor" (border) animation after typing is complete
+                    typingElement.style.borderRight = '3px solid transparent';
+                }
+            }
+
+            // Start typing animation after initial delay
+            setTimeout(() => {
+                typingElement.style.borderRight = '3px solid #1f2937'; // Show initial cursor
+                type();
+            }, delay); 
+        }
+
+        // Intersection Observer to trigger counter animation when the element is visible
+        function setupCounters() {
+            const counters = [
+                { id: 'counter-1', target: 5 },
+                { id: 'counter-2', target: 85 },
+                { id: 'counter-3', target: 45 }
+            ];
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statElement = entry.target;
+                        const target = parseInt(statElement.getAttribute('data-target'));
+                        animateCounter(statElement, target);
+                        observer.unobserve(statElement); // Stop observing after animation
+                    }
+                });
+            }, {
+                threshold: 0.8 // Trigger when 80% of the element is visible
+            });
+
+            counters.forEach(item => {
+                const element = document.getElementById(item.id);
+                if (element) {
+                    observer.observe(element);
+                }
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // FIX: Lucide Icons Initialization with increased delay for better reliability.
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                } else {
+                    console.warn("Lucide object is still undefined after delay. Icons might not render.");
+                }
+            }, 250); 
+
+
+            // 2. Image Slide-in Activation
+            const imageContainer = document.getElementById('image-anim-target');
+            setTimeout(() => {
+                if (imageContainer) {
+                    imageContainer.classList.add('active');
+                }
+            }, 100); 
+
+            // 3. Typing Animation Script for Both Headings
+            startTypingAnimation('h1-typing-text', 50); // Start Zulqarnain Ali first
+            
+            // Calculate delay for the second title based on the length of the first one
+            const h1TextLength = (document.getElementById('h1-typing-text').getAttribute('data-text') || "").length;
+            const h2StartDelay = 50 + (h1TextLength * 40) + 500; // 50 (h1 start) + (chars * 40ms) + 500ms (pause)
+
+            startTypingAnimation('h2-typing-text', h2StartDelay); // Start "Video Editor..." later
+
+            // 5. Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if(mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // 6. Setup Animated Stats Counters
+            setupCounters();
+        });
     </script>
 </body>
 </html>
