@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Plan Page</title>
+    <title>Zulqarnain's Services - Pricing</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configure Tailwind for custom colors/theme -->
@@ -22,45 +22,38 @@
         /* Setting up Inter font for the whole page */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-        /* Custom styles to mimic the organic background shapes (blobs) */
+        /* Custom background to match the style of the previous design */
         .plan-bg {
             position: relative;
-            overflow-x: hidden; /* Prevent horizontal scroll just in case */
-            background-color: #f7f9fd; /* Light background similar to image */
-            /* FIX 1: Removed min-height: 100vh; to allow content to naturally fit the screen height */
-            /* FIX 2: Vertical padding reduced to minimum for screen fit */
-            padding: 1rem 0; 
+            overflow-x: hidden;
+            background-color: #f7f9fd; /* Light background for contrast */
+            padding-bottom: 4rem;
+            padding-top: 4rem; /* Initial padding to account for fixed navbar */
+            min-height: 100vh;
         }
 
-        /* Blob 1: Top-Left Curve (Light Blue/White) */
-        .plan-bg::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: -150px;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(165, 243, 252, 0.5), rgba(125, 211, 252, 0.7));
-            border-radius: 40% 60% 70% 30% / 50% 50% 50% 50%;
-            opacity: 0.6;
-            z-index: 0;
-            transform: rotate(-10deg);
+        /* Fixed Navigation Bar Styling */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            z-index: 50;
+            padding: 0.5rem 0;
+            height: 4rem; /* Ensure consistent height */
         }
-
-        /* Blob 2: Bottom-Right Circle (Light Pink/Purple) */
-        .plan-bg::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, rgba(251, 182, 219, 0.4), rgba(244, 114, 182, 0.5));
-            border-radius: 50%;
-            opacity: 0.5;
-            z-index: 0;
+        
+        .nav-link {
+            transition: color 0.2s, background-color 0.2s;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem; 
+            font-weight: 500;
         }
-
+        
+        .nav-link:hover {
+            color: #4f46e5; /* Indigo-600 */
+        }
+        
         /* Ensure content is above the blobs */
         .plan-content {
             position: relative;
@@ -81,137 +74,240 @@
             border-bottom: none;
         }
 
-        /* Custom Gradient Background for the large, organic shape behind the header */
-        .header-curve-bg {
-            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
-            position: absolute;
-            top: 50px;
-            left: 0;
-            right: 0;
-            height: 300px;
-            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 90%, 0 70%);
-            z-index: 1;
-            opacity: 0.6;
+        /* Custom Button Styling (Contact Me) */
+        .contact-btn {
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 0.75rem;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s, box-shadow 0.2s;
         }
+        .contact-btn:hover {
+            background-color: #4338ca;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hide the mobile menu by default */
+        #mobile-menu {
+            display: none;
+        }
+        
+        /* Display the mobile menu when 'open' class is applied */
+        #mobile-menu.open {
+            display: block;
+        }
+
+        /* Utility classes for the pricing card headers */
+        .price-card-header {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Decorative Wave Shape Styling */
+        .price-card-header svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4rem;
+            transform: translateY(100%);
+            z-index: 5;
+            filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.02));
+        }
+
+        /* Ensure smooth scrolling to sections that might be added later */
+        html {
+            scroll-behavior: smooth;
+        }
+
     </style>
 </head>
 <body class="font-sans plan-bg">
 
-    <!-- Background Curve (Behind Header) -->
-    <div class="header-curve-bg"></div>
+    <!-- Header / Navigation Bar (Top of the page) -->
+    <nav id="header" class="navbar fixed top-0 w-full">
+        <div class="container mx-auto px-4 lg:max-w-7xl flex justify-between items-center h-full">
+            
+            <!-- Logo / Name -->
+            <a href="#" class="text-2xl font-bold text-indigo-700">Zulqarnain<span class="text-indigo-500">.</span></a>
 
-    <!-- Added max-width for large screens (lg:max-w-7xl) to prevent content from stretching too wide -->
-    <div class="container mx-auto px-4 plan-content lg:max-w-7xl">
-        <!-- Header Section -->
-        <!-- FIX 3: Reduced vertical space (pt-4 to pt-2 and mb-6 to mb-4) -->
-        <header class="text-center mb-4 pt-2">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Video Editing Service Plans</h1>
-            <div class="w-16 h-1 mx-auto bg-purple-500 rounded-full mb-3"></div>
-            <p class="text-gray-500 max-w-2xl mx-auto text-sm md:text-base">
-                Discover the perfect video editing package for your needs, from simple cuts to high-end cinematic productions.
-            </p>
-        </header>
-
-        <!-- Pricing Cards Container -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-
-            <!-- Card 1: Basic Video Editing (Purple) -->
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                <!-- Header with Gradient -->
-                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-indigo-500 to-violet-600 relative text-white">
-                    <!-- Decorative Wave Shape -->
-                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
-                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
-                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Basic Video Editing</p>
-                    <!-- Currency is PKR -->
-                    <p class="text-4xl font-extrabold">PKR 1,500<span class="text-base font-light ml-1">/project</span></p>
-                </div>
-                <!-- Features List -->
-                <div class="p-6 space-y-1">
-                    <div class="feature-item"><span>Project Resolution</span> <span>1080p Max</span></div>
-                    <div class="feature-item"><span>Delivery Time</span> <span>5 Days</span></div>
-                    <div class="feature-item"><span>Revision Rounds</span> <span>1</span></div>
-                    <div class="feature-item"><span>Source Files</span> <span class="text-red-500 font-bold">NO</span></div>
-                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-red-500 font-bold">NO</span></div>
-                    <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
-                </div>
-                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 1) -->
-                <div class="p-6 pt-2">
-                    <a 
-                        href="https://wa.me/923247107543?text=I%20want%20Plan%201%3A%20Basic%20Video%20Editing." 
-                        target="_blank" 
-                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-violet-600 hover:bg-violet-700 transition duration-300 shadow-md shadow-violet-300/50">
-                        SELECT PLAN
-                    </a>
-                </div>
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-6">
+                <!-- Navigation Links - Note: These links currently point to non-existent sections, 
+                     but they are included to match the screenshot's structure. -->
+                <a href="#home" class="text-gray-600 nav-link hover:text-indigo-600">Home</a>
+                <a href="#about" class="text-gray-600 nav-link hover:text-indigo-600">About</a>
+                <a href="#portfolio" class="text-gray-600 nav-link hover:text-indigo-600">Portfolio</a>
+                <a href="#price" class="text-gray-600 nav-link hover:text-indigo-600 font-bold">Price</a>
+                <a href="#services" class="text-gray-600 nav-link hover:text-indigo-600">Services</a>
+                
+                <!-- Contact Me Button (WhatsApp Link) -->
+                <a href="https://wa.me/923247107543?text=Hello!%20I%20came%20from%20your%20website.%20I%20would%20like%20to%20know%20more%20about%20your%20services.%20(M-A-W)" 
+                   target="_blank" 
+                   class="contact-btn flex items-center shadow-lg shadow-indigo-500/30">
+                    <!-- Icon for Contact/Call -->
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    Contact Me
+                </a>
             </div>
 
-            <!-- Card 2: Normal Video Editing (Pink/Magenta) -->
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out border-4 border-transparent">
-                 <!-- Header with Gradient -->
-                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-pink-500 to-fuchsia-600 relative text-white">
-                    <!-- Decorative Wave Shape -->
-                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
-                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
-                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Normal Video Editing</p>
-                    <!-- Currency is PKR -->
-                    <p class="text-4xl font-extrabold">PKR 2,000<span class="text-base font-light ml-1">/project</span></p>
-                </div>
-                <!-- Features List -->
-                <div class="p-6 space-y-1">
-                    <div class="feature-item"><span>Project Resolution</span> <span>4K Available</span></div>
-                    <div class="feature-item"><span>Delivery Time</span> <span>3 Days</span></div>
-                    <div class="feature-item"><span>Revision Rounds</span> <span>3</span></div>
-                    <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
-                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
-                    <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
-                </div>
-                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 2) -->
-                <div class="p-6 pt-2">
-                    <a 
-                        href="https://wa.me/923247107543?text=I%20want%20Plan%202%3A%20Normal%20Video%20Editing." 
-                        target="_blank" 
-                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-fuchsia-600 hover:bg-fuchsia-700 transition duration-300 shadow-md shadow-fuchsia-300/50">
-                        SELECT PLAN
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3: Ultra Video Editing (Blue) -->
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
-                 <!-- Header with Gradient -->
-                <div class="p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-blue-400 to-cyan-500 relative text-white">
-                    <!-- Decorative Wave Shape -->
-                    <svg class="absolute bottom-0 left-0 w-full h-16 transform translate-y-full" viewBox="0 0 1440 320" preserveAspectRatio="none" style="filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.05));">
-                        <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                    </svg>
-                    <p class="text-lg font-semibold uppercase tracking-wider mb-1">Ultra Video Editing</p>
-                    <!-- Currency is PKR -->
-                    <p class="text-4xl font-extrabold">PKR 2,500<span class="text-base font-light ml-1">/project</span></p>
-                </div>
-                <!-- Features List -->
-                <div class="p-6 space-y-1">
-                    <div class="feature-item"><span>Project Resolution</span> <span>8K Ready</span></div>
-                    <div class="feature-item"><span>Delivery Time</span> <span>1 Day Priority</span></div>
-                    <div class="feature-item"><span>Revision Rounds</span> <span>Unlimited</span></div>
-                    <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
-                    <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
-                    <div class="feature-item"><span>Commercial License</span> <span class="text-green-500 font-bold">YES</span></div>
-                </div>
-                <!-- Button Change: Updated WhatsApp number to 03247107543 (Plan 3) -->
-                <div class="p-6 pt-2">
-                    <a 
-                        href="https://wa.me/923247107543?text=I%20want%20Plan%203%3A%20Ultra%20Video%20Editing." 
-                        target="_blank" 
-                        class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-cyan-500 hover:bg-cyan-600 transition duration-300 shadow-md shadow-cyan-300/50">
-                        SELECT PLAN
-                    </a>
-                </div>
-            </div>
-
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="lg:hidden text-gray-600 hover:text-indigo-600 p-2 rounded-lg transition duration-150">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
         </div>
-    </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="lg:hidden bg-white shadow-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">About</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Portfolio</a>
+                <a href="#price" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Price</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Services</a>
+                <a href="https://wa.me/923247107543?text=Hello!%20I%20came%20from%20your%20website.%20I%20would%20like%20to%20know%20more%20about%20your%20services.%20(M-A-W)" 
+                   target="_blank" 
+                   class="block w-full text-center mt-2 contact-btn py-2 px-3">
+                   Contact Me
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- --- Content Section: Pricing (Main Content as per Screenshot 2) --- -->
+    <section id="price" class="py-16 mt-4">
+        <div class="container mx-auto px-4 plan-content lg:max-w-7xl">
+             <!-- Header Section for Pricing -->
+            <header class="text-center mb-12 pt-2">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Our Pricing Table</h1>
+                <div class="w-16 h-1 mx-auto bg-purple-500 rounded-full mb-3"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto text-base">
+                    Discover the perfect video editing package for your needs, from simple cuts to high-end cinematic productions.
+                </p>
+            </header>
+            
+            <!-- Pricing Cards Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+                <!-- Card 1: Basic Video Editing (Purple) -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
+                    <!-- Header with Gradient -->
+                    <div class="price-card-header p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white">
+                        <!-- Decorative Wave Shape -->
+                        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                            <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                        </svg>
+                        <p class="text-lg font-semibold uppercase tracking-wider mb-1">Basic Video Editing</p>
+                        <p class="text-4xl font-extrabold">PKR 1,500<span class="text-base font-light ml-1">/project</span></p>
+                    </div>
+                    <!-- Features List -->
+                    <div class="p-6 space-y-1">
+                        <div class="feature-item"><span>Project Resolution</span> <span>1080p Max</span></div>
+                        <div class="feature-item"><span>Delivery Time</span> <span>5 Days</span></div>
+                        <div class="feature-item"><span>Revision Rounds</span> <span>1</span></div>
+                        <div class="feature-item"><span>Source Files</span> <span class="text-red-500 font-bold">NO</span></div>
+                        <div class="feature-item"><span>Advanced Effects</span> <span class="text-red-500 font-bold">NO</span></div>
+                        <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
+                    </div>
+                    <!-- Button: Updated WhatsApp message with (M-A-W) tag -->
+                    <div class="p-6 pt-2">
+                        <a 
+                            href="https://wa.me/923247107543?text=I%20want%20Plan%201%3A%20Basic%20Video%20Editing.%20(M-A-W)" 
+                            target="_blank" 
+                            class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-violet-600 hover:bg-violet-700 transition duration-300 shadow-md shadow-violet-300/50">
+                            SELECT PLAN
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Normal Video Editing (Pink/Magenta) -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
+                     <!-- Header with Gradient -->
+                    <div class="price-card-header p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-pink-500 to-fuchsia-600 text-white">
+                        <!-- Decorative Wave Shape -->
+                        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                            <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                        </svg>
+                        <p class="text-lg font-semibold uppercase tracking-wider mb-1">Normal Video Editing</p>
+                        <p class="text-4xl font-extrabold">PKR 2,000<span class="text-base font-light ml-1">/project</span></p>
+                    </div>
+                    <!-- Features List -->
+                    <div class="p-6 space-y-1">
+                        <div class="feature-item"><span>Project Resolution</span> <span>4K Available</span></div>
+                        <div class="feature-item"><span>Delivery Time</span> <span>3 Days</span></div>
+                        <div class="feature-item"><span>Revision Rounds</span> <span>3</span></div>
+                        <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
+                        <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
+                        <div class="feature-item"><span>Commercial License</span> <span class="text-red-500 font-bold">NO</span></div>
+                    </div>
+                    <!-- Button: Updated WhatsApp message with (M-A-W) tag -->
+                    <div class="p-6 pt-2">
+                        <a 
+                            href="https://wa.me/923247107543?text=I%20want%20Plan%202%3A%20Normal%20Video%20Editing.%20(M-A-W)" 
+                            target="_blank" 
+                            class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-fuchsia-600 hover:bg-fuchsia-700 transition duration-300 shadow-md shadow-fuchsia-300/50">
+                            SELECT PLAN
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Ultra Video Editing (Blue) -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.03] transition duration-300 ease-in-out">
+                     <!-- Header with Gradient -->
+                    <div class="price-card-header p-6 pb-6 rounded-t-3xl bg-gradient-to-br from-blue-400 to-cyan-500 text-white">
+                        <!-- Decorative Wave Shape -->
+                        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                            <path fill="#ffffff" fill-opacity="1" d="M0,96L48,106.7C96,117,192,139,288,128C384,117,480,75,576,64C672,53,768,75,864,112C960,149,1056,203,1152,208C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                        </svg>
+                        <p class="text-lg font-semibold uppercase tracking-wider mb-1">Ultra Video Editing</p>
+                        <p class="text-4xl font-extrabold">PKR 2,500<span class="text-base font-light ml-1">/project</span></p>
+                    </div>
+                    <!-- Features List -->
+                    <div class="p-6 space-y-1">
+                        <div class="feature-item"><span>Project Resolution</span> <span>8K Ready</span></div>
+                        <div class="feature-item"><span>Delivery Time</span> <span>1 Day Priority</span></div>
+                        <div class="feature-item"><span>Revision Rounds</span> <span>Unlimited</span></div>
+                        <div class="feature-item"><span>Source Files</span> <span class="text-green-500 font-bold">YES</span></div>
+                        <div class="feature-item"><span>Advanced Effects</span> <span class="text-green-500 font-bold">YES</span></div>
+                        <div class="feature-item"><span>Commercial License</span> <span class="text-green-500 font-bold">YES</span></div>
+                    </div>
+                    <!-- Button: Updated WhatsApp message with (M-A-W) tag -->
+                    <div class="p-6 pt-2">
+                        <a 
+                            href="https://wa.me/923247107543?text=I%20want%20Plan%203%3A%20Ultra%20Video%20Editing.%20(M-A-W)" 
+                            target="_blank" 
+                            class="w-full block text-center py-3 rounded-xl font-semibold text-white bg-cyan-500 hover:bg-cyan-600 transition duration-300 shadow-md shadow-cyan-300/50">
+                            SELECT PLAN
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        // Toggles the mobile menu open/close state
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        });
+        
+        // Optionally close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.remove('open');
+            });
+        });
+
+        // Hide mobile menu on resize to desktop view
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) {
+                document.getElementById('mobile-menu').classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
