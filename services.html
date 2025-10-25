@@ -10,6 +10,9 @@
 
         /* --- Global Styles & Variables (Consistent with previous screenshot/page) --- */
         :root {
+            --bg-color: #F8F8F8;
+            --text-color: #333333;
+            --accent-color: #003366;
             --bg-light: #f7f9fc; /* Very light, soft background */
             --bg-card: #ffffff; /* Pure white card background */
             --text-primary: #1F2E51; /* Deep Navy Blue for main text (from screenshot) */
@@ -30,12 +33,21 @@
             box-sizing: border-box;
         }
 
+        /* Mobile Responsiveness */
+        img, video, iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
         body {
             font-family: var(--font-main);
-            background-color: var(--bg-light);
-            color: var(--text-primary);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
             padding-top: 80px; /* Space for fixed header */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -91,7 +103,7 @@
 
         /* --- Header & Navigation (Consistent Style) --- */
         .header {
-            background-color: var(--bg-card);
+            background-color: #fff;
             padding: 15px 0;
             box-shadow: var(--shadow-soft);
             position: fixed;
@@ -111,12 +123,12 @@
             font-family: var(--font-main);
             font-size: 2.2rem;
             font-weight: 800;
-            color: var(--text-primary); /* Dark Navy */
+            color: var(--accent-color);
             text-decoration: none;
         }
 
         .logo span {
-            color: var(--accent-main); /* Purple accent */
+            color: var(--accent-color);
         }
 
         .nav-links {
@@ -126,7 +138,7 @@
         }
 
         .nav-links li {
-            margin-left: 30px;
+            margin: 0 15px;
         }
 
         .nav-links a {
@@ -190,7 +202,7 @@
 
         /* --- Services Section --- */
         #services {
-            background-color: var(--bg-light); /* Consistent light background */
+            background-color: var(--bg-color); /* Consistent light background */
         }
         .services-grid {
             display: grid;
@@ -215,7 +227,7 @@
 
         .service-card .icon {
             font-size: 3.5rem; /* Slightly larger icon */
-            color: var(--accent-main); /* Purple accent */
+            color: var(--accent-color); /* Purple accent */
             margin-bottom: 20px;
             display: inline-block;
             transition: color 0.3s ease;
@@ -237,16 +249,16 @@
         
         /* --- Footer (Consistent Style) --- */
         .footer {
-            background-color: var(--accent-dark); /* Dark Navy */
-            color: var(--bg-light);
+            background-color: var(--text-color);
+            color: var(--bg-color);
             padding: 40px 0 20px;
             text-align: center;
-            border-top: 5px solid var(--accent-main); /* Purple accent line */
+            border-top: 5px solid var(--accent-color);
         }
 
         .warning-bar {
-            background-color: var(--accent-main); /* Purple accent */
-            color: var(--bg-card);
+            background-color: var(--accent-color);
+            color: #fff;
             padding: 12px;
             font-weight: 600;
             margin-bottom: 30px;
@@ -344,6 +356,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div style="flex-grow: 1;">
 
     <!-- Header -->
     <header class="header">
@@ -423,6 +436,7 @@
         </div>
     </section>
 
+    </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="warning-bar">

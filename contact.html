@@ -10,6 +10,9 @@
 
         /* --- Global Styles & Variables --- */
         :root {
+            --bg-color: #F8F8F8;
+            --text-color: #333333;
+            --accent-color: #003366;
             --primary-color: #1a1a1a;
             --secondary-color: #2d2d2d;
             --accent-color: #00aaff;
@@ -25,11 +28,20 @@
             box-sizing: border-box;
         }
 
+        /* Mobile Responsiveness */
+        img, video, iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
         body {
             font-family: var(--font-english);
-            background-color: var(--primary-color);
+            background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .container {
@@ -98,7 +110,7 @@
 
         /* --- Header & Navigation --- */
         .header {
-            background-color: rgba(26, 26, 26, 0.9);
+            background-color: #fff;
             padding: 15px 0;
             position: sticky;
             top: 0;
@@ -117,7 +129,7 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-color);
+            color: var(--accent-color);
             text-decoration: none;
         }
 
@@ -131,7 +143,7 @@
         }
 
         .nav-links li {
-            margin-left: 30px;
+            margin: 0 15px;
         }
 
         .nav-links a {
@@ -171,7 +183,7 @@
 
         /* --- Contact Section --- */
         #contact {
-            background-color: var(--secondary-color);
+            background-color: var(--bg-color);
         }
 
         .contact-content {
@@ -201,16 +213,25 @@
             text-align: center;
         }
 
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
         .contact-form input,
         .contact-form textarea {
             width: 100%;
             padding: 15px;
             margin-bottom: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
             color: var(--text-color);
             font-family: var(--font-english);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
         }
 
         .contact-form input:focus,
@@ -221,15 +242,15 @@
 
         /* --- Footer --- */
         .footer {
-            background-color: #111;
-            color: #aaa;
+            background-color: var(--text-color);
+            color: var(--bg-color);
             padding: 40px 0 20px;
             text-align: center;
         }
 
         .warning-bar {
-            background-color: #ffc107;
-            color: #333;
+            background-color: var(--accent-color);
+            color: #fff;
             padding: 8px;
             font-weight: 500;
             margin-bottom: 20px;
@@ -304,6 +325,7 @@
 </head>
 <body>
 
+    <div style="flex-grow: 1;">
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -332,9 +354,12 @@
                 <div class="contact-form-container">
                     <h3>Send a Message</h3>
                     <form id="contact-form" class="contact-form">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
                         <button type="submit" class="btn">Send Message</button>
                     </form>
                 </div>
@@ -357,6 +382,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
