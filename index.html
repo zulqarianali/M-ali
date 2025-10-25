@@ -39,8 +39,8 @@
 
         /* Adjust individual label timing/position relative to the image container */
         /* Positions adjusted to prevent overlap on small screens */
-        .label-1 { top: -10px; right: 10%; animation-delay: 4s; }
-        .label-2 { top: 50%; right: 30px; animation-delay: 1.5s; }
+        .label-1 { top: -10px; right: 10%; animation-delay: 0s; }
+        .label-2 { top: 50%; right: -20px; animation-delay: 1.5s; }
         .label-3 { bottom: 10px; left: 10%; animation-delay: 0.7s; }
         
         /* 2. Image Slide-in Animation (Initial state) */
@@ -113,6 +113,27 @@
             transform: translateY(-2px); /* Slight lift */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Subtle shadow */
         }
+        
+        /* Custom style for timeline flow */
+        .process-step {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        /* Connector Line (Hidden on mobile, visible on medium screens and up) */
+        @media (min-width: 768px) {
+            .process-step:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                top: 2rem; 
+                right: -50%; /* Center of the gap */
+                width: 100%;
+                height: 2px;
+                background-color: #a5b4fc; /* Indigo-300 for connecting line */
+                z-index: 1; 
+            }
+        }
+
 
     </style>
 </head>
@@ -127,11 +148,11 @@
                 </div>
                 
                 <!-- Desktop Menu Links (Login link removed) --><div class="hidden md:flex md:space-x-4 items-center">
-                    <!-- Updated Navigation: Home, About, Portfolio, Price, Services (Added custom class for animation) --><a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">About</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Portfolio</a>
-                    <a href="Price" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Price</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Services</a>
+                    <!-- Updated Navigation: Links point to respective files --><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">About</a>
+                    <a href="portfolio.html" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Portfolio</a>
+                    <a href="price.html" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Price</a>
+                    <a href="services.html" class="text-gray-600 hover:text-indigo-600 font-medium nav-link-anim">Services</a>
                     
                     <!-- Content Me Action Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="
                         ml-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out flex items-center
@@ -147,11 +168,11 @@
         </div>
         <!-- Mobile Menu - Hidden by default (Login link removed) --><div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Portfolio</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Price</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Services</a>
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">About</a>
+                <a href="portfolio.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Portfolio</a>
+                <a href="price.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Price</a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Services</a>
                 
                 <!-- Content Me Mobile Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="block w-full text-center mt-2 px-3 py-2 rounded-md text-base font-medium bg-indigo-500 text-white hover:bg-indigo-600 flex items-center justify-center">
                     <i data-lucide="phone" class="w-5 h-5 mr-2"></i> Content Me
@@ -160,36 +181,34 @@
         </div>
     </nav>
     
-    <!-- HERO SECTION START (Responsive & Overlap Fixed) --><!-- Increased padding (pt-16 pb-28) for a "bigger" feel --><section id="hero" class="relative pt-16 pb-28 md:pt-28 md:pb-36 custom-hero-bg overflow-hidden">
+    <!-- HERO SECTION START (Existing content preserved) --><section id="hero" class="relative pt-16 pb-28 md:pt-28 md:pb-36 custom-hero-bg overflow-hidden">
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-10 items-center">
                 
                 <!-- Left Side: Text Content and Buttons --><div class="text-center md:text-left md:w-1/2 order-2 md:order-1">
                     
-                    <!-- CORRECTED HEADING STRUCTURE (Zulqarnain Ali on top, job titles below) -->
-                    <!-- Updated with typing-effect class and data-text attribute -->
+                    <!-- H1 and H2 with Typing Animation (Existing content preserved) -->
                     <h1 id="h1-typing-text" class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-none mb-2 typing-effect" data-text="Zulqarnain Ali">
                         <span class="text-indigo-600"></span>
                     </h1>
                     
-                    <!-- Sub-Heading with Typing Animation (Job Title) - Increased font size -->
                     <h2 id="h2-typing-text" class="text-3xl lg:text-4xl font-semibold text-gray-700 mb-6 typing-effect" data-text="Video Editor & Graphic Designer">
                     </h2>
 
-                    <!-- Descriptive Paragraph - Increased font size (text-lg sm:text-xl) for bigger look --><p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-xl mx-auto md:mx-0">
+                    <p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-xl mx-auto md:mx-0">
                         A visionary creator crafting captivating visuals and stories through the art of video and design.
                     </p>
 
                     <!-- Buttons --><div class="flex justify-center md:justify-start space-x-4">
-                        <!-- 1. Content Me Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="
+                        <!-- 1. Content Me Button --><a href="https://wa.me/923247107543" class="
                             px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold shadow-xl transition duration-300 ease-in-out text-base flex items-center justify-center
                             bg-gradient-to-r from-indigo-600 to-purple-600 hover:scale-[1.03] hover:shadow-2xl
                         ">
                             <i data-lucide="phone" class="w-5 h-5 mr-2"></i> Content Me
                         </a>
                         
-                        <!-- 2. View Portfolio Button (Text changed from 'Start Project') --><a href="#" class="
+                        <!-- 2. View Portfolio Button --><a href="portfolio.html" class="
                             px-6 sm:px-8 py-2 sm:py-3 rounded-xl font-semibold text-indigo-600 border-2 border-indigo-200 transition duration-300 ease-in-out text-base
                             hover:bg-indigo-50 hover:border-indigo-600 hover:scale-[1.03]
                         ">
@@ -198,10 +217,10 @@
                     </div>
                 </div>
 
-                <!-- Right Side: Image and Floating Labels (Takes 1/2 columns on desktop) --><div class="md:w-1/2 order-1 md:order-2 flex justify-center w-full h-full min-h-[400px]">
+                <!-- Right Side: Image and Floating Labels --><div class="md:w-1/2 order-1 md:order-2 flex justify-center w-full h-full min-h-[400px]">
                     <div class="relative w-full max-w-sm flex justify-center items-center image-container" id="image-anim-target">
                         
-                        <!-- Portrait Image Card Container (Now using custom styles for better look) --><div class="portrait-frame">
+                        <!-- Portrait Image Card Container --><div class="portrait-frame">
                             <!-- Image URL is now set via CSS background-image --><img 
                                 src="https://placehold.co/1x1" 
                                 alt="Zulqarnain Ali Portrait" 
@@ -210,15 +229,15 @@
                             >
                         </div>
 
-                        <!-- Floating Labels (Properly positioned relative to the image container and animating) --><!-- 1. Video Editing --><div class="floating-label label-1 absolute -top-4 right-1/4 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-5deg] hover:rotate-[0deg] transition-transform">
+                        <!-- Floating Labels --><div class="floating-label label-1 absolute -top-4 right-1/4 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-5deg] hover:rotate-[0deg] transition-transform">
                             <i data-lucide="video" class="w-4 h-4 inline-block mr-1"></i> Video Editing
                         </div>
 
-                        <!-- 2. Graphic Design --><div class="floating-label label-2 absolute top-30 right-20 sm:right-0 px-4 py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[10deg] hover:rotate-[0deg] transition-transform">
+                        <div class="floating-label label-2 absolute top-30 right-20 sm:right-0 px-4 py-2 bg-green-100 text-green-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[10deg] hover:rotate-[0deg] transition-transform">
                             <i data-lucide="layout-grid" class="w-4 h-4 inline-block mr-1"></i> Graphic Design
                         </div>
 
-                        <!-- 3. Social Media Services --><div class="floating-label label-3 absolute bottom-0 left-1/4 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-10deg] hover:rotate-[0deg] transition-transform">
+                        <div class="floating-label label-3 absolute bottom-0 left-1/4 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-medium shadow-lg transform rotate-[-10deg] hover:rotate-[0deg] transition-transform">
                             <i data-lucide="share-2" class="w-4 h-4 inline-block mr-1"></i> Social Media Services
                         </div>
                     </div>
@@ -227,7 +246,7 @@
         </div>
     </section>
     
-    <!-- STATS BAR SECTION (Animated) --><section class="bg-white py-10 shadow-inner">
+    <!-- STATS BAR SECTION (Existing content preserved) --><section class="bg-white py-10 shadow-inner">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 
@@ -263,7 +282,227 @@
             </div>
         </div>
     </section>
-    <!-- HERO SECTION END --><script>
+    
+    <!-- === NEW SECTIONS START HERE === -->
+    
+    <!-- SECTION A: FEATURED WORK SNAPSHOT (Mini-Portfolio) --><section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Featured Work</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                A quick glimpse into my latest projects, showcasing diversity in video editing and design.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Project 1 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="h-48 bg-gray-200" style="background-image: url('https://placehold.co/600x400/3730a3/ffffff?text=Video+Editing'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Brand Promo Video</h3>
+                        <p class="text-gray-500 text-sm mb-4">High-impact social media campaign video for a tech startup.</p>
+                        <a href="portfolio.html" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150">
+                            View Project Details <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="h-48 bg-gray-200" style="background-image: url('https://placehold.co/600x400/5b21b6/ffffff?text=Graphic+Design'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Corporate Re-Brand</h3>
+                        <p class="text-gray-500 text-sm mb-4">Complete corporate identity, including logo and stationery design.</p>
+                        <a href="portfolio.html" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150">
+                            View Project Details <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 --><div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="h-48 bg-gray-200" style="background-image: url('https://placehold.co/600x400/9333ea/ffffff?text=Motion+Graphics'); background-size: cover; background-position: center;"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Animated Explainer</h3>
+                        <p class="text-gray-500 text-sm mb-4">A simple 60-second animated video explaining a complex service.</p>
+                        <a href="portfolio.html" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150">
+                            View Project Details <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Overall Portfolio CTA --><a href="portfolio.html" class="mt-10 inline-block px-8 py-3 rounded-xl font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition duration-150 shadow-lg">
+                View All 85+ Projects
+            </a>
+        </div>
+    </section>
+
+    <!-- SECTION B: CORE EXPERTISE & SERVICES SUMMARY --><section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">My Core Expertise</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                Focused services that guarantee professional, high-quality visual content for any need.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Pillar 1: Video Editing --><div class="p-8 rounded-xl shadow-lg border-t-4 border-indigo-600 bg-gray-50">
+                    <div class="text-indigo-600 mb-4 inline-block p-3 rounded-full bg-indigo-100">
+                        <i data-lucide="film" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Video Editing & Post-Production</h3>
+                    <p class="text-gray-600">
+                        Professional editing, color grading, sound design, and finishing for various platforms, ensuring a cinematic look.
+                    </p>
+                </div>
+
+                <!-- Pillar 2: Graphic Design --><div class="p-8 rounded-xl shadow-lg border-t-4 border-purple-600 bg-gray-50">
+                    <div class="text-purple-600 mb-4 inline-block p-3 rounded-full bg-purple-100">
+                        <i data-lucide="pen-tool" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Graphic Design & Branding</h3>
+                    <p class="text-gray-600">
+                        Creation of impactful logos, cohesive branding packages, and visually stunning social media and web assets.
+                    </p>
+                </div>
+
+                <!-- Pillar 3: Motion Graphics --><div class="p-8 rounded-xl shadow-lg border-t-4 border-indigo-600 bg-gray-50">
+                    <div class="text-indigo-600 mb-4 inline-block p-3 rounded-full bg-indigo-100">
+                        <i data-lucide="trello" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-3">Motion Graphics & Animation</h3>
+                    <p class="text-gray-600">
+                        Engaging 2D animations, dynamic animated intros, titles, and captivating visual effects to tell your story.
+                    </p>
+                </div>
+                
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SECTION C: CLIENT TESTIMONIALS (Social Proof) --><section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">What Clients Say</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                Trusted by businesses and creators worldwide for delivering exceptional results.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Testimonial 1 --><div class="p-8 bg-white rounded-xl shadow-xl border-l-4 border-indigo-500 flex flex-col">
+                    <i data-lucide="quote" class="w-8 h-8 text-indigo-400 mb-4 self-start"></i>
+                    <p class="text-gray-700 italic mb-4 flex-grow">
+                        "Zulqarnain delivered our project two days early and the quality was far beyond our expectations. His color grading is simply masterful."
+                    </p>
+                    <div class="text-left pt-2 border-t border-gray-100">
+                        <p class="font-bold text-gray-900">Ayesha Khan</p>
+                        <p class="text-sm text-indigo-600">CEO, Digital Corp</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 --><div class="p-8 bg-white rounded-xl shadow-xl border-l-4 border-purple-500 flex flex-col">
+                    <i data-lucide="quote" class="w-8 h-8 text-purple-400 mb-4 self-start"></i>
+                    <p class="text-gray-700 italic mb-4 flex-grow">
+                        "The branding package was cohesive and professional. He truly understood our vision and translated it perfectly into visuals."
+                    </p>
+                    <div class="text-left pt-2 border-t border-gray-100">
+                        <p class="font-bold text-gray-900">Muhammad Bilal</p>
+                        <p class="text-sm text-purple-600">Marketing Director</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 --><div class="p-8 bg-white rounded-xl shadow-xl border-l-4 border-indigo-500 flex flex-col">
+                    <i data-lucide="quote" class="w-8 h-8 text-indigo-400 mb-4 self-start"></i>
+                    <p class="text-gray-700 italic mb-4 flex-grow">
+                        "Excellent work on the animated intro for our YouTube channel. It's clean, modern, and engaging. Highly recommended!"
+                    </p>
+                    <div class="text-left pt-2 border-t border-gray-100">
+                        <p class="font-bold text-gray-900">Sara Imtiaz</p>
+                        <p class="text-sm text-indigo-600">Content Creator</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- SECTION D: THE SIMPLE WORKING PROCESS --><section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">My Simple Working Process</h2>
+            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                A clear, collaborative, and stress-free path to successful project delivery.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 text-center">
+                
+                <!-- Step 1: Discovery --><div class="process-step">
+                    <div class="relative z-10 mx-auto w-16 h-16 rounded-full bg-indigo-600 text-white flex items-center justify-center mb-4 shadow-xl">
+                        <i data-lucide="message-square" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">1. Discovery & Brief</h4>
+                    <p class="text-gray-600 text-sm">Understanding project goals and gathering all necessary content and assets.</p>
+                </div>
+                
+                <!-- Step 2: Draft & Creation --><div class="process-step">
+                    <div class="relative z-10 mx-auto w-16 h-16 rounded-full bg-indigo-600 text-white flex items-center justify-center mb-4 shadow-xl">
+                        <i data-lucide="layers" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">2. Draft & Creation</h4>
+                    <p class="text-gray-600 text-sm">Designing the initial concept and submitting the first draft for client review.</p>
+                </div>
+                
+                <!-- Step 3: Feedback & Revisions --><div class="process-step">
+                    <div class="relative z-10 mx-auto w-16 h-16 rounded-full bg-indigo-600 text-white flex items-center justify-center mb-4 shadow-xl">
+                        <i data-lucide="refresh-cw" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">3. Feedback & Revisions</h4>
+                    <p class="text-gray-600 text-sm">Implementing client feedback and refining the project to perfection.</p>
+                </div>
+                
+                <!-- Step 4: Final Delivery --><div class="process-step">
+                    <div class="relative z-10 mx-auto w-16 h-16 rounded-full bg-indigo-600 text-white flex items-center justify-center mb-4 shadow-xl">
+                        <i data-lucide="check-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">4. Final Delivery</h4>
+                    <p class="text-gray-600 text-sm">Fast, high-quality delivery of all final files, formats, and source materials.</p>
+                </div>
+
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- SECTION E: FINAL CALL TO ACTION (Contact Block) --><section class="py-20 bg-indigo-700">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">Ready to Bring Your Vision to Life?</h2>
+            <p class="text-xl text-indigo-200 mb-10">
+                Let's discuss your next project. Book a free consultation today—no obligation, just great ideas.
+            </p>
+
+            <!-- Large CTA Button (Linked to WhatsApp for direct contact) --><a href="https://wa.me/923247107543" class="
+                px-12 py-4 rounded-xl text-lg text-indigo-700 font-bold shadow-2xl transition duration-300 ease-in-out flex items-center justify-center mx-auto max-w-sm
+                bg-amber-400 hover:bg-amber-300 hover:scale-[1.03]
+            ">
+                <i data-lucide="send" class="w-5 h-5 mr-2"></i> Get Started Now
+            </a>
+            
+        </div>
+    </section>
+    
+    <!-- FOOTER (Simple Placeholder) --><footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2024 Zulqarnain Ali. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- === NEW SECTIONS END HERE === -->
+    
+    <script>
         // Function to handle the counter animation
         function animateCounter(element, target) {
             let current = 0;
