@@ -97,11 +97,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .primary-contact-btn {
-            background-color: #1E40AF;
-            border-radius: 9999px;
-        }
-
         .fade-in {
             animation: fadeIn 0.8s ease-out forwards;
         }
@@ -381,9 +376,14 @@
                 <!-- "Content Me" Button linked to WhatsApp (as requested) -->
                 <li class="contact-btn">
                     <!-- WhatsApp link set as requested -->
-                    <a href="https://wa.me/923247107543" target="_blank" class="primary-contact-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        Contact Me
+                    <a href="https://wa.me/923247107543" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Content Me
+                    </a>
+                </li>
+                <li class="contact-btn">
+                    <a href="#apk-download-link" style="background-color: var(--accent-color);">
+                        APK Download
                     </a>
                 </li>
             </ul>
@@ -454,6 +454,9 @@
 
     <!-- Floating WhatsApp Button (Redundant now, but kept if user wants it separate) -->
     <!-- The main contact button in the header is now linked to WhatsApp -->
+    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
