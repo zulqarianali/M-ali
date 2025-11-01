@@ -3,628 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Zulqarnain Ali</title>
-    <!-- Font Awesome for Icons -->
+    <title>Zulqarnain Ali - Portfolio</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Load Font Awesome for stable WhatsApp Icon (NEWLY ADDED) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Load Lucide Icons (Kept for other icons) --><script src="https://unpkg.com/lucide@latest" defer></script> 
+    
+    <!-- NEW: AOS (Animate On Scroll) Library CSS --><link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- FIX: Load AOS JavaScript library --><script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* --- Google Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        /* --- Global Styles & Variables --- */
+        /* Preserve Existing Design Aesthetics */
         :root {
-            --bg-color: #F8F8F8;
-            --text-color: #333333;
-            --accent-color: #003366;
-            --card-bg: #252525;
-            --border-color: #444;
-            --font-english: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Mobile Responsiveness */
-        img, video, iframe {
-            max-width: 100%;
-            height: auto;
-        }
-
-        body {
-            font-family: var(--font-english);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        h2, h3, h4 {
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* Custom CSS for 9:16 Aspect Ratio (Height is 16/9 = 1.777 times the width) */
+        .ratio-9-16 {
+            padding-top: 177.77%; /* (16 / 9) * 100% */
             position: relative;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        /* --- Header & Navigation --- */
-        .header {
-            background-color: #fff;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
-
-        .nav-links li {
-            margin: 0 15px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-color);
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--accent-color);
-        }
-
-        /* --- Portfolio Section --- */
-        .portfolio-tabs {
-            text-align: center;
-            margin-bottom: 40px;
-            display: flex; /* Added flex to manage button layout */
-            justify-content: center;
-            flex-wrap: wrap; /* Allows wrapping on small screens */
-            gap: 10px; /* Spacing between buttons */
-        }
-
-        .tab-button {
-            background: none;
-            border: 1px solid var(--accent-color);
-            color: var(--text-color);
-            padding: 10px 20px;
-            /* margin: 0 5px; Removed for better flex control */
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
         }
         
-        /* Mobile-specific adjustments for buttons */
-        @media (max-width: 480px) {
-            .tab-button {
-                flex-basis: 100%; /* Make buttons full width on very small screens */
-            }
-        }
-
-
-        .tab-button.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: #fff;
-        }
-
-        .portfolio-content {
-            display: none;
-        }
-
-        .portfolio-content.active {
-            display: block;
-        }
-
-        /* Video Portfolio Grid */
-        .video-portfolio-grid {
-            /* Desktop/Large Tablet Default */
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns for better aspect ratio management */
-            gap: 20px;
-        }
-        
-        /* Video Player Wrapper */
-        .video-wrapper, .video-portfolio-player {
-            position: relative;
-            padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            background-color: #000;
-        }
-
-        .video-wrapper iframe, .video-portfolio-player iframe {
+        /* Ensures the video fills the aspect ratio box */
+        .ratio-9-16 video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 0;
-        }
-
-        /* Graphics Portfolio Grid and Items */
-        .graphics-portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .graphic-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .graphic-item img {
-            width: 100%;
-            height: 100%;
-            display: block;
             object-fit: cover;
-            transition: transform 0.4s ease;
+        }
+        
+        /* Style for active tab to maintain design consistency */
+        .tab-button.active {
+            background-color: #4f46e5; /* indigo-600 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
         }
 
-        .graphic-item:hover img {
-            transform: scale(1.1);
+        /* NEW: Glowing Border for Video Cards */
+        .glow-border {
+            position: relative;
+            border-radius: 0.75rem; /* rounded-xl */
         }
-
-        .graphic-overlay {
+        .glow-border:before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: #fff;
-            padding: 40px 20px 20px;
+            inset: -3px; /* Slightly outside the card */
+            /* Indigo to Violet Gradient */
+            background: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%); 
+            border-radius: 1rem; /* Slightly larger than card radius */
+            z-index: -1;
             opacity: 0;
-            transform: translateY(100%);
-            transition: all 0.4s ease;
+            transition: opacity 0.3s ease-in-out;
         }
-        
-        /* Mobile: Show overlay instantly on hover/tap-emulator (though actual tap behavior may differ) */
-        .graphic-item:hover .graphic-overlay {
+        .group:hover .glow-border:before {
             opacity: 1;
-            transform: translateY(0);
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.7); /* Soft indigo glow */
         }
 
-
-        .graphic-overlay h4 {
-            color: #fff;
-            margin-bottom: 5px;
+        /* NEW: Soft Scale and Shadow on Video Hover */
+        .video-card-inner {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .group:hover .video-card-inner {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .graphic-overlay p {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
+        /* NEW: Video Title Ribbon (Class retained but unused in V.P. section) */
+        .title-ribbon {
+            /* Semi-transparent Indigo Gradient for premium look */
+            background: linear-gradient(to right, rgba(79, 70, 229, 0.85), rgba(167, 139, 250, 0.85)); 
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
         }
 
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            padding: 40px 0 20px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
+        /* NEW: Motion Graphics Play Overlay */
+        .play-overlay {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            opacity: 0;
         }
-
-        .warning-bar {
-            background-color: var(--accent-color);
-            color: #fff;
-            padding: 8px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        /* --- Floating WhatsApp Button --- */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: #FFF;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
+        .card-hover-zoom:hover .play-overlay {
+            opacity: 1;
             transform: scale(1.1);
         }
-
-        /* --- Responsive Design (Enhanced) --- */
-        
-        /* Tablet View (769px to 992px) */
-        @media (max-width: 992px) {
-            .video-portfolio-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-            }
-            .nav-links li {
-                margin-left: 15px;
-            }
+        .card-hover-zoom:hover .portfolio-image {
+            transform: scale(1.05);
         }
-
-        /* Mobile View (Below 768px) */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--secondary-color);
-                flex-direction: column;
-                padding: 20px 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            }
-
-            .nav-links.active {
-                max-height: 500px;
-                padding: 20px 0;
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-            
-            /* Single column for videos on mobile for better viewing */
-            .video-portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Single column for graphics on mobile */
-            .graphics-portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Ensure video player stays visible on mobile */
-            .video-portfolio-player {
-                 padding-bottom: 150%; /* Slightly less vertical space for better aspect ratio on small screens if needed */
-            }
+        .portfolio-image {
+            transition: transform 0.5s ease-in-out;
         }
     </style>
 </head>
-<body>
-    <div style="flex-grow: 1;">
 
-    <!-- Header (Using multi-page structure) -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">Zulqarnain <span>Ali</span></a>
-            <div class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-              <!-- Content Me Action Button (Icon changed to phone, href changed to WhatsApp link format) --><a href="https://wa.me/923247107543" class="
-                        ml-4 px-4 py-2 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out flex items-center
-                    " style="background-color: var(--accent-color);">
+<body class="min-h-screen bg-gray-50 antialiased overflow-x-hidden">
+
+    <!-- HEADER (Non-Modified) --><nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 font-bold text-2xl text-indigo-600">
+                    Zulqarnain.
+                </div>
+                <div class="hidden md:flex md:space-x-4 items-center">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition duration-150">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition duration-150">About</a>
+                    <a href="portfolio.html" class="text-indigo-600 font-medium px-3 py-2 rounded-md bg-indigo-50">Portfolio</a>
+                    <a href="price.html" class="text-gray-600 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition duration-150">Price</a>
+                    <a href="services.html" class="text-gray-600 hover:text-indigo-600 font-medium px-3 py-2 rounded-md transition duration-150">Services</a>
+                    <a href="https://wa.me/923247107543" class="ml-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out flex items-center">
                         <i data-lucide="phone" class="w-4 h-4 mr-1"></i> Content Me
                     </a>
-                    <a href="#apk-download-link" class="ml-4 px-4 py-2 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out flex items-center" style="background-color: var(--accent-color);">
-                        APK Download
-                    </a>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container fade-in">
-            <h2>Portfolio</h2>
-            <div class="portfolio-tabs">
-                <button class="tab-button active" data-tab="video">Video Portfolio</button>
-                <button class="tab-button" data-tab="graphics">Graphic Design</button>
-            </div>
-
-            <!-- Video Portfolio (Preserved YouTube Shorts Content) -->
-            <div id="video-portfolio" class="portfolio-content active">
-                <div class="video-portfolio-grid">
-                    <!-- Your Existing YouTube Shorts Links (Preserved) -->
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/5DMJMVhzbpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/iWwR540lmn0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/5TFMmNSGP-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/I0_1g7aXVe0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/eE9Wn5lPOII" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/-Bpwog89K7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/dg5U0M8kMRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/sjjxAIbSzq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/KLTQcmYMzok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-
-                    <!-- Additional shorts from your initial single-page code (combined and kept) -->
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/m0T0D-pA7gY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/LqdnTrXmI-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/tH0-_5LGHTo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/u_wB9p-4p-c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/DflqZKea_yA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/j54Hh4p5h2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/8Z1e_gYk1A4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/Q344a-n_yqE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-portfolio-player">
-                        <iframe src="https://www.youtube.com/embed/shorts/Vf7D_ur2C-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <!-- Graphics Portfolio -->
-            <div id="graphics-portfolio" class="portfolio-content">
-                <div class="graphics-portfolio-grid">
-                    
-                    <!-- 1. Modern Tech Logo Design (Placeholder - BLUE) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://files.selar.co/product-images/2023/products/Adamsola/get-a-professional-busine-selar.co-643fedd515337.jpg" alt="Graphic Design Project 1: Modern Logo">
-                            <div class="graphic-overlay">
-                                <h4>Project 1: Modern Logo Design</h4>
-                                <p>Software: Adobe Illustrator</p>
-                                <p>A minimalist logo for a B2B Software Company.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">Client X: Brand Animation</div>
-                    </div>
-                    
-                    <!-- 2. Marketing Agency Social Media Banner (Placeholder - ORANGE) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://coreldrawdesign.com/resources/previews/preview-digital-marketing--banner-free-vector-1654258467.webp" alt="Graphic Design Project 2: Social Media Banner">
-                              <div class="graphic-overlay">
-                                <h4>Project 2: Digital Marketing Banner</h4>
-                                <p>Software: Photoshop, Canva</p>
-                                <p>Engaging social media carousel banner for promotions.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">E-commerce Website Design</div>
-                    </div>
-
-                    <!-- 3. Corporate Flyer Design (Placeholder - PURPLE) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://unblast.com/wp-content/uploads/2020/03/A4-Corporate-Flyer-Template-1.jpg" alt="Graphic Design Project 3: A4 Flyer Design">
-                              <div class="graphic-overlay">
-                                <h4>Project 3: Professional A4 Flyer</h4>
-                                <p>Software: Adobe InDesign, Illustrator</p>
-                                <p>Print-ready corporate flyer design for a seminar.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">Client Y: Brand Animation</div>
-                    </div>
-
-                    <!-- 4. Business Card Design (Placeholder - GREEN) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://www.navpacknprint.com/public/uploads/product/601601742_07_09_2024_04_05_20.jpg" alt="Graphic Design Project 4: Business Card Design">
-                              <div class="graphic-overlay">
-                                <h4>Project 4: Premium Business Card</h4>
-                                <p>Software: Adobe Illustrator</p>
-                                <p>Double-sided minimalist card design with spot UV finish.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">Client Z: Brand Animation</div>
-                    </div>
-
-                    <!-- 5. YouTube Gaming Thumbnail (Placeholder - RED) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/333112144/original/65f02190137ae3aebeed12912a6d6adf37d703bb/design-a-high-ctr-youtube-thumbnail-fast.png" alt="Graphic Design Project 5: YouTube Thumbnail">
-                              <div class="graphic-overlay">
-                                <h4>Project 5: High-CTR Thumbnail</h4>
-                                <p>Software: Adobe Photoshop</p>
-                                <p>Aggressive design for a YouTube gaming video.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">Gaming Channel Thumbnails</div>
-                    </div>
-
-                    <!-- 6. Data Infographic Design (Placeholder - CYAN) -->
-                    <div>
-                        <div class="graphic-item" style="cursor: pointer;">
-                            <!-- NOTE: Please replace this URL with your actual project image link later. -->
-                            <img src="https://img.freepik.com/free-vector/earth-structure-infographic_23-2148411035.jpg?semt=ais_hybrid&w=740&q=80" alt="Graphic Design Project 6: Infographic Design">
-                              <div class="graphic-overlay">
-                                <h4>Project 6: Data Infographic</h4>
-                                <p>Software: Adobe Illustrator</p>
-                                <p>Clean and readable infographic for statistical data.</p>
-                            </div>
-                        </div>
-                        <div class="text-center py-2 font-bold">Infographic Design</div>
-                    </div>
-
                 </div>
             </div>
         </div>
-    </section>
-    </div>
+    </nav>
+    
+    <!-- PORTFOLIO MAIN SECTION --><main class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl font-extrabold text-gray-900 text-center mb-4">My Creative Portfolio</h1>
+            <p class="text-xl text-gray-600 text-center mb-10 max-w-3xl mx-auto">
+                Explore a curated collection of my video editing, graphic design, and motion graphics projects.
+            </p>
+            
+            <!-- Tabs Navigation (Non-Modified) --><div class="flex justify-center mb-10">
+                <div class="flex flex-wrap space-x-2 bg-white p-2 rounded-xl shadow-lg">
+                    <button class="tab-button active px-6 py-2 rounded-lg font-semibold transition duration-200" data-target="video-portfolio">
+                        Video & Shorts
+                    </button>
+                    <button class="tab-button px-6 py-2 rounded-lg font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200" data-target="graphic-design">
+                        Graphic Design
+                    </button>
+                    <button class="tab-button px-6 py-2 rounded-lg font-semibold text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition duration-200" data-target="motion-graphics">
+                        Motion Graphics
+                    </button>
+                </div>
+            </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="warning-bar">
-            Downloading and reusing videos is a legal offense.
+            <!-- TAB CONTENT CONTAINER --><div id="portfolio-container" class="bg-white p-8 sm:p-12 rounded-xl shadow-2xl">
+                
+                <!-- START: VIDEO PORTFOLIO SECTION (FIXED WHATSAPP ICON) --><div id="video-portfolio" class="portfolio-content active">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3">Ai Video Ads All categories</h2>
+                    
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        
+                        <!-- Video 1: E-Commerce Brand Video Ad --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                               poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761994263/E_-Commerence.finl_2_sjnfik.jpg"
+                                               src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761994263/E_-Commerence.finl_2_sjnfik.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    E-Commerce Brand Video Ad
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20E-Commerce%20Brand%20Video%20Ad"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 2: Cinematic Travel Short --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                               poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761995142/U_Travel.finl_1_i1e65s.jpg"
+                                               src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761995142/U_Travel.finl_1_i1e65s.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="plane" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    Cinematic Travel Short
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Cinematic%20Travel%20Short"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 3: Animated Logo Reveal (Placeholder) --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                                poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1762000001/food-promo-short.jpg"
+                                           src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761994737/Al-SUDIA_power_plus_Kyunki.finl4_jmtai2.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="sparkles" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    Dynamic Logo Reveal
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Dynamic%20Logo%20Reveal"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Video 4: Food Promo Short (Placeholder) --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                               poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1762000001/food-promo-short.jpg"
+                                               src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761995282/Sunspark_Tailors.finl_kezlhn.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="egg-fried" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    Food Promo Short
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Food%20Promo%20Short"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Video 5: Educational Reel (Placeholder) --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                               poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1762000002/educational-reel.jpg"
+                                               src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761995368/South_Travel_Tours.finl_fxplqa.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="book-open-text" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    Educational Content Reel
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Educational%20Content%20Reel"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Video 6: Real Estate Walkthrough (Placeholder) --><div class="group bg-gray-50 p-4 rounded-xl shadow-md transition duration-300 hover:shadow-lg" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-out" data-aos-once="true">
+                            <div class="glow-border"> 
+                                <div class="video-card-inner relative w-full overflow-hidden rounded-xl shadow-xl">
+                                    <div class="ratio-9-16">
+                                        <video class="absolute inset-0 w-full h-full object-cover" 
+                                               controls 
+                                               preload="none"
+                                               poster="https://res.cloudinary.com/dpamzvcxg/video/upload/v1762000003/real-estate-walkthrough.jpg"
+                                               src="https://res.cloudinary.com/dpamzvcxg/video/upload/v1761999971/Lahore_Organic_Farms_finl1_x5gnwj.mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TITLE BAR --><div class="mt-3 py-2 border-y border-indigo-200 bg-white">
+                                <p class="text-center text-lg font-medium text-indigo-700 flex items-center justify-center">
+                                    <i data-lucide="home" class="w-5 h-5 mr-2 text-indigo-500"></i>
+                                    Real Estate Walkthrough
+                                </p>
+                            </div>
+
+                            <!-- WHATSAPP CTA: Font Awesome Icon Used --><div class="p-3 pt-4 flex justify-center">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Real%20Estate%20Walkthrough"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- END: VIDEO PORTFOLIO SECTION --><!-- START: Graphic Design Section (FIXED WHATSAPP ICON) --><div id="graphic-design" class="portfolio-content hidden">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3">Graphic Design & Branding</h2>
+                    
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        
+                        <!-- Card 1: Logo Design --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="zoom-in" data-aos-delay="100" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?logo,branding" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Logo+Design';" alt="Modern Logo Branding" class="portfolio-image w-full h-48 object-cover">
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">Modern Tech Branding</p>
+                                <p class="text-sm text-indigo-600 mt-1">Logo Design & Identity</p>
+                            </div>
+                            <!-- NEW: WHATSAPP CTA for Graphic Design (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Modern%20Tech%20Branding"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2: Poster --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="zoom-in" data-aos-delay="200" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?poster,minimal" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Minimal+Poster';" alt="Minimalist Poster Design" class="portfolio-image w-full h-48 object-cover">
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">Minimalist Event Poster</p>
+                                <p class="text-sm text-indigo-600 mt-1">Print Design</p>
+                            </div>
+                            <!-- ADDED WHATSAPP CTA for Graphic Design 2 (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Minimalist%20Event%20Poster"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 3: Social Media --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="zoom-in" data-aos-delay="300" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?socialmedia,marketing" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Social+Ads';" alt="Social Media Marketing Post" class="portfolio-image w-full h-48 object-cover">
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">E-Commerce Ad Set</p>
+                                <p class="text-sm text-indigo-600 mt-1">Social Media Graphics</p>
+                            </div>
+                            <!-- ADDED WHATSAPP CTA for Graphic Design 3 (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20E-Commerce%20Ad%20Set"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Graphic Design Section --><!-- START: Motion Graphics Section (FIXED WHATSAPP ICON) --><div id="motion-graphics" class="portfolio-content hidden">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-3">Motion Graphics & Animation</h2>
+                    
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                        
+                        <!-- Card 1: Kinetic Typography --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="100" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?typography,abstract" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Kinetic+Text';" alt="Kinetic Typography Intro" class="portfolio-image w-full h-48 object-cover">
+                                <!-- Play Overlay --><div class="play-overlay absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <i data-lucide="play-circle" class="w-16 h-16 text-white/90"></i>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">Kinetic Typography Intro</p>
+                                <p class="text-sm text-indigo-600 mt-1">After Effects Project</p>
+                            </div>
+                            <!-- NEW: WHATSAPP CTA for Motion Graphics (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Kinetic%20Typography%20Intro"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 2: Animated Logo --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="200" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?motion,logo,abstract" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Logo+Animation';" alt="Animated Logo Reveal" class="portfolio-image w-full h-48 object-cover">
+                                <!-- Play Overlay --><div class="play-overlay absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <i data-lucide="play-circle" class="w-16 h-16 text-white/90"></i>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">Minimal Logo Stinger</p>
+                                <p class="text-sm text-indigo-600 mt-1">3D Motion Graphics</p>
+                            </div>
+                            <!-- ADDED WHATSAPP CTA for Motion Graphics 2 (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%20Minimal%20Logo%20Stinger"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 3: Explainer Video Screenshot --><div class="group card-hover-zoom overflow-hidden rounded-xl shadow-xl transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">
+                            <div class="relative overflow-hidden">
+                                <img src="https://source.unsplash.com/random/800x600/?explainer,whiteboard" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/FFFFFF?text=Explainer+Video';" alt="2D Explainer Video" class="portfolio-image w-full h-48 object-cover">
+                                <!-- Play Overlay --><div class="play-overlay absolute inset-0 bg-black/50 flex items-center justify-center">
+                                    <i data-lucide="play-circle" class="w-16 h-16 text-white/90"></i>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-white">
+                                <p class="text-lg font-semibold text-gray-800">2D Explainer Video</p>
+                                <p class="text-sm text-indigo-600 mt-1">Whiteboard Animation</p>
+                            </div>
+                            <!-- ADDED WHATSAPP CTA for Motion Graphics 3 (Font Awesome Icon Used) -->
+                            <div class="p-4 pt-2 flex justify-center bg-white rounded-b-xl">
+                                <a href="https://wa.me/923247107543?text=Hello%20Zulqarnain%2C%20I%20am%20interested%20in%20the%20project%3A%202D%20Explainer%20Video"
+                                   target="_blank"
+                                   class="inline-flex items-center px-4 py-2 bg-green-500 text-white font-semibold rounded-full shadow-md 
+                                          hover:bg-green-600 transition duration-150 ease-in-out text-sm">
+                                    <i class="fab fa-whatsapp mr-2 text-base"></i> Discuss on WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Motion Graphics Section --></div>
         </div>
-        <div class="container">
-            <p>&copy; 2024 Zulqarnain Ali. All Rights Reserved.</p>
+    </main>
+
+    <!-- FOOTER (Non-Modified) --><footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2024 Zulqarnain Ali. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/923247107543" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
+    
+    <!-- Scripts (Updated for AOS and Icons) --><script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+    </script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons (only needed for non-WhatsApp icons now)
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                }
+            }, 50); 
+            
+            // Tab Switching Logic
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.portfolio-content');
 
-        // --- Mobile Menu Toggle ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-target');
+                    
+                    // Deactivate all tabs and hide all content
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.classList.add('text-gray-700', 'hover:bg-indigo-50', 'hover:text-indigo-600');
+                        t.classList.remove('bg-indigo-600', 'text-white');
+                    });
+                    contents.forEach(c => c.classList.add('hidden'));
 
-        // --- Portfolio Tabs ---
-        const tabs = document.querySelectorAll('.tab-button');
-        const portfolioContents = document.querySelectorAll('.portfolio-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Deactivate all
-                tabs.forEach(t => t.classList.remove('active'));
-                portfolioContents.forEach(c => c.classList.remove('active'));
-
-                // Activate clicked
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab + '-portfolio').classList.add('active');
+                    // Activate the clicked tab and show the target content
+                    tab.classList.add('active');
+                    tab.classList.remove('text-gray-700', 'hover:bg-indigo-50', 'hover:text-indigo-600');
+                    
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                    }
+                    
+                    // NEW: Refresh AOS when switching tabs to trigger animations in the new content
+                    AOS.refresh();
+                });
             });
+
+            // Set initial active state for the Video tab (as it is the default 'active' class in HTML)
+            const initialTab = document.querySelector('.tab-button[data-target="video-portfolio"]');
+            if(initialTab) {
+                initialTab.classList.add('active');
+                initialTab.classList.remove('text-gray-700', 'hover:bg-indigo-50', 'hover:text-indigo-600');
+            }
+
         });
-    });
     </script>
 </body>
 </html>
+
